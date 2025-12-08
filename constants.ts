@@ -11,7 +11,7 @@ export const CONTACT_INFO = {
 export const SITE_CONTENT_CONTEXT = {
   mission: "To provide a safe haven, holistic education, and community integration for orphaned and vulnerable children.",
   vision: "A world where every child has the foundation to build their own future.",
-  history: "Founded in 2010 by Sarah Mati, starting with a small 3-bedroom house and 5 children.",
+  history: "Founded in 2010 by Matilda Kashindo, starting with a small 3-bedroom house and 5 children.",
   stats: {
     childrenSupported: 150,
     graduates: 45,
@@ -58,7 +58,7 @@ export const STORIES: Story[] = [
     id: '1',
     title: 'From Survival to Success: David’s Journey',
     excerpt: 'David came to Mati Foundation at age 6. Today, he is graduating with a degree in Civil Engineering.',
-    author: 'Sarah Mati',
+    author: 'Matilda Kashindo',
     date: 'Oct 12, 2023',
     image: 'https://picsum.photos/id/1012/600/400',
     content: "David's story represents the heart of our mission..."
@@ -76,7 +76,7 @@ export const STORIES: Story[] = [
 
 export const TEAM: TeamMember[] = [
   {
-    name: "Sarah Mati",
+    name: "Matilda Kashindo",
     role: "Founder & Director",
     bio: "Former educator with 20 years of experience in child development.",
     image: "https://picsum.photos/id/64/300/300"

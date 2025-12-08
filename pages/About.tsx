@@ -34,10 +34,10 @@ const About: React.FC = () => {
           <h2 className="text-3xl font-bold font-serif mb-6 text-stone-900">Our Story</h2>
           <div className="prose prose-stone lg:prose-lg text-stone-600">
             <p className="mb-4">
-              In 2010, Sarah Mati was a high school teacher who noticed that several of her students were dropping out not due to lack of ability, but lack of basic needs. Visiting their homes, she found children living in child-headed households or with aging grandparents unable to support them.
+              In 2010, Matilda Kashindo was a high school teacher who noticed that several of her students were dropping out not due to lack of ability, but lack of basic needs. Visiting their homes, she found children living in child-headed households or with aging grandparents unable to support them.
             </p>
             <p className="mb-4">
-              She started by opening her own guest room to three siblings. Word spread, and the need became undeniable. With the help of the local church and initial donors, Sarah officially registered the Mati Foundation.
+              She started by opening her own guest room to three siblings. Word spread, and the need became undeniable. With the help of the local church and initial donors, Matilda officially registered the Mati Foundation.
             </p>
             <p>
               Today, what started as a 3-bedroom house has grown into a campus with dormitories, a learning center, and a community clinic. Yet, the core value remains the same: treat every child like family.
