@@ -20,7 +20,6 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
     { name: 'Stories', path: PageRoute.STORIES },
     { name: 'Gallery', path: PageRoute.GALLERY },
     { name: 'Contact', path: PageRoute.CONTACT },
-    { name: 'Plan & Admin', path: PageRoute.ADMIN_PLAN },
   ];
 
   const handleNav = (path: PageRoute) => {
@@ -165,7 +164,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
                 <li><button onClick={() => handleNav(PageRoute.ABOUT)} className="hover:text-white transition-colors">About Us</button></li>
                 <li><button onClick={() => handleNav(PageRoute.PROGRAMS)} className="hover:text-white transition-colors">Our Programs</button></li>
                 <li><button onClick={() => handleNav(PageRoute.GET_INVOLVED)} className="hover:text-white transition-colors">Volunteer</button></li>
-                <li><button onClick={() => handleNav(PageRoute.ADMIN_PLAN)} className="hover:text-white transition-colors">Admin Portal</button></li>
+                <li><button onClick={() => handleNav(PageRoute.GALLERY)} className="hover:text-white transition-colors">Gallery</button></li>
               </ul>
             </div>
 

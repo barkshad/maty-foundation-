@@ -46,7 +46,12 @@ const About: React.FC = () => {
                 </div>
              </div>
              <div>
-                <img src="https://picsum.photos/id/1012/600/800" alt="Matilda Kashindo" className="rounded-lg shadow-xl" />
+                {/* Image: Teacher/Mentor with child */}
+                <img 
+                  src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600" 
+                  alt="Matilda Kashindo teaching" 
+                  className="rounded-lg shadow-xl" 
+                />
                 <p className="mt-4 text-center text-sm text-slate-500 italic">Founder Matilda Kashindo with the first group of graduates.</p>
              </div>
            </div>

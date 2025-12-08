@@ -35,7 +35,8 @@ export const PROGRAMS: Program[] = [
     id: 'edu',
     title: 'Education Program',
     description: 'We believe education is the key to breaking the cycle of poverty. Our program provides tuition, uniforms, books, and after-school tutoring for both residents and vulnerable children in the surrounding community.',
-    image: 'https://picsum.photos/id/10/800/600',
+    // Image: Children in a classroom
+    image: 'https://images.unsplash.com/photo-1427504746696-ea470a74ea02?auto=format&fit=crop&q=80&w=800',
     stats: [
       { label: 'Students Sponsored', value: '120' },
       { label: 'Graduation Rate', value: '98%' }
@@ -45,7 +46,8 @@ export const PROGRAMS: Program[] = [
     id: 'outreach',
     title: 'Community Outreach',
     description: 'The Mati Foundation extends its arms beyond our walls. We host monthly medical camps, nutrition workshops, and vocational training for single mothers in the neighborhood.',
-    image: 'https://picsum.photos/id/12/800/600',
+    // Image: Community gathering/hands together
+    image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800',
     stats: [
       { label: 'Families Helped', value: '450' },
       { label: 'Medical Camps', value: '12/yr' }
@@ -60,7 +62,8 @@ export const STORIES: Story[] = [
     excerpt: 'David came to Mati Foundation at age 6. Today, he is graduating with a degree in Civil Engineering.',
     author: 'Matilda Kashindo',
     date: 'Oct 12, 2023',
-    image: 'https://picsum.photos/id/1012/600/400',
+    // Image: Graduation
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600',
     content: "David's story represents the heart of our mission..."
   },
   {
@@ -69,7 +72,8 @@ export const STORIES: Story[] = [
     excerpt: 'Thanks to our generous donors, we opened a publicly accessible library this weekend.',
     author: 'Admin',
     date: 'Sep 28, 2023',
-    image: 'https://picsum.photos/id/1073/600/400',
+    // Image: Books/Library
+    image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=600',
     content: "Books have the power to transport us..."
   }
 ];
@@ -79,18 +83,21 @@ export const TEAM: TeamMember[] = [
     name: "Matilda Kashindo",
     role: "Founder & Director",
     bio: "Former educator with 20 years of experience in child development.",
-    image: "https://picsum.photos/id/64/300/300"
+    // Image: Black woman professional
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300'
   },
   {
     name: "Dr. James Ochieng",
     role: "Head of Health",
     bio: "Pediatrician dedicated to community health initiatives.",
-    image: "https://picsum.photos/id/91/300/300"
+    // Image: Black man doctor/professional
+    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=300'
   },
   {
     name: "Elena Rodriguez",
     role: "Education Coordinator",
     bio: "Ensures every child's academic needs are met with personalized plans.",
-    image: "https://picsum.photos/id/338/300/300"
+    // Image: Woman professional
+    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=300'
   }
 ];

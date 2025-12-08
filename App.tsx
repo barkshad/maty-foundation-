@@ -10,7 +10,6 @@ import GetInvolved from './pages/GetInvolved';
 import Stories from './pages/Stories';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
-import AdminPlan from './pages/AdminPlan';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<PageRoute>(PageRoute.HOME);
@@ -36,8 +35,6 @@ const App: React.FC = () => {
         return <Gallery />;
       case PageRoute.CONTACT:
         return <Contact />;
-      case PageRoute.ADMIN_PLAN:
-        return <AdminPlan />;
       default:
         return <Home navigate={setCurrentPage} />;
     }

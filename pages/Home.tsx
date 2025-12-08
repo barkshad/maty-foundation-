@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageRoute } from '../types';
 import { ArrowRight, Heart, BookOpen, Users, Sparkles } from 'lucide-react';
+import { PROGRAMS } from '../constants';
 
 interface HomeProps {
   navigate: (page: PageRoute) => void;
@@ -12,8 +13,9 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center justify-center text-center px-4 bg-brand-dark">
         <div className="absolute inset-0 z-0 opacity-40">
+          {/* Image: Children playing in a field/school context */}
           <img 
-            src="https://picsum.photos/id/1012/1920/1080" 
+            src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1920" 
             alt="Children playing" 
             className="w-full h-full object-cover"
           />
@@ -85,8 +87,9 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
           </div>
           <div className="relative">
             <div className="absolute top-4 left-4 w-full h-full border-2 border-brand-primary rounded-2xl z-0"></div>
+            {/* Image: Group of happy kids */}
             <img 
-              src="https://picsum.photos/id/1059/600/700" 
+              src="https://images.unsplash.com/photo-1603354350317-6f7aaa5911c5?auto=format&fit=crop&q=80&w=600" 
               alt="Community" 
               className="relative z-10 rounded-2xl shadow-xl w-full h-auto"
             />
@@ -108,20 +111,17 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {[
-              { title: "Education First", desc: "Scholarships, tutoring, and supplies for 150+ students.", img: "https://picsum.photos/id/10/800/600" },
-              { title: "Community Outreach", desc: "Health camps and food security for vulnerable families.", img: "https://picsum.photos/id/12/800/600" }
-            ].map((prog, idx) => (
+            {PROGRAMS.map((prog, idx) => (
               <div 
                 key={idx}
                 onClick={() => navigate(PageRoute.PROGRAMS)}
                 className="group relative overflow-hidden rounded-xl shadow-md cursor-pointer h-80"
               >
-                <img src={prog.img} alt={prog.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <img src={prog.image} alt={prog.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80"></div>
                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
                   <h3 className="text-2xl text-white font-bold mb-2">{prog.title}</h3>
-                  <p className="text-slate-200 mb-4">{prog.desc}</p>
+                  <p className="text-slate-200 mb-4">{prog.description}</p>
                   <span className="text-white text-sm font-bold underline decoration-brand-primary underline-offset-4">Learn More</span>
                 </div>
               </div>

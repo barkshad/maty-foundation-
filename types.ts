@@ -37,5 +37,4 @@ export enum PageRoute {
   STORIES = '/stories',
   GALLERY = '/gallery',
   CONTACT = '/contact',
-  ADMIN_PLAN = '/admin-plan' // Special page for the "Plan" deliverables
 }

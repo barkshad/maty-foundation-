@@ -2,14 +2,41 @@ import React from 'react';
 
 const Gallery: React.FC = () => {
   const images = [
-    { id: 1011, caption: "Morning Assembly" },
-    { id: 1025, caption: "Our Rescue Dog, Max" },
-    { id: 1059, caption: "Computer Lab" },
-    { id: 106, caption: "Spring Garden" },
-    { id: 14, caption: "Art Class" },
-    { id: 17, caption: "Community Walk" },
-    { id: 28, caption: "Study Time" },
-    { id: 29, caption: "Mountain Trip" },
+    // Education / Learning
+    { 
+      url: "https://images.unsplash.com/photo-1427504746696-ea470a74ea02?auto=format&fit=crop&q=80&w=400", 
+      caption: "Morning Classes" 
+    },
+    { 
+      url: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=400", 
+      caption: "Computer Lab" 
+    },
+    { 
+      url: "https://images.unsplash.com/photo-1577896334623-e71387e143f6?auto=format&fit=crop&q=80&w=400", 
+      caption: "Art & Creativity" 
+    },
+    // Outreach / Community
+    { 
+      url: "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=400", 
+      caption: "Community Meeting" 
+    },
+    { 
+      url: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=400", 
+      caption: "Medical Camp" 
+    },
+    // Daily Life / Fun
+    { 
+      url: "https://images.unsplash.com/photo-1603354350317-6f7aaa5911c5?auto=format&fit=crop&q=80&w=400", 
+      caption: "Recess Time" 
+    },
+    { 
+      url: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=400", 
+      caption: "Field Trip" 
+    },
+    { 
+      url: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=400", 
+      caption: "Celebration Day" 
+    },
   ];
 
   return (
@@ -21,13 +48,13 @@ const Gallery: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {images.map((img) => (
+          {images.map((img, idx) => (
             <div 
-              key={img.id}
+              key={idx}
               className="group relative aspect-square overflow-hidden rounded-lg shadow-sm hover:shadow-xl transition-all cursor-pointer bg-slate-200"
             >
               <img 
-                src={`https://picsum.photos/id/${img.id}/400/400`} 
+                src={img.url} 
                 loading="lazy"
                 alt={img.caption}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
