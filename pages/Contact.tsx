@@ -1,5 +1,6 @@
 import React from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react';
+import { CONTACT_INFO } from '../constants';
 
 const Contact: React.FC = () => {
   return (
@@ -31,8 +32,8 @@ const Contact: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-bold text-stone-800">Email</h3>
-                <p className="text-stone-600">hello@matifoundation.org</p>
-                <p className="text-stone-600">volunteer@matifoundation.org</p>
+                <a href={`mailto:${CONTACT_INFO.email}`} className="text-stone-600 hover:text-brand-primary block">{CONTACT_INFO.email}</a>
+                <a href="mailto:volunteer@matifoundation.org" className="text-stone-600 hover:text-brand-primary block">volunteer@matifoundation.org</a>
               </div>
             </div>
 
@@ -42,7 +43,26 @@ const Contact: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-bold text-stone-800">Call</h3>
-                <p className="text-stone-600">+1 (555) 123-4567</p>
+                <a href={`tel:${CONTACT_INFO.rawPhone}`} className="text-stone-600 hover:text-brand-primary block text-lg">{CONTACT_INFO.displayPhone}</a>
+                <p className="text-xs text-stone-400">Mon-Fri, 9am - 5pm</p>
+              </div>
+            </div>
+
+            <div className="flex items-start">
+              <div className="bg-[#25D366]/10 p-3 rounded-lg mr-4 text-[#25D366]">
+                <MessageCircle size={24} />
+              </div>
+              <div>
+                <h3 className="font-bold text-stone-800">WhatsApp</h3>
+                <a 
+                  href={`https://wa.me/${CONTACT_INFO.rawPhone}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-stone-600 hover:text-[#25D366] block"
+                >
+                  Chat with us on WhatsApp
+                </a>
+                <p className="text-xs text-stone-400">Quick responses for donors & volunteers</p>
               </div>
             </div>
           </div>
@@ -58,7 +78,7 @@ const Contact: React.FC = () => {
             </div>
             <input type="text" placeholder="Subject" className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:outline-none focus:border-brand-primary" />
             <textarea rows={5} placeholder="Message" className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:outline-none focus:border-brand-primary"></textarea>
-            <button className="w-full bg-brand-primary text-white font-bold py-3 rounded-lg hover:bg-orange-700 transition-colors">
+            <button className="w-full bg-brand-primary text-white font-bold py-3 rounded-lg hover:bg-blue-800 transition-colors">
               Send Message
             </button>
           </form>

@@ -1,5 +1,12 @@
 import { Program, Story, TeamMember } from './types';
 
+export const CONTACT_INFO = {
+  email: "hello@matifoundation.org",
+  displayPhone: "0712 146 179",
+  rawPhone: "254712146179", // Sanitized with country code (Kenya) for tel: and wa.me links
+  address: "123 Hope Lane, Springfield"
+};
+
 // This context is fed to Gemini
 export const SITE_CONTENT_CONTEXT = {
   mission: "To provide a safe haven, holistic education, and community integration for orphaned and vulnerable children.",
@@ -17,9 +24,9 @@ export const SITE_CONTENT_CONTEXT = {
     "Community Outreach: Monthly health camps and food drives."
   ],
   contact: {
-    email: "hello@matifoundation.org",
-    phone: "+1 (555) 123-4567",
-    address: "123 Hope Lane, Springfield"
+    email: CONTACT_INFO.email,
+    phone: CONTACT_INFO.displayPhone,
+    address: CONTACT_INFO.address
   }
 };
 

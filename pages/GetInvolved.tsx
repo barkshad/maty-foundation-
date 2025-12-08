@@ -62,7 +62,7 @@ const GetInvolved: React.FC = () => {
                 </p>
               </div>
 
-              <button className="w-full bg-brand-primary text-white py-4 rounded-xl font-bold text-lg hover:bg-orange-700 transition-colors shadow-lg">
+              <button className="w-full bg-brand-primary text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-800 transition-colors shadow-lg">
                 Process Secure Donation
               </button>
               <p className="text-center text-xs text-stone-400 mt-4">Secure payment powered by MockStripe. All donations are tax-deductible.</p>

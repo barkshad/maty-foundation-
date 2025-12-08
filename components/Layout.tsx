@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
-import { Menu, X, Heart, ShieldCheck } from 'lucide-react';
+import { Menu, X, Heart, ShieldCheck, Phone, MessageCircle } from 'lucide-react';
 import ChatWidget from './ChatWidget';
+import { CONTACT_INFO } from '../constants';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -60,7 +61,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
               ))}
               <button
                 onClick={() => handleNav(PageRoute.GET_INVOLVED)}
-                className="bg-brand-primary hover:bg-orange-700 text-white px-5 py-2.5 rounded-full font-medium shadow-md transition-all transform hover:scale-105"
+                className="bg-brand-primary hover:bg-blue-800 text-white px-5 py-2.5 rounded-full font-medium shadow-md transition-all transform hover:scale-105"
               >
                 Donate Now
               </button>
@@ -106,7 +107,36 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
         {children}
       </main>
 
-      {/* Chat Widget */}
+      {/* Floating Contact Buttons (Bottom Left) */}
+      <div className="fixed bottom-6 left-6 z-50 flex flex-col space-y-4">
+        {/* WhatsApp Button */}
+        <a
+          href={`https://wa.me/${CONTACT_INFO.rawPhone}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-[#25D366] text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center group"
+          title="Chat on WhatsApp"
+        >
+          <MessageCircle size={28} fill="white" className="text-white" />
+          <span className="absolute left-14 bg-white text-stone-800 px-2 py-1 rounded shadow-md text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            WhatsApp Us
+          </span>
+        </a>
+
+        {/* Phone Call Button */}
+        <a
+          href={`tel:${CONTACT_INFO.rawPhone}`}
+          className="bg-brand-primary text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center group"
+          title="Call Us"
+        >
+          <Phone size={28} fill="currentColor" />
+          <span className="absolute left-14 bg-white text-stone-800 px-2 py-1 rounded shadow-md text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            Call Now
+          </span>
+        </a>
+      </div>
+
+      {/* Chat Widget (Bottom Right) */}
       <ChatWidget />
 
       {/* Footer */}
@@ -115,7 +145,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-1">
                <div className="flex items-center mb-4">
-                <Heart className="h-6 w-6 text-brand-primary mr-2" fill="#c2410c" />
+                <Heart className="h-6 w-6 text-brand-primary mr-2" fill="#1d4ed8" />
                 <span className="text-xl font-serif font-bold text-white">Mati Foundation</span>
               </div>
               <p className="text-sm leading-relaxed mb-4">
@@ -140,10 +170,13 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
             <div>
               <h3 className="text-white font-bold mb-4 uppercase text-sm tracking-wider">Contact</h3>
               <ul className="space-y-2 text-sm">
-                <li>123 Hope Lane</li>
-                <li>Springfield, SP 12345</li>
-                <li>+1 (555) 123-4567</li>
-                <li>hello@matifoundation.org</li>
+                <li>{CONTACT_INFO.address}</li>
+                <li>
+                  <a href={`tel:${CONTACT_INFO.rawPhone}`} className="hover:text-brand-primary">{CONTACT_INFO.displayPhone}</a>
+                </li>
+                <li>
+                   <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-brand-primary">{CONTACT_INFO.email}</a>
+                </li>
               </ul>
             </div>
 
@@ -156,7 +189,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
                   placeholder="Your email" 
                   className="bg-stone-800 text-white px-3 py-2 rounded-l-md w-full focus:outline-none focus:ring-1 focus:ring-brand-primary border border-stone-700"
                 />
-                <button className="bg-brand-primary px-4 py-2 rounded-r-md text-white font-medium hover:bg-orange-600">
+                <button className="bg-brand-primary px-4 py-2 rounded-r-md text-white font-medium hover:bg-blue-600">
                   Join
                 </button>
               </div>

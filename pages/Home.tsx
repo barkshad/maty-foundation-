@@ -32,7 +32,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={() => navigate(PageRoute.GET_INVOLVED)}
-              className="bg-brand-primary hover:bg-orange-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all shadow-lg hover:shadow-xl"
+              className="bg-brand-primary hover:bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all shadow-lg hover:shadow-xl"
             >
               Donate Now
             </button>
@@ -73,7 +73,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
         </p>
         <button 
           onClick={() => navigate(PageRoute.ABOUT)}
-          className="text-brand-primary font-bold hover:text-orange-800 flex items-center justify-center mx-auto"
+          className="text-brand-primary font-bold hover:text-blue-900 flex items-center justify-center mx-auto"
         >
           Read Our Full Story <ArrowRight className="ml-2 w-4 h-4" />
         </button>
