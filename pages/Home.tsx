@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageRoute } from '../types';
-import { ArrowRight, Heart, BookOpen, Users } from 'lucide-react';
+import { ArrowRight, Heart, BookOpen, Users, Sparkles } from 'lucide-react';
 
 interface HomeProps {
   navigate: (page: PageRoute) => void;
@@ -10,35 +10,31 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative h-[600px] flex items-center justify-center text-center px-4">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
+      <section className="relative h-[600px] flex items-center justify-center text-center px-4 bg-brand-dark">
+        <div className="absolute inset-0 z-0 opacity-40">
           <img 
             src="https://picsum.photos/id/1012/1920/1080" 
             alt="Children playing" 
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-stone-900/60 mix-blend-multiply"></div>
         </div>
-
-        {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto text-white">
-          <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6 leading-tight">
-            Building Futures,<br />One Child at a Time.
+        <div className="relative z-10 max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight">
+            Building Futures, One Child at a Time.
           </h1>
-          <p className="text-lg md:text-xl text-stone-200 mb-8 max-w-2xl mx-auto">
-            Mati Foundation provides a loving home, quality education, and community support to orphaned children, giving them the tools to write their own stories.
+          <p className="text-lg md:text-xl text-slate-200 mb-8 max-w-2xl mx-auto">
+            Providing a loving home, quality education, and community support to orphaned children.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={() => navigate(PageRoute.GET_INVOLVED)}
-              className="bg-brand-primary hover:bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all shadow-lg hover:shadow-xl"
+              className="bg-brand-primary hover:bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-bold transition-colors shadow-lg"
             >
               Donate Now
             </button>
             <button 
               onClick={() => navigate(PageRoute.ABOUT)}
-              className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/50 px-8 py-3 rounded-full text-lg font-semibold transition-all"
+              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 px-8 py-3 rounded-full text-lg font-bold transition-colors"
             >
               Our Mission
             </button>
@@ -46,69 +42,90 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
         </div>
       </section>
 
-      {/* Impact Stats */}
-      <section className="py-16 bg-brand-primary text-white">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {/* Stats Section */}
+      <section className="bg-white py-12 border-b border-stone-100">
+        <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { label: 'Children Housed', value: '50+', icon: <Heart className="w-8 h-8 mx-auto mb-2 opacity-80"/> },
-            { label: 'Students Educated', value: '150+', icon: <BookOpen className="w-8 h-8 mx-auto mb-2 opacity-80"/> },
-            { label: 'Meals Served', value: '50k+', icon: <Users className="w-8 h-8 mx-auto mb-2 opacity-80"/> },
-            { label: 'Years Active', value: '14', icon: <Heart className="w-8 h-8 mx-auto mb-2 opacity-80"/> },
+            { label: 'Children Housed', value: '50+', icon: <Heart className="w-6 h-6 text-brand-primary"/> },
+            { label: 'Students Educated', value: '150+', icon: <BookOpen className="w-6 h-6 text-brand-secondary"/> },
+            { label: 'Meals Served', value: '50k+', icon: <Users className="w-6 h-6 text-amber-500"/> },
+            { label: 'Years Active', value: '14', icon: <Sparkles className="w-6 h-6 text-purple-500"/> },
           ].map((stat, idx) => (
-            <div key={idx} className="p-4">
-              {stat.icon}
-              <div className="text-4xl font-bold font-serif mb-1">{stat.value}</div>
-              <div className="text-sm uppercase tracking-wider opacity-90">{stat.label}</div>
+            <div key={idx} className="text-center">
+              <div className="bg-stone-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                {stat.icon}
+              </div>
+              <div className="text-3xl font-bold text-slate-800 mb-1">{stat.value}</div>
+              <div className="text-xs uppercase tracking-wider text-slate-500 font-semibold">{stat.label}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Intro / Welcome */}
-      <section className="py-20 px-4 max-w-5xl mx-auto text-center">
-        <span className="text-brand-secondary font-bold tracking-widest text-sm uppercase mb-3 block">Welcome to Mati Foundation</span>
-        <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-800 mb-6">More Than Just a Shelter</h2>
-        <p className="text-stone-600 text-lg leading-relaxed mb-8">
-          We believe that every child deserves safety, love, and opportunity. Founded in 2010, the Mati Foundation has grown from a humble home into a comprehensive center for community transformation. We don't just provide beds; we provide pathways to dignity and independence through rigorous education and holistic care.
-        </p>
-        <button 
-          onClick={() => navigate(PageRoute.ABOUT)}
-          className="text-brand-primary font-bold hover:text-blue-900 flex items-center justify-center mx-auto"
-        >
-          Read Our Full Story <ArrowRight className="ml-2 w-4 h-4" />
-        </button>
+      {/* Welcome Section */}
+      <section className="py-20 px-4 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="text-brand-primary font-bold tracking-widest text-xs uppercase mb-2 block">Welcome to Mati Foundation</span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-800 mb-6">
+              More Than Just a Shelter
+            </h2>
+            <p className="text-slate-600 text-lg leading-relaxed mb-6">
+              We believe that every child deserves safety, love, and opportunity. Founded in 2010, the Mati Foundation has grown from a humble home into a comprehensive center for community transformation. 
+            </p>
+            <p className="text-slate-600 text-lg leading-relaxed mb-8">
+              We don't just provide beds; we provide pathways to dignity and independence through rigorous education and holistic care.
+            </p>
+            <button 
+              onClick={() => navigate(PageRoute.ABOUT)}
+              className="text-brand-primary font-bold hover:text-blue-700 flex items-center group"
+            >
+              Read Our Full Story <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+          <div className="relative">
+            <div className="absolute top-4 left-4 w-full h-full border-2 border-brand-primary rounded-2xl z-0"></div>
+            <img 
+              src="https://picsum.photos/id/1059/600/700" 
+              alt="Community" 
+              className="relative z-10 rounded-2xl shadow-xl w-full h-auto"
+            />
+          </div>
+        </div>
       </section>
 
-      {/* Preview Programs */}
+      {/* Program Previews */}
       <section className="py-20 bg-stone-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <h2 className="text-3xl font-serif font-bold text-stone-800 mb-2">Our Key Programs</h2>
-              <p className="text-stone-500">Holistic support for lasting change.</p>
+              <h2 className="text-3xl font-serif font-bold text-slate-800 mb-2">Our Key Programs</h2>
+              <p className="text-slate-500">Holistic support for lasting change.</p>
             </div>
-            <button onClick={() => navigate(PageRoute.PROGRAMS)} className="hidden md:flex text-brand-secondary font-bold items-center">
+            <button onClick={() => navigate(PageRoute.PROGRAMS)} className="hidden md:flex text-brand-secondary font-bold items-center hover:translate-x-1 transition-transform">
               View All <ArrowRight className="ml-2 w-4 h-4" />
             </button>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer" onClick={() => navigate(PageRoute.PROGRAMS)}>
-              <img src="https://picsum.photos/id/10/800/600" alt="Education" className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
-                <h3 className="text-2xl text-white font-bold mb-2">Education First</h3>
-                <p className="text-stone-200 mb-4">Scholarships, tutoring, and supplies for 150+ students.</p>
-                <span className="text-white underline text-sm font-bold">Learn More</span>
+            {[
+              { title: "Education First", desc: "Scholarships, tutoring, and supplies for 150+ students.", img: "https://picsum.photos/id/10/800/600" },
+              { title: "Community Outreach", desc: "Health camps and food security for vulnerable families.", img: "https://picsum.photos/id/12/800/600" }
+            ].map((prog, idx) => (
+              <div 
+                key={idx}
+                onClick={() => navigate(PageRoute.PROGRAMS)}
+                className="group relative overflow-hidden rounded-xl shadow-md cursor-pointer h-80"
+              >
+                <img src={prog.img} alt={prog.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80"></div>
+                <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  <h3 className="text-2xl text-white font-bold mb-2">{prog.title}</h3>
+                  <p className="text-slate-200 mb-4">{prog.desc}</p>
+                  <span className="text-white text-sm font-bold underline decoration-brand-primary underline-offset-4">Learn More</span>
+                </div>
               </div>
-            </div>
-            <div className="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer" onClick={() => navigate(PageRoute.PROGRAMS)}>
-              <img src="https://picsum.photos/id/12/800/600" alt="Community" className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
-                <h3 className="text-2xl text-white font-bold mb-2">Community Outreach</h3>
-                <p className="text-stone-200 mb-4">Health camps and food security for vulnerable families.</p>
-                <span className="text-white underline text-sm font-bold">Learn More</span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

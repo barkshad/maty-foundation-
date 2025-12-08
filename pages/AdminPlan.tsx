@@ -1,139 +1,119 @@
 import React from 'react';
-import { Database, Server, Layout, Shield } from 'lucide-react';
+import { Database, Server, Layout, Shield, Lock, CreditCard, Users, FileText } from 'lucide-react';
 
 const AdminPlan: React.FC = () => {
   return (
-    <div className="bg-stone-50 min-h-screen py-16">
-      <div className="max-w-6xl mx-auto px-4">
+    <div className="min-h-screen py-16 px-4 bg-stone-50">
+      <div className="max-w-7xl mx-auto">
         
-        <div className="text-center mb-16">
-          <div className="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold uppercase tracking-widest mb-4">Internal Documentation</div>
-          <h1 className="text-4xl font-serif font-bold text-stone-900 mb-4">Website Plan & Workflows</h1>
-          <p className="text-stone-600 max-w-2xl mx-auto">
-            This section outlines the technical architecture, user workflows, and administrative processes designed for the Mati Foundation web application.
+        <div className="text-center mb-12">
+          <div className="inline-block px-3 py-1 rounded-full bg-blue-100 text-brand-primary text-xs font-bold uppercase tracking-widest mb-2">Internal Documentation</div>
+          <h1 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-4">System Architecture & Workflows</h1>
+          <p className="text-slate-600 max-w-2xl mx-auto">
+            A blueprint for the secure, scalable, and modern digital infrastructure of Mati Foundation.
           </p>
         </div>
 
-        {/* Workflows */}
-        <div className="grid lg:grid-cols-2 gap-12 mb-20">
-          {/* Visitor Workflow */}
-          <div className="bg-white p-8 rounded-2xl shadow-md border border-stone-200">
-            <h3 className="text-xl font-bold text-stone-800 mb-6 flex items-center">
-              <span className="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 text-sm">1</span>
-              Visitor Journey
-            </h3>
-            <div className="space-y-4">
-              <div className="flex items-center p-3 bg-stone-50 rounded-lg border border-stone-100">
-                <span className="font-bold text-stone-700 w-24">Explore</span>
-                <span className="text-stone-500 text-sm">Lands on Home → Views Impact Stats → Reads About Page</span>
-              </div>
-              <div className="flex justify-center"><div className="h-4 w-0.5 bg-stone-300"></div></div>
-              <div className="flex items-center p-3 bg-stone-50 rounded-lg border border-stone-100">
-                <span className="font-bold text-stone-700 w-24">Engage</span>
-                <span className="text-stone-500 text-sm">Browses Programs → Reads Success Stories → Uses Chatbot</span>
-              </div>
-              <div className="flex justify-center"><div className="h-4 w-0.5 bg-stone-300"></div></div>
-              <div className="flex items-center p-3 bg-green-50 rounded-lg border border-green-100">
-                <span className="font-bold text-green-700 w-24">Act</span>
-                <span className="text-green-800 text-sm">Clicks "Donate" or "Volunteer" → Submits Form → Receives Email</span>
-              </div>
-            </div>
-          </div>
+        {/* Dashboard Simulation */}
+        <div className="grid lg:grid-cols-3 gap-6 mb-16">
+           {/* Column 1: Public Flow */}
+           <div className="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+              <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                <Layout size={20} className="mr-2 text-blue-500"/>
+                Public Interface
+              </h3>
+              <ul className="space-y-3">
+                <li className="bg-stone-50 p-3 rounded-lg text-sm flex items-center">
+                  <div className="w-2 h-2 rounded-full bg-green-500 mr-3"></div>
+                  Visitor lands on Home
+                </li>
+                <li className="bg-stone-50 p-3 rounded-lg text-sm flex items-center">
+                  <div className="w-2 h-2 rounded-full bg-green-500 mr-3"></div>
+                  Interacts with Chatbot (Gemini AI)
+                </li>
+                <li className="bg-stone-50 p-3 rounded-lg text-sm flex items-center">
+                  <div className="w-2 h-2 rounded-full bg-blue-500 mr-3"></div>
+                  Submits Donation (Stripe/M-Pesa)
+                </li>
+              </ul>
+           </div>
 
-          {/* Admin Workflow */}
-          <div className="bg-white p-8 rounded-2xl shadow-md border border-stone-200">
-            <h3 className="text-xl font-bold text-stone-800 mb-6 flex items-center">
-               <span className="w-8 h-8 rounded-full bg-stone-800 text-white flex items-center justify-center mr-3 text-sm">2</span>
-              Admin Management
-            </h3>
-            <div className="space-y-4">
-              <div className="flex items-center p-3 bg-stone-50 rounded-lg border border-stone-100">
-                <span className="font-bold text-stone-700 w-24">Login</span>
-                <span className="text-stone-500 text-sm">Secure Auth (OAuth/Email) → Dashboard Access</span>
-              </div>
-               <div className="flex justify-center"><div className="h-4 w-0.5 bg-stone-300"></div></div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-stone-50 p-3 rounded-lg border border-stone-100 text-sm">
-                  <span className="block font-bold text-stone-700 mb-1">Volunteers</span>
-                  Review Apps → Approve/Deny → Assign Role
+           {/* Column 2: Admin Panel */}
+           <div className="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700 text-slate-200">
+              <h3 className="text-lg font-bold text-white mb-4 flex items-center">
+                <Lock size={20} className="mr-2 text-teal-400"/>
+                Admin Dashboard
+              </h3>
+              
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="bg-slate-700 p-3 rounded-lg text-center">
+                  <Users size={20} className="mx-auto mb-1 text-purple-400"/>
+                  <span className="text-[10px] font-bold uppercase text-slate-400">Volunteers</span>
+                  <div className="text-lg font-bold text-white">12 Pending</div>
                 </div>
-                <div className="bg-stone-50 p-3 rounded-lg border border-stone-100 text-sm">
-                  <span className="block font-bold text-stone-700 mb-1">Donations</span>
-                  Track Payments → Send Tax Receipts → Export Reports
+                <div className="bg-slate-700 p-3 rounded-lg text-center">
+                  <CreditCard size={20} className="mx-auto mb-1 text-green-400"/>
+                  <span className="text-[10px] font-bold uppercase text-slate-400">Donations</span>
+                  <div className="text-lg font-bold text-white">$1,250</div>
                 </div>
               </div>
-               <div className="flex justify-center"><div className="h-4 w-0.5 bg-stone-300"></div></div>
-              <div className="flex items-center p-3 bg-blue-50 rounded-lg border border-blue-100">
-                <span className="font-bold text-blue-700 w-24">Content</span>
-                <span className="text-blue-800 text-sm">Upload Gallery Photos → Post Stories → Update Program Stats</span>
+              <div className="bg-slate-700 p-3 rounded-lg text-xs flex items-center text-slate-300">
+                  <FileText size={16} className="mr-2 text-slate-500"/>
+                  Recent Story Draft: "Summer Camp..."
               </div>
-            </div>
-          </div>
-        </div>
+           </div>
 
-        {/* Tech Stack */}
-        <h2 className="text-2xl font-bold font-serif text-stone-900 mb-8 text-center">Recommended Tech Stack</h2>
-        <div className="grid md:grid-cols-4 gap-6">
-          <div className="bg-white p-6 rounded-xl border border-stone-200 text-center hover:shadow-lg transition-shadow">
-            <Layout className="w-10 h-10 text-brand-primary mx-auto mb-4" />
-            <h3 className="font-bold text-stone-800 mb-2">Frontend</h3>
-            <p className="text-sm text-stone-600">React (TypeScript)</p>
-            <p className="text-sm text-stone-600">Tailwind CSS</p>
-            <p className="text-sm text-stone-600">Vite</p>
-          </div>
-          <div className="bg-white p-6 rounded-xl border border-stone-200 text-center hover:shadow-lg transition-shadow">
-            <Server className="w-10 h-10 text-brand-secondary mx-auto mb-4" />
-            <h3 className="font-bold text-stone-800 mb-2">Backend</h3>
-            <p className="text-sm text-stone-600">Node.js / Express</p>
-            <p className="text-sm text-stone-600">Supabase (Auth + DB)</p>
-            <p className="text-sm text-stone-600">Gemini API (AI)</p>
-          </div>
-          <div className="bg-white p-6 rounded-xl border border-stone-200 text-center hover:shadow-lg transition-shadow">
-            <Database className="w-10 h-10 text-blue-600 mx-auto mb-4" />
-            <h3 className="font-bold text-stone-800 mb-2">Data</h3>
-            <p className="text-sm text-stone-600">PostgreSQL</p>
-            <p className="text-sm text-stone-600">AWS S3 (Images)</p>
-            <p className="text-sm text-stone-600">Stripe (Payments)</p>
-          </div>
-           <div className="bg-white p-6 rounded-xl border border-stone-200 text-center hover:shadow-lg transition-shadow">
-            <Shield className="w-10 h-10 text-stone-700 mx-auto mb-4" />
-            <h3 className="font-bold text-stone-800 mb-2">Hosting</h3>
-            <p className="text-sm text-stone-600">Vercel (Frontend)</p>
-            <p className="text-sm text-stone-600">Railway (Backend)</p>
-            <p className="text-sm text-stone-600">Cloudflare (DNS)</p>
-          </div>
+           {/* Column 3: Backend */}
+           <div className="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+              <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                <Server size={20} className="mr-2 text-purple-500"/>
+                Infrastructure
+              </h3>
+               <ul className="space-y-3">
+                <li className="bg-stone-50 p-3 rounded-lg text-sm flex items-center justify-between">
+                  <span>Frontend Hosting</span>
+                  <span className="font-mono text-xs bg-black text-white px-2 py-0.5 rounded">Vercel</span>
+                </li>
+                <li className="bg-stone-50 p-3 rounded-lg text-sm flex items-center justify-between">
+                  <span>Database & Auth</span>
+                  <span className="font-mono text-xs bg-green-600 text-white px-2 py-0.5 rounded">Supabase</span>
+                </li>
+                <li className="bg-stone-50 p-3 rounded-lg text-sm flex items-center justify-between">
+                  <span>AI Logic</span>
+                  <span className="font-mono text-xs bg-blue-600 text-white px-2 py-0.5 rounded">Gemini</span>
+                </li>
+                 <li className="bg-stone-50 p-3 rounded-lg text-sm flex items-center justify-between">
+                  <span>Media Storage</span>
+                  <span className="font-mono text-xs bg-orange-600 text-white px-2 py-0.5 rounded">Cloudinary</span>
+                </li>
+              </ul>
+           </div>
         </div>
 
         {/* Database Schema Idea */}
-        <div className="mt-20 bg-stone-900 text-stone-300 p-8 rounded-2xl font-mono text-sm overflow-x-auto">
-          <h3 className="text-white font-bold mb-4 text-lg border-b border-stone-700 pb-2">Proposed Database Schema (Snippet)</h3>
-          <pre>
-{`Table: Users
-- id (uuid)
-- email (string)
-- role (admin | donor | volunteer)
-
-Table: Donations
-- id (uuid)
-- user_id (fk)
-- amount (decimal)
-- currency (string)
-- status (pending | completed)
-- created_at (timestamp)
-
-Table: Volunteers
-- id (uuid)
-- name (string)
-- skills (array)
-- status (applied | vetted | active)
-
-Table: Stories
-- id (uuid)
-- title (string)
-- content (text)
-- image_url (string)
-- published (boolean)`}
-          </pre>
+        <div className="bg-slate-900 text-slate-300 p-8 rounded-xl font-mono text-sm shadow-lg overflow-hidden border border-slate-800">
+          <h3 className="text-white font-bold mb-4 text-base pb-2 border-b border-slate-700 flex items-center"><Database className="mr-2 w-4 h-4 text-blue-400"/> Database Schema</h3>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <p className="text-purple-400 mb-2">// Users Table</p>
+              <pre className="text-xs leading-relaxed opacity-80">
+{`id: uuid (pk)
+email: string
+role: 'admin' | 'donor'
+created_at: timestamp`}
+              </pre>
+            </div>
+            <div>
+               <p className="text-green-400 mb-2">// Donations Table</p>
+              <pre className="text-xs leading-relaxed opacity-80">
+{`id: uuid (pk)
+amount: decimal
+currency: 'USD' | 'KES'
+provider: 'stripe' | 'mpesa'
+status: 'success' | 'pending'`}
+              </pre>
+            </div>
+          </div>
         </div>
 
       </div>
