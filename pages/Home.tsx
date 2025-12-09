@@ -22,9 +22,9 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
   ];
 
   return (
-    <div className="flex flex-col gap-24 md:gap-32 pb-24 bg-white">
+    <div className="flex flex-col gap-24 md:gap-32 pb-24 bg-background-soft">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center text-center px-4 overflow-hidden">
+      <section className="relative min-h-[90vh] flex items-center justify-center text-center px-4 overflow-hidden pt-20">
         <motion.div 
           className="absolute inset-0 z-0"
           style={{ y: parallaxY }}
@@ -34,19 +34,19 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
             alt="African children in an outdoor learning session"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(13, 71, 161, 0.5)' }}></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-accent-blue/60 to-accent-blue/20"></div>
         </motion.div>
 
         <div className="relative z-10 max-w-4xl mx-auto p-8">
             <AnimatedText 
               text="Empowering Children. Strengthening Communities."
-              className="text-4xl md:text-6xl font-serif font-bold mb-6 leading-tight text-white"
+              className="text-4xl md:text-6xl font-serif font-bold mb-6 leading-tight text-white [text-shadow:0_3px_5px_rgba(0,0,0,0.3)]"
             />
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', stiffness: 120, damping: 20, delay: 0.8 }}
-            className="text-lg md:text-xl text-slate-100 mb-8 max-w-3xl mx-auto font-medium"
+            className="text-lg md:text-xl text-slate-100 mb-8 max-w-3xl mx-auto font-medium [text-shadow:0_2px_4px_rgba(0,0,0,0.4)]"
           >
             Founded by Matilda Kashindo, Mati Foundation is an independent foundation providing education, care, and connection to Kenya’s orphans and vulnerable children.
           </motion.p>
@@ -58,7 +58,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
           >
             <motion.button
               onClick={() => navigate(PageRoute.GET_INVOLVED)}
-              className="btn-primary text-lg"
+              className="btn-primary text-lg px-8 py-4"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -66,9 +66,8 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
             </motion.button>
             <motion.button
               onClick={() => navigate(PageRoute.ABOUT)}
-              className="bg-white/20 border-2 border-white text-white px-8 py-4 rounded-full text-lg font-bold transition-colors hover:bg-white"
-              // FIX: The 'hover' property is invalid in 'style'. Moved the color change to the 'whileHover' prop to correctly handle hover animations.
-              whileHover={{ scale: 1.05, y: -2, color: 'var(--text-main)' }}
+              className="bg-white/10 border-2 border-white text-white px-8 py-4 rounded-full text-lg font-bold transition-colors hover:bg-white hover:text-accent-blue"
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
               Our Founder's Story
@@ -119,7 +118,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
           {[
             { title: "Child Welfare & Care", icon: <Heart size={32} />, desc: "Food, clothing, and safe, supportive living conditions.", img: "https://i0.wp.com/africanrelief.org/wp-content/uploads/2024/08/BWA-Kabwata-Orphan-Image-Ironisitc.jpeg?fit=2160%2C1440&ssl=1" },
             { title: "Education Support", icon: <BookOpen size={32} />, desc: "School fees, learning materials, and uniforms.", img: "https://camfed.org/wp-content/uploads/2021/07/Hero_-_CAMA_Zambia_outdoor_lessons.jpg" },
-            { title: "Community Empowerment", icon: <Users size={32} />, desc: "Promoting family stability and self-reliance.", img: "https://static.wixstatic.com/media/c3ec3c_d97978e55e294e449545fe551cb85635~mv2.png/v1/fill/w_640%2Ch_446%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/c3ec3c_d97978e55e294e449545fe551cb85635~mv2.png" },
+            { title: "Community Empowerment", icon: <Users size={32} />, desc: "Promoting family stability and self-reliance.", img: "https://static.wixstatic.com/media/c3ec3c_d97978e55e294e449545fe551cb85635~nv2.png/v1/fill/w_640%2Ch_446%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/c3ec3c_d97978e55e294e449545fe551cb85635~nv2.png" },
             { title: "Health & Wellbeing", icon: <Shield size={32} />, desc: "Nutrition awareness and basic health support.", img: "https://images.unsplash.com/photo-1540499749214-f6f3e8371804?auto=format&fit=crop&q=80&w=800" },
           ].map((item, idx) => (
              <motion.div
@@ -164,7 +163,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
-            className="text-white text-3xl md:text-4xl font-serif italic"
+            className="text-white text-3xl md:text-4xl font-serif italic [text-shadow:0_2px_4px_rgba(0,0,0,0.3)]"
           >
             "{INSPIRATIONAL_QUOTES[0].quote}"
           </motion.p>
@@ -182,17 +181,17 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
           >
             <div className="absolute inset-0 z-0">
                 <img src="https://images.unsplash.com/photo-1518842323119-94a03f4a3424?auto=format&fit=crop&q=80&w=1470" alt="Hopeful child" className="w-full h-full object-cover" />
-                <div className="absolute inset-0" style={{ backgroundColor: 'rgba(30, 136, 229, 0.8)' }}></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-blue/80 to-accent-blue/80"></div>
             </div>
             <div className="relative z-10">
-                <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-white">Support Comes in Many Forms</h2>
+                <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.2)]">Support Comes in Many Forms</h2>
                 <p className="text-blue-100 text-xl mb-8 max-w-2xl mx-auto">
                     Your support helps provide education, food, and care to children who need it most.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <motion.button
                     onClick={() => navigate(PageRoute.GET_INVOLVED)}
-                    className="btn-secondary"
+                    className="btn-primary text-lg px-8 py-4"
                     style={{ backgroundColor: 'var(--white)', color: 'var(--primary-blue)', border: 'none' }}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
@@ -201,7 +200,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
                     </motion.button>
                     <motion.button
                     onClick={() => navigate(PageRoute.GET_INVOLVED)}
-                    className="btn-secondary"
+                    className="btn-secondary text-lg px-8 py-4 bg-white/20 border-white text-white hover:bg-white hover:text-accent-blue"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     >

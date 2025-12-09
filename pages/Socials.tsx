@@ -6,11 +6,11 @@ import * as Lucide from 'lucide-react';
 
 const Socials: React.FC = () => {
   return (
-    <div className="min-h-screen pb-24 bg-white">
-      <div className="relative py-24 px-4 text-center text-white overflow-hidden">
+    <div className="min-h-screen pb-24 bg-background-soft">
+      <div className="relative pt-20 pb-24 px-4 text-center text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?auto=format&fit=crop&q=80&w=1470" alt="Community connection" className="w-full h-full object-cover"/>
-            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-accent-blue/70 to-accent-blue/40"></div>
         </div>
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -18,8 +18,8 @@ const Socials: React.FC = () => {
             transition={{ type: 'spring', stiffness: 120, damping: 20 }}
             className="relative z-10"
         >
-          <AnimatedText text="Connect With Us" className="text-4xl font-serif font-bold mb-4 text-white" />
-          <p className="text-lg text-slate-100 max-w-2xl mx-auto">Follow our journey, share our stories, and be part of our growing community online.</p>
+          <AnimatedText text="Connect With Us" className="text-4xl font-serif font-bold mb-4 text-white [text-shadow:0_3px_5px_rgba(0,0,0,0.3)]" />
+          <p className="text-lg text-slate-100 max-w-2xl mx-auto [text-shadow:0_2px_4px_rgba(0,0,0,0.4)]">Follow our journey, share our stories, and be part of our growing community online.</p>
         </motion.div>
       </div>
       
@@ -40,12 +40,12 @@ const Socials: React.FC = () => {
               >
                 <div className="relative h-48">
                     <img src={social.image} alt={social.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute bottom-4 left-4 flex items-center">
                         <div className="p-3 rounded-xl bg-white/90 shadow-md mr-3" style={{ color: 'var(--primary-blue)' }}>
                            {Icon && <Icon size={24}/>}
                         </div>
-                        <h2 className="text-2xl font-bold text-white font-serif">{social.name}</h2>
+                        <h2 className="text-2xl font-bold text-white font-serif [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">{social.name}</h2>
                     </div>
                 </div>
                 <div className="p-6">

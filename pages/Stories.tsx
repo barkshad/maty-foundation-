@@ -6,11 +6,11 @@ import AnimatedText from '../components/AnimatedText';
 
 const Stories: React.FC = () => {
   return (
-    <div className="bg-white pb-24">
-       <div className="relative py-24 px-4 text-center text-white overflow-hidden">
+    <div className="bg-background-soft pb-24">
+       <div className="relative pt-20 pb-24 px-4 text-center text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1470" alt="Community story telling" className="w-full h-full object-cover"/>
-            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-accent-blue/70 to-accent-blue/40"></div>
         </div>
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -18,8 +18,8 @@ const Stories: React.FC = () => {
             transition={{ type: 'spring', stiffness: 120, damping: 20 }}
             className="relative z-10"
         >
-            <AnimatedText text="Moments of Joy" className="text-4xl font-serif font-bold mb-2 text-white" />
-            <p className="text-lg text-slate-100">Stories from our community to yours.</p>
+            <AnimatedText text="Moments of Joy" className="text-4xl font-serif font-bold mb-2 text-white [text-shadow:0_3px_5px_rgba(0,0,0,0.3)]" />
+            <p className="text-lg text-slate-100 [text-shadow:0_2px_4px_rgba(0,0,0,0.4)]">Stories from our community to yours.</p>
         </motion.div>
       </div>
 

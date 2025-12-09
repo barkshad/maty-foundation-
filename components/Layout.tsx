@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageRoute } from '../types';
 import { Menu, X, Heart, Phone, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -13,6 +13,15 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { name: 'Home', path: PageRoute.HOME },
@@ -31,8 +40,10 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans relative bg-white">
-      <nav className="sticky top-0 w-full z-50 bg-white border-b" style={{ borderColor: 'var(--border-color)'}}>
+    <div className="min-h-screen flex flex-col font-sans relative bg-background-soft">
+      <nav 
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-md' : 'bg-transparent'}`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
             <motion.div
@@ -55,15 +66,15 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
                 <motion.button
                   key={link.name}
                   onClick={() => handleNav(link.path)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors relative`}
+                  className={`px-4 py-2 rounded-full text-sm font-bold transition-colors relative`}
                   style={{ color: currentPage === link.path ? 'var(--primary-blue)' : 'var(--text-light)'}}
-                  whileHover={{ scale: 1.1 }}
+                  whileHover={{ scale: 1.1, color: 'var(--primary-blue)' }}
                   whileTap={{ scale: 0.95 }}
                 >
                   {link.name}
                   {currentPage === link.path && (
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5"
+                      className="absolute bottom-0 left-1 right-1 h-0.5"
                       style={{backgroundColor: 'var(--primary-blue)'}}
                       layoutId="underline"
                     />
@@ -83,7 +94,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
 
         {/* Mobile Nav */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t" style={{ borderColor: 'var(--border-color)'}}>
+          <div className="lg:hidden border-t bg-white" style={{ borderColor: 'var(--border-color)'}}>
             <div className="px-4 pt-2 pb-6 space-y-1">
               {navLinks.map((link) => (
                 <button
@@ -110,8 +121,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
           href={`https://wa.me/${CONTACT_INFO.rawPhone}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white p-3 rounded-full shadow-lg flex items-center justify-center"
-          style={{ backgroundColor: 'var(--primary-blue)' }}
+          className="text-white p-3 rounded-full shadow-lg flex items-center justify-center btn-primary"
           aria-label="Chat on WhatsApp"
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}
@@ -122,8 +132,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
 
         <motion.a
           href={`tel:${CONTACT_INFO.rawPhone}`}
-          className="text-white p-3 rounded-full shadow-lg flex items-center justify-center"
-          style={{ backgroundColor: 'var(--primary-blue)' }}
+          className="text-white p-3 rounded-full shadow-lg flex items-center justify-center btn-primary"
           aria-label="Call Us"
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}
@@ -177,9 +186,13 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
                   placeholder="Email..."
                   className="bg-transparent px-4 py-2 w-full focus:outline-none text-sm text-white placeholder-blue-200"
                 />
-                <button className="btn-primary text-sm px-4 py-2">
+                <motion.button 
+                  className="btn-primary text-sm px-4 py-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   Go
-                </button>
+                </motion.button>
               </div>
             </div>
           </div>

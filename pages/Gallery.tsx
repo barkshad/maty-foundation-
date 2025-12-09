@@ -19,11 +19,11 @@ const Gallery: React.FC = () => {
   const filteredImages = filter === 'all' ? images : images.filter(img => img.cat === filter);
 
   return (
-    <div className="min-h-screen pb-24 bg-white">
-      <div className="relative py-24 px-4 text-center text-white overflow-hidden">
+    <div className="min-h-screen pb-24 bg-background-soft">
+      <div className="relative pt-20 pb-24 px-4 text-center text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1534182928399-73d8b1c42f3e?auto=format&fit=crop&q=80&w=1528" alt="Gallery of moments" className="w-full h-full object-cover"/>
-            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-accent-blue/70 to-accent-blue/40"></div>
         </div>
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -31,8 +31,8 @@ const Gallery: React.FC = () => {
             transition={{ type: 'spring', stiffness: 120, damping: 20 }}
             className="relative z-10"
         >
-          <AnimatedText text="Our Gallery" className="text-4xl font-serif font-bold mb-4 text-white" />
-          <p className="text-lg text-slate-100">A glimpse into the moments of hope and connection we create together.</p>
+          <AnimatedText text="Our Gallery" className="text-4xl font-serif font-bold mb-4 text-white [text-shadow:0_3px_5px_rgba(0,0,0,0.3)]" />
+          <p className="text-lg text-slate-100 [text-shadow:0_2px_4px_rgba(0,0,0,0.4)]">A glimpse into the moments of hope and connection we create together.</p>
         </motion.div>
       </div>
       
@@ -45,7 +45,7 @@ const Gallery: React.FC = () => {
             { key: 'community', label: 'Community' },
             { key: 'welfare', label: 'Child Welfare' }
           ].map((f) => (
-            <button 
+            <motion.button 
               key={f.key}
               onClick={() => setFilter(f.key as any)}
               className={`px-4 sm:px-6 py-2 rounded-full font-bold text-sm uppercase tracking-wider transition-all relative ${
@@ -54,9 +54,11 @@ const Gallery: React.FC = () => {
                 : 'bg-white border hover:bg-gray-100'
               }`}
               style={{ borderColor: filter !== f.key ? 'var(--border-color)' : 'transparent', color: filter !== f.key ? 'var(--text-light)' : 'var(--white)'}}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
               {f.label}
-            </button>
+            </motion.button>
           ))}
         </div>
         
@@ -79,8 +81,8 @@ const Gallery: React.FC = () => {
                   alt={img.caption}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                 />
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="text-white font-bold text-center p-2">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-4">
+                  <span className="text-white font-bold text-sm [text-shadow:0_1px_3px_rgba(0,0,0,0.5)]">
                     {img.caption}
                   </span>
                 </div>

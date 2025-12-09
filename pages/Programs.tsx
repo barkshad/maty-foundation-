@@ -8,11 +8,11 @@ import AnimatedText from '../components/AnimatedText';
 
 const Programs: React.FC<{ navigate: (page: PageRoute) => void; }> = ({ navigate }) => {
   return (
-    <div className="min-h-screen pb-24 bg-white">
-      <div className="relative py-24 px-4 text-center text-white overflow-hidden">
+    <div className="min-h-screen pb-24 bg-background-soft">
+      <div className="relative pt-20 pb-24 px-4 text-center text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=1470" alt="Education session" className="w-full h-full object-cover"/>
-            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-accent-blue/70 to-accent-blue/40"></div>
         </div>
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -20,8 +20,8 @@ const Programs: React.FC<{ navigate: (page: PageRoute) => void; }> = ({ navigate
             transition={{ type: 'spring', stiffness: 120, damping: 20 }}
             className="relative z-10 max-w-4xl mx-auto"
         >
-            <AnimatedText text="Our Core Programs" className="text-4xl md:text-5xl font-serif font-bold mb-4 text-white" />
-            <p className="text-lg text-slate-100">A holistic approach to nurture, educate, and empower every child.</p>
+            <AnimatedText text="Our Core Programs" className="text-4xl md:text-5xl font-serif font-bold mb-4 text-white [text-shadow:0_3px_5px_rgba(0,0,0,0.3)]" />
+            <p className="text-lg text-slate-100 [text-shadow:0_2px_4px_rgba(0,0,0,0.4)]">A holistic approach to nurture, educate, and empower every child.</p>
         </motion.div>
       </div>
 

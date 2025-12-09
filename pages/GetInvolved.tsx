@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Lucide from 'lucide-react';
 import { CONTACT_INFO, GET_INVOLVED_OPTIONS, BANK_DETAILS } from '../constants';
 import { motion } from 'framer-motion';
@@ -21,12 +21,27 @@ const SectionWrapper: React.FC<{ className?: string, children: React.ReactNode }
   </motion.section>
 );
 
-const BankDetailRow: React.FC<{ label: string, value: string }> = ({ label, value }) => (
-    <div className="flex justify-between items-center py-3 border-b" style={{ borderColor: 'rgba(13, 71, 161, 0.1)'}}>
-        <span className="font-semibold" style={{ color: 'var(--text-light)'}}>{label}</span>
-        <span className="font-mono text-sm">{value}</span>
-    </div>
-);
+const BankDetailRow: React.FC<{ label: string, value: string }> = ({ label, value }) => {
+    const [copied, setCopied] = useState(false);
+    
+    const handleCopy = () => {
+        navigator.clipboard.writeText(value);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    }
+
+    return (
+        <div className="flex justify-between items-center py-3 border-b" style={{ borderColor: 'rgba(13, 71, 161, 0.1)'}}>
+            <span className="font-semibold" style={{ color: 'var(--text-light)'}}>{label}</span>
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-sm">{value}</span>
+              <button onClick={handleCopy} className="text-gray-400 hover:text-primary-blue transition-colors">
+                  {copied ? <Lucide.Check size={16} className="text-green-500"/> : <Lucide.Copy size={16} />}
+              </button>
+            </div>
+        </div>
+    );
+};
 
 
 const GetInvolved: React.FC<GetInvolvedProps> = ({ navigate }) => {
@@ -34,11 +49,11 @@ const GetInvolved: React.FC<GetInvolvedProps> = ({ navigate }) => {
   const { itemCategories, deliveryInfo, volunteerInfo, sponsorInfo } = GET_INVOLVED_OPTIONS;
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="relative py-24 px-4 text-center text-white overflow-hidden">
+    <div className="min-h-screen bg-background-soft">
+      <div className="relative pt-20 pb-24 px-4 text-center text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1618143099239-c8b519a86a23?auto=format&fit=crop&q=80&w=1470" alt="Volunteers working together" className="w-full h-full object-cover"/>
-            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-accent-blue/70 to-accent-blue/40"></div>
         </div>
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -46,8 +61,8 @@ const GetInvolved: React.FC<GetInvolvedProps> = ({ navigate }) => {
             transition={{ type: 'spring', stiffness: 120, damping: 20 }}
             className="relative z-10"
         >
-            <AnimatedText text="How You Can Support" className="text-4xl md:text-5xl font-serif font-bold mb-4 text-white" />
-            <p className="text-lg max-w-2xl mx-auto text-slate-100">Your support helps provide education, food, and care to children who need it most.</p>
+            <AnimatedText text="How You Can Support" className="text-4xl md:text-5xl font-serif font-bold mb-4 text-white [text-shadow:0_3px_5px_rgba(0,0,0,0.3)]" />
+            <p className="text-lg max-w-2xl mx-auto text-slate-100 [text-shadow:0_2px_4px_rgba(0,0,0,0.4)]">Your support helps provide education, food, and care to children who need it most.</p>
         </motion.div>
       </div>
 
@@ -56,7 +71,7 @@ const GetInvolved: React.FC<GetInvolvedProps> = ({ navigate }) => {
         {/* Bank Donation Section */}
         <SectionWrapper className="w-full">
           <div className="bg-white border p-8 rounded-2xl shadow-lg card-shine relative overflow-hidden" style={{ borderColor: 'var(--border-color)'}}>
-             <img src={sponsorInfo.image} alt={sponsorInfo.title} className="absolute inset-0 w-full h-full object-cover opacity-20"/>
+             <img src={sponsorInfo.image} alt={sponsorInfo.title} className="absolute inset-0 w-full h-full object-cover opacity-10"/>
             <div className="relative z-10">
                 <h2 className="text-3xl font-serif font-bold mb-2 text-center">Donate via Bank Transfer</h2>
                 <p className="text-center mb-8" style={{ color: 'var(--text-light)' }}>{sponsorInfo.description}</p>
@@ -166,11 +181,11 @@ const GetInvolved: React.FC<GetInvolvedProps> = ({ navigate }) => {
                 <p className="text-center mb-8" style={{ color: 'var(--text-light)' }}>{volunteerInfo.description}</p>
                 <form className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="First Name" className="w-full px-4 py-3 bg-white/50 border rounded-xl focus:ring-2 outline-none" style={{ borderColor: 'var(--border-color)'}}/>
-                    <input type="text" placeholder="Last Name" className="w-full px-4 py-3 bg-white/50 border rounded-xl focus:ring-2 outline-none" style={{ borderColor: 'var(--border-color)'}}/>
+                    <input type="text" placeholder="First Name" className="w-full px-4 py-3 bg-background-soft/50 border rounded-xl" style={{ borderColor: 'var(--border-color)'}}/>
+                    <input type="text" placeholder="Last Name" className="w-full px-4 py-3 bg-background-soft/50 border rounded-xl" style={{ borderColor: 'var(--border-color)'}}/>
                   </div>
-                  <input type="email" placeholder="Email Address" className="w-full px-4 py-3 bg-white/50 border rounded-xl focus:ring-2 outline-none" style={{ borderColor: 'var(--border-color)'}}/>
-                  <textarea rows={3} placeholder="How would you like to help? (e.g., tutoring, events)" className="w-full px-4 py-3 bg-white/50 border rounded-xl focus:ring-2 outline-none" style={{ borderColor: 'var(--border-color)'}}></textarea>
+                  <input type="email" placeholder="Email Address" className="w-full px-4 py-3 bg-background-soft/50 border rounded-xl" style={{ borderColor: 'var(--border-color)'}}/>
+                  <textarea rows={3} placeholder="How would you like to help? (e.g., tutoring, events)" className="w-full px-4 py-3 bg-background-soft/50 border rounded-xl" style={{ borderColor: 'var(--border-color)'}}></textarea>
                   <motion.button 
                     className="w-full btn-primary py-3"
                     whileHover={{ scale: 1.02 }}

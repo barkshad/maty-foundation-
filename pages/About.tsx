@@ -12,7 +12,6 @@ const icons: { [key: string]: React.ReactElement } = {
     Handshake: <Handshake className="w-8 h-8" style={{ color: 'var(--primary-blue)'}}/>,
 };
 
-// FIX: Added 'style' prop to the component's props to allow passing inline styles.
 const SectionWrapper: React.FC<{ className?: string, children: React.ReactNode, style?: React.CSSProperties }> = ({ children, className = '', style }) => (
   <motion.section
     initial={{ opacity: 0, y: 50 }}
@@ -28,23 +27,23 @@ const SectionWrapper: React.FC<{ className?: string, children: React.ReactNode, 
 
 const About: React.FC = () => {
   return (
-    <div className="pb-24 bg-white">
+    <div className="pb-24 bg-background-soft">
         {/* Header Section with Image */}
-        <div className="relative py-24 px-4 text-center text-white overflow-hidden">
+        <div className="relative pt-20 pb-24 px-4 text-center text-white overflow-hidden">
             <div className="absolute inset-0 z-0">
                 <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=1470" alt="Community hands" className="w-full h-full object-cover"/>
-                <div className="absolute inset-0 bg-black/50"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-accent-blue/70 to-accent-blue/40"></div>
             </div>
             <div className="relative z-10">
                  <AnimatedText 
                     text="A Foundation Built on a Vision of Care"
-                    className="text-4xl md:text-6xl font-serif font-bold mb-6 text-white"
+                    className="text-4xl md:text-6xl font-serif font-bold mb-6 text-white [text-shadow:0_3px_5px_rgba(0,0,0,0.3)]"
                 />
                 <motion.p 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ type: 'spring', delay: 0.5 }}
-                    className="text-xl max-w-3xl mx-auto text-slate-100"
+                    className="text-xl max-w-3xl mx-auto text-slate-100 [text-shadow:0_2px_4px_rgba(0,0,0,0.4)]"
                 >
                     Mati Foundation is an independent, humanitarian foundation created to respond directly to the real challenges facing children.
                 </motion.p>
@@ -127,7 +126,7 @@ const About: React.FC = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ type: 'spring', stiffness: 100 }}
-                    className="text-white text-3xl md:text-4xl font-serif italic"
+                    className="text-white text-3xl md:text-4xl font-serif italic [text-shadow:0_2px_4px_rgba(0,0,0,0.3)]"
                 >
                     "{INSPIRATIONAL_QUOTES[1].quote}"
                 </motion.p>

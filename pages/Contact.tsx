@@ -6,11 +6,11 @@ import AnimatedText from '../components/AnimatedText';
 
 const Contact: React.FC = () => {
   return (
-    <div className="bg-white pb-24">
-       <div className="relative py-24 px-4 text-center text-white overflow-hidden">
+    <div className="bg-background-soft pb-24">
+       <div className="relative pt-20 pb-24 px-4 text-center text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?auto=format&fit=crop&q=80&w=1470" alt="Contact us" className="w-full h-full object-cover"/>
-            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-accent-blue/70 to-accent-blue/40"></div>
         </div>
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -18,8 +18,8 @@ const Contact: React.FC = () => {
             transition={{ type: 'spring', stiffness: 120, damping: 20 }}
             className="relative z-10"
         >
-          <AnimatedText text="Get in Touch" className="text-4xl font-serif font-bold mb-6 text-white" />
-          <p className="text-lg max-w-2xl mx-auto text-slate-100">
+          <AnimatedText text="Get in Touch" className="text-4xl font-serif font-bold mb-6 text-white [text-shadow:0_3px_5px_rgba(0,0,0,0.3)]" />
+          <p className="text-lg max-w-2xl mx-auto text-slate-100 [text-shadow:0_2px_4px_rgba(0,0,0,0.4)]">
             Whether you want to arrange a drop-off for donations, inquire about volunteering, or just say hello, we are here.
           </p>
         </motion.div>
@@ -30,7 +30,8 @@ const Contact: React.FC = () => {
             {/* Contact Info */}
             <motion.div
             initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.2 }}
             >
             <h2 className="text-3xl font-serif font-bold mb-8">Contact Information</h2>
@@ -44,7 +45,8 @@ const Contact: React.FC = () => {
                     className="bg-white border rounded-2xl shadow-lg flex items-center card-shine relative overflow-hidden group p-6"
                     style={{ borderColor: 'var(--border-color)'}}
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                     transition={{ type: 'spring', delay: 0.4 + idx * 0.15 }}
                 >
                     <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity" />
@@ -71,19 +73,20 @@ const Contact: React.FC = () => {
             className="bg-white border p-8 md:p-10 rounded-2xl shadow-xl card-shine relative overflow-hidden"
             style={{ borderColor: 'var(--border-color)'}}
             initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.4 }}
             >
-            <img src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&q=80&w=800" alt="contact background" className="absolute inset-0 w-full h-full object-cover opacity-25" />
+            <img src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&q=80&w=800" alt="contact background" className="absolute inset-0 w-full h-full object-cover opacity-10" />
             <div className="relative z-10">
                 <h2 className="text-2xl font-bold mb-6">Send a Message</h2>
                 <form className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="Name" className="w-full px-4 py-3 bg-white/70 border rounded-xl focus:ring-2 outline-none" style={{ borderColor: 'var(--border-color)'}}/>
-                    <input type="email" placeholder="Email" className="w-full px-4 py-3 bg-white/70 border rounded-xl focus:ring-2 outline-none" style={{ borderColor: 'var(--border-color)'}}/>
+                    <input type="text" placeholder="Name" className="w-full px-4 py-3 bg-background-soft/70 border rounded-xl" style={{ borderColor: 'var(--border-color)'}}/>
+                    <input type="email" placeholder="Email" className="w-full px-4 py-3 bg-background-soft/70 border rounded-xl" style={{ borderColor: 'var(--border-color)'}}/>
                 </div>
-                <input type="text" placeholder="Subject" className="w-full px-4 py-3 bg-white/70 border rounded-xl focus:ring-2 outline-none" style={{ borderColor: 'var(--border-color)'}}/>
-                <textarea rows={5} placeholder="Message" className="w-full px-4 py-3 bg-white/70 border rounded-xl focus:ring-2 outline-none" style={{ borderColor: 'var(--border-color)'}}></textarea>
+                <input type="text" placeholder="Subject" className="w-full px-4 py-3 bg-background-soft/70 border rounded-xl" style={{ borderColor: 'var(--border-color)'}}/>
+                <textarea rows={5} placeholder="Message" className="w-full px-4 py-3 bg-background-soft/70 border rounded-xl" style={{ borderColor: 'var(--border-color)'}}></textarea>
                 <motion.button 
                     className="w-full btn-primary py-3 flex justify-center items-center"
                     whileHover={{ scale: 1.02 }}
@@ -106,8 +109,8 @@ const Contact: React.FC = () => {
              style={{ borderColor: 'var(--border-color)'}}
         >
             <h3 className="text-2xl font-serif font-bold mb-4">Our Location</h3>
-             <div className="aspect-video w-full rounded-xl flex items-center justify-center" style={{ backgroundColor: 'var(--secondary-blue)'}}>
-                <div className="text-center p-4">
+             <div className="aspect-video w-full rounded-xl flex items-center justify-center map-placeholder-bg">
+                <div className="text-center p-4 bg-white/80 backdrop-blur-sm rounded-lg">
                     <Lucide.MapPin size={48} className="mx-auto mb-4" style={{ color: 'var(--primary-blue)'}} />
                     <p className="font-bold" style={{ color: 'var(--text-light)'}}>Exact map location will be added soon.</p>
                     <p className="text-sm" style={{ color: 'var(--text-light)'}}>{CONTACT_INFO.address}</p>
