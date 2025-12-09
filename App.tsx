@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Layout from './components/Layout';
 import { PageRoute } from './types';
 import { AnimatePresence, motion } from 'framer-motion';
+import './components/AnimatedCounter';
+import './components/AnimatedText';
 
 // Pages
 import Home from './pages/Home';

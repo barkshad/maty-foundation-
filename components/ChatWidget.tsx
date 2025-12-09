@@ -44,10 +44,11 @@ const ChatWidget: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="bg-white/30 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 w-80 sm:w-96 mb-4 overflow-hidden flex flex-col h-[500px]"
+            className="bg-white rounded-2xl shadow-2xl border w-80 sm:w-96 mb-4 overflow-hidden flex flex-col h-[500px]"
+            style={{ borderColor: 'var(--border-color)'}}
           >
             {/* Header */}
-            <div className="bg-brand-secondary/80 p-4 flex justify-between items-center">
+            <div className="p-4 flex justify-between items-center" style={{ backgroundColor: 'var(--accent-blue)'}}>
               <div className="flex items-center text-white">
                 <Sparkles className="w-5 h-5 mr-2" />
                 <span className="font-bold">Mati Assistant</span>
@@ -58,7 +59,7 @@ const ChatWidget: React.FC = () => {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 bg-white/10 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4" style={{ backgroundColor: 'var(--secondary-blue)'}}>
               {messages.map((msg, idx) => (
                 <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <motion.div
@@ -66,20 +67,26 @@ const ChatWidget: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
                     msg.role === 'user' 
-                      ? 'bg-brand-primary text-white rounded-br-none' 
-                      : 'bg-white/80 border border-white/20 text-slate-800 rounded-bl-none shadow-sm'
-                  }`}>
+                      ? 'text-white rounded-br-none' 
+                      : 'bg-white border rounded-bl-none shadow-sm'
+                  }`}
+                  style={{ 
+                    backgroundColor: msg.role === 'user' ? 'var(--primary-blue)' : 'var(--white)',
+                    borderColor: 'var(--border-color)',
+                    color: msg.role === 'user' ? 'var(--white)' : 'var(--text-main)'
+                  }}
+                  >
                     {msg.text}
                   </motion.div>
                 </div>
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-white/80 border border-white/20 rounded-2xl rounded-bl-none px-4 py-3 shadow-sm">
+                  <div className="bg-white border rounded-2xl rounded-bl-none px-4 py-3 shadow-sm" style={{ borderColor: 'var(--border-color)'}}>
                     <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                      <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                      <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                     </div>
                   </div>
                 </div>
@@ -88,7 +95,7 @@ const ChatWidget: React.FC = () => {
             </div>
 
             {/* Input */}
-            <div className="p-3 bg-white/20 border-t border-white/20">
+            <div className="p-3 bg-white border-t" style={{ borderColor: 'var(--border-color)'}}>
               <div className="flex items-center space-x-2">
                 <input
                   type="text"
@@ -96,12 +103,14 @@ const ChatWidget: React.FC = () => {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Type your question..."
-                  className="flex-1 bg-white/30 border-none rounded-full px-4 py-2 focus:ring-2 focus:ring-brand-secondary focus:outline-none text-sm placeholder-slate-600"
+                  className="flex-1 bg-gray-100 border rounded-full px-4 py-2 focus:ring-2 focus:outline-none text-sm"
+                  style={{ borderColor: 'var(--border-color)', color: 'var(--text-main)'}}
                 />
                 <button 
                   onClick={handleSend}
                   disabled={isLoading || !input.trim()}
-                  className="bg-brand-secondary text-white p-2 rounded-full hover:bg-teal-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="text-white p-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  style={{ backgroundColor: 'var(--primary-blue)'}}
                 >
                   <Send size={18} />
                 </button>
@@ -114,7 +123,8 @@ const ChatWidget: React.FC = () => {
       {/* Toggle Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className={`${isOpen ? 'bg-slate-500' : 'bg-brand-secondary'} text-white p-4 rounded-full shadow-lg transition-all duration-300`}
+        className="text-white p-4 rounded-full shadow-lg transition-all duration-300"
+        style={{ backgroundColor: 'var(--primary-blue)'}}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         layout

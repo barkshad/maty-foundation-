@@ -2,10 +2,11 @@ import React from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { CONTACT_INFO } from '../constants';
 import { motion } from 'framer-motion';
+import AnimatedText from '../components/AnimatedText';
 
 const Contact: React.FC = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-20">
+    <div className="max-w-7xl mx-auto px-4 py-20 bg-white">
       <div className="grid md:grid-cols-2 gap-16">
         
         {/* Contact Info */}
@@ -14,8 +15,8 @@ const Contact: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ type: 'spring', stiffness: 100, damping: 20 }}
         >
-          <h1 className="text-4xl font-serif font-bold text-slate-900 mb-6">Get in Touch</h1>
-          <p className="text-slate-600 text-lg mb-10 leading-relaxed">
+          <AnimatedText text="Get in Touch" className="text-4xl font-serif font-bold mb-6" />
+          <p className="text-lg mb-10 leading-relaxed" style={{ color: 'var(--text-light)' }}>
             Whether you want to arrange a drop-off for donations, inquire about volunteering, or just say hello, we are here.
           </p>
 
@@ -27,20 +28,21 @@ const Contact: React.FC = () => {
             ].map((item, idx) => (
               <motion.div
                 key={item.title}
-                className="bg-white/30 backdrop-blur-lg border border-white/20 p-4 rounded-xl shadow-md flex items-center"
+                className="bg-white border p-4 rounded-xl shadow-md flex items-center card-shine"
+                style={{ borderColor: 'var(--border-color)'}}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', delay: 0.2 + idx * 0.1 }}
               >
-                <div className="bg-blue-100 p-3 rounded-xl mr-4 text-brand-primary">
+                <div className="p-3 rounded-xl mr-4" style={{ backgroundColor: 'var(--secondary-blue)', color: 'var(--primary-blue)'}}>
                   {item.icon}
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-800">{item.title}</h3>
+                  <h3 className="font-bold">{item.title}</h3>
                   {item.href ? (
-                    <a href={item.href} className="text-slate-600 hover:text-brand-primary block">{item.content}</a>
+                    <a href={item.href} className="block hover:underline" style={{ color: 'var(--text-light)'}}>{item.content}</a>
                   ) : (
-                    <p className="text-slate-600">{item.content}</p>
+                    <p style={{ color: 'var(--text-light)'}}>{item.content}</p>
                   )}
                 </div>
               </motion.div>
@@ -50,21 +52,22 @@ const Contact: React.FC = () => {
 
         {/* Form */}
         <motion.div 
-          className="bg-white/30 backdrop-blur-xl border border-white/20 p-8 md:p-10 rounded-2xl shadow-xl"
+          className="bg-white border p-8 md:p-10 rounded-2xl shadow-xl card-shine"
+          style={{ borderColor: 'var(--border-color)'}}
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ type: 'spring', stiffness: 100, damping: 20 }}
         >
-          <h2 className="text-2xl font-bold mb-6 text-slate-800">Send a Message</h2>
+          <h2 className="text-2xl font-bold mb-6">Send a Message</h2>
           <form className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <input type="text" placeholder="Name" className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl focus:ring-2 focus:ring-brand-primary outline-none placeholder:text-slate-600" />
-              <input type="email" placeholder="Email" className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl focus:ring-2 focus:ring-brand-primary outline-none placeholder:text-slate-600" />
+              <input type="text" placeholder="Name" className="w-full px-4 py-3 bg-gray-50 border rounded-xl focus:ring-2 outline-none" style={{ borderColor: 'var(--border-color)'}}/>
+              <input type="email" placeholder="Email" className="w-full px-4 py-3 bg-gray-50 border rounded-xl focus:ring-2 outline-none" style={{ borderColor: 'var(--border-color)'}}/>
             </div>
-            <input type="text" placeholder="Subject" className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl focus:ring-2 focus:ring-brand-primary outline-none placeholder:text-slate-600" />
-            <textarea rows={5} placeholder="Message" className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-xl focus:ring-2 focus:ring-brand-primary outline-none placeholder:text-slate-600"></textarea>
+            <input type="text" placeholder="Subject" className="w-full px-4 py-3 bg-gray-50 border rounded-xl focus:ring-2 outline-none" style={{ borderColor: 'var(--border-color)'}}/>
+            <textarea rows={5} placeholder="Message" className="w-full px-4 py-3 bg-gray-50 border rounded-xl focus:ring-2 outline-none" style={{ borderColor: 'var(--border-color)'}}></textarea>
             <motion.button 
-              className="w-full bg-brand-accent text-white font-bold py-3 rounded-xl hover:bg-amber-600 transition-colors shadow-lg flex justify-center items-center"
+              className="w-full btn-primary py-3 flex justify-center items-center"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >

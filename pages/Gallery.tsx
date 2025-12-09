@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import AnimatedText from '../components/AnimatedText';
 
 const Gallery: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'edu' | 'community' | 'welfare'>('all');
@@ -18,7 +19,7 @@ const Gallery: React.FC = () => {
   const filteredImages = filter === 'all' ? images : images.filter(img => img.cat === filter);
 
   return (
-    <div className="min-h-screen py-20 px-4">
+    <div className="min-h-screen py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -26,8 +27,8 @@ const Gallery: React.FC = () => {
           transition={{ type: 'spring', stiffness: 120, damping: 20 }} 
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-serif font-bold text-slate-900 mb-4">Our Gallery</h1>
-          <p className="text-slate-600">A glimpse into the moments of hope and connection we create together.</p>
+          <AnimatedText text="Our Gallery" className="text-4xl font-serif font-bold mb-4" />
+          <p style={{ color: 'var(--text-light)' }}>A glimpse into the moments of hope and connection we create together.</p>
           
           {/* Filter Buttons */}
           <div className="flex justify-center space-x-2 sm:space-x-4 mt-8">
@@ -42,9 +43,10 @@ const Gallery: React.FC = () => {
                 onClick={() => setFilter(f.key as any)}
                 className={`px-4 sm:px-6 py-2 rounded-full font-bold text-sm uppercase tracking-wider transition-all relative ${
                   filter === f.key
-                  ? 'bg-brand-primary text-white shadow-lg' 
-                  : 'bg-white/50 text-slate-500 hover:bg-white'
+                  ? 'btn-primary shadow-lg' 
+                  : 'bg-white border hover:bg-gray-100'
                 }`}
+                style={{ borderColor: filter !== f.key ? 'var(--border-color)' : 'transparent', color: filter !== f.key ? 'var(--text-light)' : 'var(--white)'}}
               >
                 {f.label}
               </button>
@@ -62,7 +64,8 @@ const Gallery: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-                className="group relative aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-white/30 backdrop-blur-lg border border-white/20"
+                className="group relative aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-white border card-shine"
+                style={{ borderColor: 'var(--border-color)'}}
               >
                 <img 
                   src={img.url} 

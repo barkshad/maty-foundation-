@@ -30,8 +30,8 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans relative">
-      <nav className="sticky top-0 w-full z-50 bg-white/5 backdrop-blur-lg border-b border-white/10 shadow-sm">
+    <div className="min-h-screen flex flex-col font-sans relative bg-white">
+      <nav className="sticky top-0 w-full z-50 bg-white border-b" style={{ borderColor: 'var(--border-color)'}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
             <motion.div
@@ -40,11 +40,11 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              <div className="bg-brand-primary p-2 rounded-xl mr-3 shadow-lg shadow-blue-500/30">
+              <div className="p-2 rounded-xl mr-3" style={{ backgroundColor: 'var(--primary-blue)'}}>
                 <Heart className="h-6 w-6 text-white" fill="white" />
               </div>
               <div>
-                <span className="block text-xl font-serif font-bold text-slate-800 tracking-tight">Mati Foundation</span>
+                <span className="block text-xl font-serif font-bold tracking-tight" style={{ color: 'var(--accent-blue)'}}>Mati Foundation</span>
               </div>
             </motion.div>
 
@@ -54,18 +54,16 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
                 <motion.button
                   key={link.name}
                   onClick={() => handleNav(link.path)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors relative ${
-                    currentPage === link.path
-                      ? 'text-brand-primary'
-                      : 'text-slate-600 hover:text-brand-primary'
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors relative`}
+                  style={{ color: currentPage === link.path ? 'var(--primary-blue)' : 'var(--text-light)'}}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   {link.name}
                   {currentPage === link.path && (
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-accent"
+                      className="absolute bottom-0 left-0 right-0 h-0.5"
+                      style={{backgroundColor: 'var(--primary-blue)'}}
                       layoutId="underline"
                     />
                   )}
@@ -75,7 +73,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
 
             {/* Mobile Menu Button */}
             <div className="lg:hidden">
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-slate-600 p-2">
+              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2" style={{ color: 'var(--text-light)'}}>
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
             </div>
@@ -84,13 +82,14 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
 
         {/* Mobile Nav */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-white/10">
+          <div className="lg:hidden border-t" style={{ borderColor: 'var(--border-color)'}}>
             <div className="px-4 pt-2 pb-6 space-y-1">
               {navLinks.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => handleNav(link.path)}
-                  className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-white/10 hover:text-brand-primary"
+                  className="block w-full text-left px-3 py-3 rounded-md text-base font-medium hover:bg-gray-100"
+                  style={{ color: 'var(--text-main)' }}
                 >
                   {link.name}
                 </button>
@@ -110,7 +109,8 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
           href={`https://wa.me/${CONTACT_INFO.rawPhone}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-[#25D366] text-white p-3 rounded-full shadow-lg hover:shadow-green-500/40 flex items-center justify-center"
+          className="text-white p-3 rounded-full shadow-lg flex items-center justify-center"
+          style={{ backgroundColor: 'var(--primary-blue)' }}
           aria-label="Chat on WhatsApp"
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}
@@ -121,7 +121,8 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
 
         <motion.a
           href={`tel:${CONTACT_INFO.rawPhone}`}
-          className="bg-brand-primary text-white p-3 rounded-full shadow-lg hover:shadow-blue-500/40 flex items-center justify-center"
+          className="text-white p-3 rounded-full shadow-lg flex items-center justify-center"
+          style={{ backgroundColor: 'var(--primary-blue)' }}
           aria-label="Call Us"
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}
@@ -134,53 +135,53 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
       <ChatWidget />
 
       {/* Footer */}
-      <footer className="bg-slate-900/10 backdrop-blur-lg border-t border-white/10 text-slate-800">
+      <footer style={{ backgroundColor: 'var(--secondary-blue)'}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-1">
               <div className="flex items-center mb-4">
-                <Heart className="h-6 w-6 text-brand-primary mr-2" fill="#1d4ed8" />
-                <span className="text-xl font-serif font-bold text-slate-900">Mati Foundation</span>
+                <Heart className="h-6 w-6 mr-2" fill="var(--primary-blue)" style={{ color: 'var(--primary-blue)' }}/>
+                <span className="text-xl font-serif font-bold" style={{ color: 'var(--accent-blue)' }}>Mati Foundation</span>
               </div>
-              <p className="text-sm leading-relaxed mb-4 text-slate-600">
+              <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-light)' }}>
                 Connecting hearts, building minds, and strengthening communities.
               </p>
             </div>
 
             <div>
-              <h3 className="text-brand-accent font-bold mb-4 uppercase text-xs tracking-widest">Explore</h3>
-              <ul className="space-y-2 text-sm text-slate-600">
-                <li><button onClick={() => handleNav(PageRoute.ABOUT)} className="hover:text-slate-900 transition-colors">Our Story</button></li>
-                <li><button onClick={() => handleNav(PageRoute.PROGRAMS)} className="hover:text-slate-900 transition-colors">Programs</button></li>
-                <li><button onClick={() => handleNav(PageRoute.GET_INVOLVED)} className="hover:text-slate-900 transition-colors">Donate Items</button></li>
+              <h3 className="font-bold mb-4 uppercase text-xs tracking-widest" style={{ color: 'var(--accent-blue)' }}>Explore</h3>
+              <ul className="space-y-2 text-sm" style={{ color: 'var(--text-light)' }}>
+                <li><button onClick={() => handleNav(PageRoute.ABOUT)} className="hover:underline">Our Story</button></li>
+                <li><button onClick={() => handleNav(PageRoute.PROGRAMS)} className="hover:underline">Programs</button></li>
+                <li><button onClick={() => handleNav(PageRoute.GET_INVOLVED)} className="hover:underline">Donate Items</button></li>
               </ul>
             </div>
 
             <div>
-              <h3 className="text-brand-accent font-bold mb-4 uppercase text-xs tracking-widest">Visit Us</h3>
-              <ul className="space-y-2 text-sm text-slate-600">
+              <h3 className="font-bold mb-4 uppercase text-xs tracking-widest" style={{ color: 'var(--accent-blue)' }}>Visit Us</h3>
+              <ul className="space-y-2 text-sm" style={{ color: 'var(--text-light)' }}>
                 <li>{CONTACT_INFO.address}</li>
                 <li>
-                  <a href={`tel:${CONTACT_INFO.rawPhone}`} className="hover:text-slate-900 transition-colors">{CONTACT_INFO.displayPhone}</a>
+                  <a href={`tel:${CONTACT_INFO.rawPhone}`} className="hover:underline">{CONTACT_INFO.displayPhone}</a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h3 className="text-brand-accent font-bold mb-4 uppercase text-xs tracking-widest">Stay Updated</h3>
-              <div className="flex bg-white/20 rounded-lg p-1">
+              <h3 className="font-bold mb-4 uppercase text-xs tracking-widest" style={{ color: 'var(--accent-blue)' }}>Stay Updated</h3>
+              <div className="flex bg-white rounded-lg p-1 border" style={{ borderColor: 'var(--border-color)' }}>
                 <input
                   type="email"
                   placeholder="Email..."
-                  className="bg-transparent text-slate-800 px-4 py-2 w-full focus:outline-none placeholder-slate-500 text-sm"
+                  className="bg-transparent px-4 py-2 w-full focus:outline-none text-sm"
                 />
-                <button className="bg-brand-accent px-4 py-2 rounded-md text-white font-medium hover:bg-amber-600 transition-colors text-sm">
+                <button className="btn-primary text-sm px-4 py-2">
                   Go
                 </button>
               </div>
             </div>
           </div>
-          <div className="border-t border-white/10 mt-16 pt-8 text-center text-xs text-slate-500">
+          <div className="border-t mt-16 pt-8 text-center text-xs" style={{ borderColor: 'rgba(0,0,0,0.1)', color: 'var(--text-light)' }}>
             <p>&copy; {new Date().getFullYear()} Mati Foundation. Built with 💙 by Matilda Kashindo.</p>
           </div>
         </div>
