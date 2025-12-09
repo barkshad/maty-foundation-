@@ -84,9 +84,14 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-            className="bg-white border p-8 rounded-2xl shadow-xl grid grid-cols-2 md:grid-cols-4 gap-8 card-shine" style={{ borderColor: 'var(--border-color)'}}>
+            className="relative bg-white border p-8 rounded-2xl shadow-xl grid grid-cols-2 md:grid-cols-4 gap-8 card-shine overflow-hidden" style={{ borderColor: 'var(--border-color)'}}>
+            <img 
+                src="https://www.transparenttextures.com/patterns/subtle-zebra-3d.png" 
+                alt="subtle background pattern" 
+                className="absolute inset-0 w-full h-full object-cover opacity-5"
+            />
           {impactStats.map((stat, idx) => (
-            <div key={idx} className="text-center">
+            <div key={idx} className="text-center relative">
               <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm" style={{ backgroundColor: 'var(--secondary-blue)'}}>
                 {stat.icon}
               </div>
@@ -168,35 +173,42 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
 
       {/* CTA Section */}
       <section className="px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-          className="max-w-6xl mx-auto p-12 rounded-2xl text-white text-center shadow-2xl" style={{ backgroundColor: 'var(--primary-blue)'}}>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-white">Support Comes in Many Forms</h2>
-          <p className="text-blue-100 text-xl mb-8 max-w-2xl mx-auto">
-            Your support helps provide education, food, and care to children who need it most.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.button
-              onClick={() => navigate(PageRoute.GET_INVOLVED)}
-              className="btn-secondary"
-              style={{ backgroundColor: 'var(--white)', color: 'var(--primary-blue)', border: 'none' }}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Sponsor a Child
-            </motion.button>
-            <motion.button
-              onClick={() => navigate(PageRoute.GET_INVOLVED)}
-              className="btn-secondary"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Volunteer With Us
-            </motion.button>
-          </div>
+         <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+            className="relative max-w-6xl mx-auto p-12 rounded-2xl text-white text-center shadow-2xl overflow-hidden"
+          >
+            <div className="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1518842323119-94a03f4a3424?auto=format&fit=crop&q=80&w=1470" alt="Hopeful child" className="w-full h-full object-cover" />
+                <div className="absolute inset-0" style={{ backgroundColor: 'rgba(30, 136, 229, 0.8)' }}></div>
+            </div>
+            <div className="relative z-10">
+                <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-white">Support Comes in Many Forms</h2>
+                <p className="text-blue-100 text-xl mb-8 max-w-2xl mx-auto">
+                    Your support helps provide education, food, and care to children who need it most.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <motion.button
+                    onClick={() => navigate(PageRoute.GET_INVOLVED)}
+                    className="btn-secondary"
+                    style={{ backgroundColor: 'var(--white)', color: 'var(--primary-blue)', border: 'none' }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    >
+                    Sponsor a Child
+                    </motion.button>
+                    <motion.button
+                    onClick={() => navigate(PageRoute.GET_INVOLVED)}
+                    className="btn-secondary"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    >
+                    Volunteer With Us
+                    </motion.button>
+                </div>
+            </div>
         </motion.div>
       </section>
     </div>

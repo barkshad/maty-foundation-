@@ -135,22 +135,22 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
       <ChatWidget />
 
       {/* Footer */}
-      <footer style={{ backgroundColor: 'var(--secondary-blue)'}}>
+      <footer className="footer-bg text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-1">
               <div className="flex items-center mb-4">
-                <Heart className="h-6 w-6 mr-2" fill="var(--primary-blue)" style={{ color: 'var(--primary-blue)' }}/>
-                <span className="text-xl font-serif font-bold" style={{ color: 'var(--accent-blue)' }}>Mati Foundation</span>
+                <Heart className="h-6 w-6 mr-2 text-white" fill="white"/>
+                <span className="text-xl font-serif font-bold text-white">Mati Foundation</span>
               </div>
-              <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-light)' }}>
+              <p className="text-sm leading-relaxed mb-4 text-blue-200">
                 Connecting hearts, building minds, and strengthening communities.
               </p>
             </div>
 
             <div>
-              <h3 className="font-bold mb-4 uppercase text-xs tracking-widest" style={{ color: 'var(--accent-blue)' }}>Explore</h3>
-              <ul className="space-y-2 text-sm" style={{ color: 'var(--text-light)' }}>
+              <h3 className="font-bold mb-4 uppercase text-xs tracking-widest text-white">Explore</h3>
+              <ul className="space-y-2 text-sm text-blue-200">
                 <li><button onClick={() => handleNav(PageRoute.ABOUT)} className="hover:underline">Our Story</button></li>
                 <li><button onClick={() => handleNav(PageRoute.PROGRAMS)} className="hover:underline">Programs</button></li>
                 <li><button onClick={() => handleNav(PageRoute.GET_INVOLVED)} className="hover:underline">Donate Items</button></li>
@@ -158,8 +158,8 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
             </div>
 
             <div>
-              <h3 className="font-bold mb-4 uppercase text-xs tracking-widest" style={{ color: 'var(--accent-blue)' }}>Visit Us</h3>
-              <ul className="space-y-2 text-sm" style={{ color: 'var(--text-light)' }}>
+              <h3 className="font-bold mb-4 uppercase text-xs tracking-widest text-white">Visit Us</h3>
+              <ul className="space-y-2 text-sm text-blue-200">
                 <li>{CONTACT_INFO.address}</li>
                 <li>
                   <a href={`tel:${CONTACT_INFO.rawPhone}`} className="hover:underline">{CONTACT_INFO.displayPhone}</a>
@@ -168,12 +168,12 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
             </div>
 
             <div>
-              <h3 className="font-bold mb-4 uppercase text-xs tracking-widest" style={{ color: 'var(--accent-blue)' }}>Stay Updated</h3>
-              <div className="flex bg-white rounded-lg p-1 border" style={{ borderColor: 'var(--border-color)' }}>
+              <h3 className="font-bold mb-4 uppercase text-xs tracking-widest text-white">Stay Updated</h3>
+              <div className="flex bg-white/20 rounded-lg p-1 border border-white/30">
                 <input
                   type="email"
                   placeholder="Email..."
-                  className="bg-transparent px-4 py-2 w-full focus:outline-none text-sm"
+                  className="bg-transparent px-4 py-2 w-full focus:outline-none text-sm text-white placeholder-blue-200"
                 />
                 <button className="btn-primary text-sm px-4 py-2">
                   Go
@@ -181,7 +181,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
               </div>
             </div>
           </div>
-          <div className="border-t mt-16 pt-8 text-center text-xs" style={{ borderColor: 'rgba(0,0,0,0.1)', color: 'var(--text-light)' }}>
+          <div className="border-t border-white/20 mt-16 pt-8 text-center text-xs text-blue-200">
             <p>&copy; {new Date().getFullYear()} Mati Foundation. Built with 💙 by Matilda Kashindo.</p>
           </div>
         </div>

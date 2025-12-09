@@ -27,6 +27,39 @@ export const SITE_CONTENT_CONTEXT = {
   }
 };
 
+export const CORE_VALUES = [
+    { title: "Compassion", icon: 'Heart', text: "Leading with empathy and care.", image: "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&q=80&w=800" },
+    { title: "Integrity", icon: 'CheckCircle', text: "Operating with honesty and accountability.", image: "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&q=80&w=800" },
+    { title: "Transparency", icon: 'Sun', text: "Being open with our partners and community.", image: "https://images.unsplash.com/photo-1581092921461-8a283a792751?auto=format&fit=crop&q=80&w=800" },
+    { title: "Community", icon: 'Users', text: "Building change through local collaboration.", image: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&q=80&w=800" },
+    { title: "Sustainability", icon: 'Handshake', text: "Creating programs for long-term self-reliance.", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" },
+];
+
+export const GET_INVOLVED_OPTIONS = {
+    itemCategories: [
+        { id: 'clothes', label: 'Clothes & Shoes', icon: 'Shirt', desc: 'New or gently used for all ages.', image: 'https://images.unsplash.com/photo-1603252109360-704baaf1365c?auto=format&fit=crop&q=80&w=800' },
+        { id: 'books', label: 'School Supplies', icon: 'Book', desc: 'Books, pens, and notebooks.', image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=800' },
+        { id: 'hygiene', label: 'Hygiene Kits', icon: 'Droplets', desc: 'Soap, toothpaste, sanitary items.', image: 'https://images.unsplash.com/photo-1583947581920-8c6a0d6a5e1d?auto=format&fit=crop&q=80&w=800' },
+        { id: 'food', label: 'Food Items', icon: 'Utensils', desc: 'Non-perishable staples.', image: 'https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?auto=format&fit=crop&q=80&w=800' },
+    ],
+    deliveryInfo: {
+        title: "How to Deliver Items",
+        description: "Please drop off items at our center or call us to arrange a pickup for larger contributions.",
+        icon: 'Truck',
+        image: 'https://images.unsplash.com/photo-1598981449422-3c83b879f790?auto=format&fit=crop&q=80&w=800'
+    },
+    volunteerInfo: {
+        title: "Volunteer Your Time",
+        description: "Join us in making a difference through skills, time, or community outreach.",
+        image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=800'
+    },
+    sponsorInfo: {
+        title: "Sponsor or Donate",
+        description: "Sponsor a child’s education or make a general donation.",
+        image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&q=80&w=800'
+    }
+};
+
 export const PROGRAMS: Program[] = [
   {
     id: 'welfare',
@@ -109,4 +142,10 @@ export const INSPIRATIONAL_QUOTES = [
         quote: "Hope begins when someone chooses to care.",
         image: "https://images.unsplash.com/photo-1517594422361-5e3e8a30be48?auto=format&fit=crop&q=80&w=800"
     },
+];
+
+export const CONTACT_METHODS = [
+    { icon: 'MapPin', title: "Visit / Drop-off", content: CONTACT_INFO.address, image: "https://images.unsplash.com/photo-1594398997548-583163776796?auto=format&fit=crop&q=80&w=800" },
+    { icon: 'Mail', title: "Email", content: CONTACT_INFO.email, href: `mailto:${CONTACT_INFO.email}`, image: "https://images.unsplash.com/photo-1557853194-27230455d35a?auto=format&fit=crop&q=80&w=800" },
+    { icon: 'Phone', title: "Call", content: CONTACT_INFO.displayPhone, href: `tel:${CONTACT_INFO.rawPhone}`, image: "https://images.unsplash.com/photo-1586953208448-3151cf794014?auto=format&fit=crop&q=80&w=800" },
 ];

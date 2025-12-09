@@ -1,8 +1,16 @@
 import React from 'react';
-import { TEAM, INSPIRATIONAL_QUOTES } from '../constants';
+import { TEAM, INSPIRATIONAL_QUOTES, CORE_VALUES } from '../constants';
 import { Heart, CheckCircle, Handshake, Sun, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AnimatedText from '../components/AnimatedText';
+
+const icons: { [key: string]: React.ReactElement } = {
+    Heart: <Heart className="w-8 h-8" style={{ color: 'var(--primary-blue)'}}/>,
+    CheckCircle: <CheckCircle className="w-8 h-8" style={{ color: 'var(--primary-blue)'}}/>,
+    Sun: <Sun className="w-8 h-8" style={{ color: 'var(--primary-blue)'}}/>,
+    Users: <Users className="w-8 h-8" style={{ color: 'var(--primary-blue)'}}/>,
+    Handshake: <Handshake className="w-8 h-8" style={{ color: 'var(--primary-blue)'}}/>,
+};
 
 const SectionWrapper: React.FC<{ className?: string, children: React.ReactNode }> = ({ children, className = '' }) => (
   <motion.section
@@ -18,19 +26,30 @@ const SectionWrapper: React.FC<{ className?: string, children: React.ReactNode }
 
 const About: React.FC = () => {
   return (
-    <div className="pb-24 pt-16 px-4 bg-white">
-      <div className="max-w-6xl mx-auto space-y-24">
+    <div className="pb-24 bg-white">
+        {/* Header Section with Image */}
+        <div className="relative py-24 px-4 text-center text-white overflow-hidden">
+            <div className="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=1470" alt="Community hands" className="w-full h-full object-cover"/>
+                <div className="absolute inset-0 bg-black/50"></div>
+            </div>
+            <div className="relative z-10">
+                 <AnimatedText 
+                    text="A Foundation Built on a Vision of Care"
+                    className="text-4xl md:text-6xl font-serif font-bold mb-6 text-white"
+                />
+                <motion.p 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ type: 'spring', delay: 0.5 }}
+                    className="text-xl max-w-3xl mx-auto text-slate-100"
+                >
+                    Mati Foundation is an independent, humanitarian foundation created to respond directly to the real challenges facing children.
+                </motion.p>
+            </div>
+        </div>
 
-        {/* Header Section */}
-        <SectionWrapper className="text-center">
-          <AnimatedText 
-            text="A Foundation Built on a Vision of Care"
-            className="text-4xl md:text-6xl font-serif font-bold mb-6"
-          />
-          <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--text-light)'}}>
-            Mati Foundation is an independent, humanitarian foundation created to respond directly to the real challenges facing children.
-          </p>
-        </SectionWrapper>
+      <div className="max-w-6xl mx-auto space-y-24 px-4 pt-24">
 
         {/* Narrative Card */}
         <SectionWrapper className="bg-white border p-8 md:p-12 rounded-2xl shadow-lg flex flex-col md:flex-row gap-12 items-center card-shine" style={{ borderColor: 'var(--border-color)'}}>
@@ -68,27 +87,27 @@ const About: React.FC = () => {
         <SectionWrapper>
           <h2 className="text-3xl font-bold text-center mb-12 font-serif">Our Core Values</h2>
           <div className="grid md:grid-cols-5 gap-6">
-            {[
-              { title: "Compassion", icon: <Heart className="w-8 h-8" style={{ color: 'var(--primary-blue)'}}/>, text: "Leading with empathy and care." },
-              { title: "Integrity", icon: <CheckCircle className="w-8 h-8" style={{ color: 'var(--primary-blue)'}}/>, text: "Operating with honesty and accountability." },
-              { title: "Transparency", icon: <Sun className="w-8 h-8" style={{ color: 'var(--primary-blue)'}}/>, text: "Being open with our partners and community." },
-              { title: "Community", icon: <Users className="w-8 h-8" style={{ color: 'var(--primary-blue)'}}/>, text: "Building change through local collaboration." },
-              { title: "Sustainability", icon: <Handshake className="w-8 h-8" style={{ color: 'var(--primary-blue)'}}/>, text: "Creating programs for long-term self-reliance." },
-            ].map((val, idx) => (
+            {CORE_VALUES.map((val, idx) => (
               <motion.div
                 key={idx}
-                className="bg-white border p-8 rounded-2xl text-center shadow-lg card-shine"
+                className="bg-white border rounded-2xl text-center shadow-lg card-shine overflow-hidden group"
                 style={{ borderColor: 'var(--border-color)'}}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ type: 'spring', stiffness: 100, delay: idx * 0.1 }}
               >
-                <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm" style={{ backgroundColor: 'var(--secondary-blue)'}}>
-                  {val.icon}
+                <div className="relative h-32">
+                    <img src={val.image} alt={val.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+                    <div className="absolute inset-0 bg-black/20"></div>
                 </div>
-                <h3 className="text-xl font-bold mb-2">{val.title}</h3>
-                <p className="text-sm" style={{ color: 'var(--text-light)'}}>{val.text}</p>
+                <div className="p-6">
+                    <div className="w-16 h-16 -mt-14 relative z-10 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-md border-4 border-white">
+                      {icons[val.icon]}
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">{val.title}</h3>
+                    <p className="text-sm" style={{ color: 'var(--text-light)'}}>{val.text}</p>
+                </div>
               </motion.div>
             ))}
           </div>

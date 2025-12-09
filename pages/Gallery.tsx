@@ -19,40 +19,46 @@ const Gallery: React.FC = () => {
   const filteredImages = filter === 'all' ? images : images.filter(img => img.cat === filter);
 
   return (
-    <div className="min-h-screen py-20 px-4 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen pb-24 bg-white">
+      <div className="relative py-24 px-4 text-center text-white overflow-hidden">
+        <div className="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1534182928399-73d8b1c42f3e?auto=format&fit=crop&q=80&w=1528" alt="Gallery of moments" className="w-full h-full object-cover"/>
+            <div className="absolute inset-0 bg-black/50"></div>
+        </div>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: 'spring', stiffness: 120, damping: 20 }} 
-          className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 120, damping: 20 }}
+            className="relative z-10"
         >
-          <AnimatedText text="Our Gallery" className="text-4xl font-serif font-bold mb-4" />
-          <p style={{ color: 'var(--text-light)' }}>A glimpse into the moments of hope and connection we create together.</p>
-          
-          {/* Filter Buttons */}
-          <div className="flex justify-center space-x-2 sm:space-x-4 mt-8">
-            {[
-              { key: 'all', label: 'All Photos' },
-              { key: 'edu', label: 'Education' },
-              { key: 'community', label: 'Community' },
-              { key: 'welfare', label: 'Child Welfare' }
-            ].map((f) => (
-              <button 
-                key={f.key}
-                onClick={() => setFilter(f.key as any)}
-                className={`px-4 sm:px-6 py-2 rounded-full font-bold text-sm uppercase tracking-wider transition-all relative ${
-                  filter === f.key
-                  ? 'btn-primary shadow-lg' 
-                  : 'bg-white border hover:bg-gray-100'
-                }`}
-                style={{ borderColor: filter !== f.key ? 'var(--border-color)' : 'transparent', color: filter !== f.key ? 'var(--text-light)' : 'var(--white)'}}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
+          <AnimatedText text="Our Gallery" className="text-4xl font-serif font-bold mb-4 text-white" />
+          <p className="text-lg text-slate-100">A glimpse into the moments of hope and connection we create together.</p>
         </motion.div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto py-20 px-4">
+        {/* Filter Buttons */}
+        <div className="flex justify-center flex-wrap gap-2 sm:gap-4 mb-12">
+          {[
+            { key: 'all', label: 'All Photos' },
+            { key: 'edu', label: 'Education' },
+            { key: 'community', label: 'Community' },
+            { key: 'welfare', label: 'Child Welfare' }
+          ].map((f) => (
+            <button 
+              key={f.key}
+              onClick={() => setFilter(f.key as any)}
+              className={`px-4 sm:px-6 py-2 rounded-full font-bold text-sm uppercase tracking-wider transition-all relative ${
+                filter === f.key
+                ? 'btn-primary shadow-lg' 
+                : 'bg-white border hover:bg-gray-100'
+              }`}
+              style={{ borderColor: filter !== f.key ? 'var(--border-color)' : 'transparent', color: filter !== f.key ? 'var(--text-light)' : 'var(--white)'}}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
         
         <motion.div layout className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <AnimatePresence>
