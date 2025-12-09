@@ -4,7 +4,16 @@ export const CONTACT_INFO = {
   email: "hello@matifoundation.org",
   displayPhone: "0712 146 179",
   rawPhone: "254712146179", // Sanitized with country code (Kenya) for tel: and wa.me links
-  address: "123 Hope Lane, Kilifi, Kenya"
+  address: "Kilifi, Kenya"
+};
+
+export const BANK_DETAILS = {
+  bankName: "[To be provided]",
+  accountName: "[To be provided]",
+  accountNumber: "[To be provided]",
+  branch: "[To be provided]",
+  swiftCode: "[To be provided]",
+  country: "Kenya"
 };
 
 // This context is fed to Gemini
@@ -19,7 +28,7 @@ export const SITE_CONTENT_CONTEXT = {
     "Community Empowerment: Working with parents, caregivers, and local leaders to promote family stability and self-reliance.",
     "Health & Wellbeing: Promoting healthy growth through nutrition awareness and basic health support.",
   ],
-  how_to_help: "Support can be given by donating to provide education and care, sponsoring a child's education, volunteering your time, or partnering with us to amplify our impact.",
+  how_to_help: "Support can be given by donating via bank transfer, donating items, volunteering your time, or partnering with us to amplify our impact.",
   contact: {
     email: CONTACT_INFO.email,
     phone: CONTACT_INFO.displayPhone,
@@ -55,7 +64,7 @@ export const GET_INVOLVED_OPTIONS = {
     },
     sponsorInfo: {
         title: "Sponsor or Donate",
-        description: "Sponsor a child’s education or make a general donation.",
+        description: "Support our mission by sending your contribution directly through our bank account. Your donation helps provide education, safety, and hope to vulnerable children.",
         image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&q=80&w=800'
     }
 };
