@@ -1,17 +1,17 @@
 import { Program, Story, TeamMember } from './types';
 
 export const CONTACT_INFO = {
-  email: "hello@matifoundation.org",
+  email: "jomimatilda@gmail.com",
   displayPhone: "0712 146 179",
   rawPhone: "254712146179", // Sanitized with country code (Kenya) for tel: and wa.me links
   address: "Kilifi, Kenya"
 };
 
 export const BANK_DETAILS = {
-  bankName: "[To be provided]",
-  accountName: "[To be provided]",
+  bankName: "Diamond Trust Bank",
+  accountName: "Matilda John Kashindo",
   accountNumber: "[To be provided]",
-  branch: "[To be provided]",
+  branch: "Kilifi Branch",
   swiftCode: "[To be provided]",
   country: "Kenya"
 };
@@ -160,7 +160,7 @@ export const CONTACT_METHODS = [
 ];
 
 export const SOCIAL_LINKS = [
-    { name: 'Facebook', icon: 'Facebook', url: '#', desc: 'Join our community for daily updates and stories.', image: 'https://images.unsplash.com/photo-1633675254053-524a35031a29?auto=format&fit=crop&q=80&w=800' },
+    { name: 'Facebook', icon: 'Facebook', url: 'https://www.facebook.com/61575204286318/posts/pfbid034621S3CEyUPajVdwJPxQ27A29aBjbzkJjWS3XHxT1kbW2zoJTWephy6LKxFqFfwrl/?app=fbl', desc: 'Join our community for daily updates and stories.', image: 'https://images.unsplash.com/photo-1633675254053-524a35031a29?auto=format&fit=crop&q=80&w=800' },
     { name: 'Instagram', icon: 'Instagram', url: '#', desc: 'See the moments of joy and impact through our photos.', image: 'https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&q=80&w=800' },
     { name: 'Twitter / X', icon: 'Twitter', url: '#', desc: 'Follow for news, announcements, and live updates.', image: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&q=80&w=800' },
     { name: 'LinkedIn', icon: 'Linkedin', url: '#', desc: 'Connect with us for professional partnerships and networking.', image: 'https://images.unsplash.com/photo-1611944212129-29955ae40213?auto=format&fit=crop&q=80&w=800' },

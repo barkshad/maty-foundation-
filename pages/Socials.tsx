@@ -58,8 +58,8 @@ const Socials: React.FC = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
-                        Follow Us on {social.name}
-                        <Lucide.ArrowRight size={16} className="ml-2"/>
+                        {Icon && <Icon size={20} className="mr-2"/>}
+                        Follow on {social.name}
                     </motion.a>
                 </div>
               </motion.div>
