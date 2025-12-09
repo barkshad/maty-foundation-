@@ -18,7 +18,7 @@
               brand: {
                 primary: '#1d4ed8', // Blue-700
                 secondary: '#0f766e', // Teal-700
-                accent: '#f5f5f4', // Stone-100
+                accent: '#f59e0b', // Amber-500 (Gold/Sunrise Orange)
                 dark: '#1e293b', // Slate-800
               }
             },
@@ -35,12 +35,26 @@
         "react/": "https://aistudiocdn.com/react@^19.2.1/",
         "react": "https://aistudiocdn.com/react@^19.2.1",
         "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
-        "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0"
+        "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+        "framer-motion": "https://aistudiocdn.com/framer-motion@^11.3.18"
       }
     }
     </script>
+    <style>
+      body {
+        background: linear-gradient(-45deg, #eef2ff, #dbeafe, #e0f2fe, #d1fae5);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+      }
+
+      @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+    </style>
   </head>
-  <body class="bg-stone-100 text-slate-800 antialiased selection:bg-brand-primary selection:text-white">
+  <body class="text-slate-800 antialiased selection:bg-brand-accent selection:text-white">
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
   </body>

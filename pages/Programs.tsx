@@ -2,24 +2,30 @@ import React from 'react';
 import { PROGRAMS } from '../constants';
 import { PageRoute } from '../types';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-interface ProgramsProps {
-    navigate: (page: PageRoute) => void;
-}
-
-const Programs: React.FC<ProgramsProps> = ({navigate}) => {
+const Programs: React.FC<{ navigate: (page: PageRoute) => void; }> = ({ navigate }) => {
   return (
-    <div className="min-h-screen pb-20 pt-16 px-4">
-      <div className="max-w-4xl mx-auto text-center mb-16">
+    <div className="min-h-screen pb-24 pt-16 px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ type: 'spring', stiffness: 120, damping: 20 }}
+        className="max-w-4xl mx-auto text-center mb-20"
+      >
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-4">Our Core Programs</h1>
         <p className="text-lg text-slate-600">A holistic approach to nurture, educate, and empower every child.</p>
-      </div>
+      </motion.div>
 
-      <div className="max-w-6xl mx-auto space-y-20">
+      <div className="max-w-6xl mx-auto space-y-24">
         {PROGRAMS.map((program, idx) => (
-          <div
+          <motion.div
             key={program.id}
-            className={`bg-white rounded-3xl overflow-hidden flex flex-col shadow-xl ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'}`}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.2 }}
+            className={`bg-white/30 backdrop-blur-xl border border-white/20 rounded-3xl overflow-hidden flex flex-col shadow-xl ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'}`}
           >
             <div className="md:w-1/2 h-64 md:h-auto relative overflow-hidden group">
               <img
@@ -42,21 +48,23 @@ const Programs: React.FC<ProgramsProps> = ({navigate}) => {
 
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {program.stats.map((stat, sIdx) => (
-                  <div key={sIdx} className="bg-stone-100 p-4 rounded-xl border border-stone-200">
+                  <div key={sIdx} className="bg-white/20 p-4 rounded-xl border border-white/20">
                     <div className="text-2xl font-bold text-brand-primary">{stat.value}</div>
-                    <div className="text-xs text-slate-500 uppercase tracking-wider font-bold">{stat.label}</div>
+                    <div className="text-xs text-slate-600 uppercase tracking-wider font-bold">{stat.label}</div>
                   </div>
                 ))}
               </div>
 
-              <button
+              <motion.button
                 onClick={() => navigate(PageRoute.GET_INVOLVED)}
-                className="self-start bg-slate-900 text-white px-8 py-3 rounded-full hover:bg-brand-primary transition-colors text-sm font-bold flex items-center shadow-lg"
+                className="self-start bg-brand-accent text-white px-8 py-3 rounded-full hover:bg-amber-600 transition-colors text-sm font-bold flex items-center shadow-lg"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Support This Program <ArrowRight size={16} className="ml-2" />
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

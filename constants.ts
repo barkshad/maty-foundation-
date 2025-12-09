@@ -99,3 +99,14 @@ export const TEAM: TeamMember[] = [
     image: 'https://www.fordfoundation.org/wp-content/uploads/2025/08/Akina_Mama_wa_Afrika_Hero.jpg?w=1024'
   }
 ];
+
+export const INSPIRATIONAL_QUOTES = [
+    {
+        quote: "Education is the most powerful gift we can give a child.",
+        image: "https://images.unsplash.com/photo-1541873676-a18131494184?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+        quote: "Hope begins when someone chooses to care.",
+        image: "https://images.unsplash.com/photo-1517594422361-5e3e8a30be48?auto=format&fit=crop&q=80&w=800"
+    },
+];

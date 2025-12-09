@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './components/Layout';
 import { PageRoute } from './types';
+import { AnimatePresence, motion } from 'framer-motion';
 
 // Pages
 import Home from './pages/Home';
@@ -10,6 +11,27 @@ import GetInvolved from './pages/GetInvolved';
 import Stories from './pages/Stories';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
+
+const pageVariants = {
+  initial: {
+    opacity: 0,
+    y: 20,
+  },
+  in: {
+    opacity: 1,
+    y: 0,
+  },
+  out: {
+    opacity: 0,
+    y: -20,
+  },
+};
+
+const pageTransition = {
+  type: 'spring',
+  stiffness: 120,
+  damping: 20
+};
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<PageRoute>(PageRoute.HOME);
@@ -42,7 +64,18 @@ const App: React.FC = () => {
 
   return (
     <Layout currentPage={currentPage} navigate={setCurrentPage}>
-      {renderPage()}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentPage}
+          initial="initial"
+          animate="in"
+          exit="out"
+          variants={pageVariants}
+          transition={pageTransition}
+        >
+          {renderPage()}
+        </motion.div>
+      </AnimatePresence>
     </Layout>
   );
 };
