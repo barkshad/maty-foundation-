@@ -1,142 +1,118 @@
-import React, { useState } from 'react';
-import { Check, Heart } from 'lucide-react';
+import React from 'react';
+import { Heart, Shirt, Book, DollarSign, Truck, Droplets, Utensils, Handshake } from 'lucide-react';
+import { CONTACT_INFO } from '../constants';
 
 const GetInvolved: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'donate' | 'volunteer'>('donate');
-  const [amount, setAmount] = useState<string>('50');
+  
+  const itemCategories = [
+    { id: 'clothes', label: 'Clothes & Shoes', icon: <Shirt size={28}/>, desc: 'New or gently used for all ages.' },
+    { id: 'books', label: 'School Supplies', icon: <Book size={28}/>, desc: 'Books, pens, and notebooks.' },
+    { id: 'hygiene', label: 'Hygiene Kits', icon: <Droplets size={28}/>, desc: 'Soap, toothpaste, sanitary items.' },
+    { id: 'food', label: 'Food Items', icon: <Utensils size={28}/>, desc: 'Non-perishable staples.' },
+  ];
 
   return (
-    <div className="min-h-screen py-16 px-4 bg-stone-50">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen py-16 px-4">
+      <div className="max-w-6xl mx-auto space-y-16">
         
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-serif font-bold text-slate-900 mb-2">Make a Difference</h1>
-          <p className="text-slate-600">Your support changes lives. Choose how you want to help.</p>
+        <div className="text-center">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-4">How You Can Support</h1>
+          <p className="text-slate-600 text-lg max-w-2xl mx-auto">Your support helps provide education, food, and care to children who need it most.</p>
         </div>
 
-        {/* Tab Toggle */}
-        <div className="flex justify-center mb-8">
-          <div className="bg-white p-1 rounded-full shadow-sm border border-stone-200 inline-flex">
-            <button
-              onClick={() => setActiveTab('donate')}
-              className={`px-8 py-2 rounded-full font-bold transition-colors ${
-                activeTab === 'donate' ? 'bg-brand-primary text-white shadow-sm' : 'text-slate-500 hover:text-slate-800'
-              }`}
-            >
-              Donate
-            </button>
-            <button
-              onClick={() => setActiveTab('volunteer')}
-              className={`px-8 py-2 rounded-full font-bold transition-colors ${
-                activeTab === 'volunteer' ? 'bg-brand-secondary text-white shadow-sm' : 'text-slate-500 hover:text-slate-800'
-              }`}
-            >
-              Volunteer
-            </button>
-          </div>
-        </div>
+        {/* Item Donations Section */}
+        <section>
+            <h2 className="text-3xl font-serif font-bold text-slate-800 mb-2 text-center">Donate Items</h2>
+            <p className="text-center text-slate-500 mb-10">We gratefully accept items to support the children's daily needs and education.</p>
 
-        {/* Content Area */}
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-stone-100">
-            {activeTab === 'donate' && (
-              <div className="p-8 md:p-12 animate-in fade-in duration-300">
-                <div className="flex items-center mb-6">
-                  <div className="bg-blue-50 p-2 rounded-full mr-4">
-                    <Heart className="text-brand-primary" fill="currentColor" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              {itemCategories.map((item) => (
+                <div
+                  key={item.id}
+                  className="bg-white p-6 rounded-2xl text-center shadow-lg transition-transform duration-300 hover:-translate-y-2"
+                >
+                  <div className="mx-auto w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center mb-4 text-brand-primary shadow-sm">
+                    {item.icon}
                   </div>
-                  <h2 className="text-2xl font-bold text-slate-800">Support a Child Today</h2>
+                  <h3 className="text-xl font-bold text-slate-800 mb-1">{item.label}</h3>
+                  <p className="text-slate-600 text-sm">{item.desc}</p>
                 </div>
-                
-                <div className="grid grid-cols-3 gap-4 mb-8">
-                  {['25', '50', '100'].map((amt) => (
-                    <button 
-                      key={amt} 
-                      onClick={() => setAmount(amt)}
-                      className={`py-3 rounded-lg font-bold text-lg transition-colors border-2 ${
-                        amount === amt 
-                        ? 'border-brand-primary bg-blue-50 text-brand-primary' 
-                        : 'border-slate-100 text-slate-500 hover:border-brand-primary'
-                      }`}
-                    >
-                      ${amt}
-                    </button>
-                  ))}
-                </div>
-                
-                <div className="mb-8">
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Or enter custom amount</label>
-                  <div className="relative">
-                    <span className="absolute left-3 top-3 text-slate-500 font-bold">$</span>
-                    <input 
-                      type="number" 
-                      value={amount}
-                      onChange={(e) => setAmount(e.target.value)}
-                      className="w-full pl-7 pr-4 py-3 bg-stone-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-primary outline-none" 
-                      placeholder="0.00" 
-                    />
-                  </div>
-                </div>
-                
-                <div className="bg-stone-50 p-4 rounded-lg mb-8 flex items-start border border-stone-200">
-                   <div className="mr-3 mt-1"><Check size={16} className="text-brand-primary" /></div>
-                   <div>
-                     <h3 className="font-bold text-sm text-brand-primary mb-1">Your Impact</h3>
-                     <p className="text-sm text-slate-600">
-                       <strong className="text-slate-900">${amount}</strong> helps provide essential school supplies, nutritious meals, and medical checkups for children in need.
-                     </p>
-                   </div>
-                </div>
+              ))}
+            </div>
+            
+            <div className="bg-white p-6 rounded-2xl border-t-4 border-brand-primary shadow-md">
+               <div className="flex flex-col md:flex-row items-center text-center md:text-left">
+                 <Truck className="text-brand-primary w-12 h-12 mb-4 md:mb-0 md:mr-6 flex-shrink-0" />
+                 <div>
+                   <h4 className="font-bold text-slate-800 text-xl">How to Deliver Items</h4>
+                   <p className="text-slate-600">
+                     Please drop off items at our center or call us to arrange a pickup for larger contributions.
+                   </p>
+                   <p className="mt-2">
+                     <span className="font-bold text-slate-700">{CONTACT_INFO.address}</span> | <a href={`tel:${CONTACT_INFO.rawPhone}`} className="font-bold text-brand-primary hover:underline">{CONTACT_INFO.displayPhone}</a>
+                   </p>
+                 </div>
+               </div>
+            </div>
+        </section>
 
-                <button className="w-full bg-brand-primary text-white py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition-colors shadow-md">
-                  Process Secure Donation
+        {/* Split Section for Volunteer & Financial */}
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Volunteer */}
+          <div className="w-full">
+            <h2 className="text-3xl font-serif font-bold text-slate-800 mb-2 text-center">Volunteer Your Time</h2>
+            <p className="text-center text-slate-500 mb-8">Join us in making a difference through skills, time, or community outreach.</p>
+            <div className="bg-white p-8 rounded-2xl shadow-lg">
+              <form className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <input type="text" placeholder="First Name" className="w-full px-4 py-3 bg-stone-100 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-secondary outline-none" />
+                  <input type="text" placeholder="Last Name" className="w-full px-4 py-3 bg-stone-100 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-secondary outline-none" />
+                </div>
+                <input type="email" placeholder="Email Address" className="w-full px-4 py-3 bg-stone-100 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-secondary outline-none" />
+                <textarea rows={3} placeholder="How would you like to help? (e.g., tutoring, events)" className="w-full px-4 py-3 bg-stone-100 border border-stone-200 rounded-xl focus:ring-2 focus:ring-brand-secondary outline-none"></textarea>
+                <button className="w-full bg-brand-secondary text-white py-3 rounded-xl font-bold hover:bg-teal-800 transition-colors shadow-md">
+                  Join as a Volunteer
                 </button>
-                <p className="text-center text-xs text-slate-400 mt-4">Secure payment powered by MockStripe. All donations are tax-deductible.</p>
-              </div>
-            )}
+              </form>
+            </div>
+          </div>
 
-            {activeTab === 'volunteer' && (
-              <div className="p-8 md:p-12 animate-in fade-in duration-300">
-                <h2 className="text-2xl font-bold mb-6 text-slate-800">Join Our Team</h2>
-                <p className="mb-8 text-slate-600">We need tutors, mentors, and event organizers. Fill out the form below to get started.</p>
+          {/* Financial */}
+          <div className="w-full">
+             <h2 className="text-3xl font-serif font-bold text-slate-800 mb-2 text-center">Sponsor or Donate</h2>
+             <p className="text-center text-slate-500 mb-8">Sponsor a child’s education or make a general donation.</p>
+              <div className="bg-white p-8 rounded-2xl shadow-lg space-y-6">
                 
-                <form className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-bold text-slate-700 mb-1">First Name</label>
-                      <input type="text" className="w-full px-4 py-2 bg-stone-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-secondary outline-none" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-bold text-slate-700 mb-1">Last Name</label>
-                      <input type="text" className="w-full px-4 py-2 bg-stone-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-secondary outline-none" />
-                    </div>
+                <div>
+                  <h3 className="text-xl font-bold text-center text-slate-700 mb-4">Make a Donation</h3>
+                  <div className="grid grid-cols-3 gap-4 mb-4">
+                    {['25', '50', '100'].map((amt) => (
+                      <button 
+                        key={amt} 
+                        className="py-3 rounded-xl font-bold text-lg transition-all border-2 border-stone-200 bg-stone-50 text-slate-600 hover:border-brand-primary hover:bg-blue-50 hover:text-brand-primary focus:border-brand-primary focus:bg-blue-50 focus:text-brand-primary"
+                      >
+                        ${amt}
+                      </button>
+                    ))}
                   </div>
-                  
-                  <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-1">Email</label>
-                    <input type="email" className="w-full px-4 py-2 bg-stone-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-secondary outline-none" />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-1">Area of Interest</label>
-                    <select className="w-full px-4 py-2 bg-stone-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-secondary outline-none">
-                      <option>Tutoring / Education</option>
-                      <option>Medical / Health</option>
-                      <option>Events / Fundraising</option>
-                      <option>General Help</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-1">Why do you want to volunteer?</label>
-                    <textarea rows={4} className="w-full px-4 py-2 bg-stone-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-secondary outline-none"></textarea>
-                  </div>
-
-                  <button className="w-full bg-brand-secondary text-white py-4 rounded-lg font-bold text-lg hover:bg-teal-800 transition-colors shadow-md">
-                    Submit Application
+                  <input 
+                     type="number" 
+                     className="w-full px-4 py-3 rounded-xl border border-stone-300 mb-4 focus:ring-2 focus:ring-brand-primary"
+                     placeholder="Custom Amount"
+                  />
+                  <button className="w-full bg-brand-primary text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg">
+                    Donate Securely
                   </button>
-                </form>
+                </div>
+
+                <div className="border-t border-stone-200 pt-6 text-center">
+                    <Handshake className="text-brand-secondary w-10 h-10 mx-auto mb-2" />
+                    <h3 className="text-xl font-bold text-slate-700">Partner With Us</h3>
+                    <p className="text-slate-500 mb-3 text-sm">Collaborate with Mati Foundation to amplify impact.</p>
+                    <a href={`mailto:${CONTACT_INFO.email}`} className="text-brand-primary font-bold hover:underline">Contact Us for Partnerships</a>
+                </div>
               </div>
-            )}
+          </div>
         </div>
       </div>
     </div>

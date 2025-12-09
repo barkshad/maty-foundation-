@@ -4,25 +4,22 @@ export const CONTACT_INFO = {
   email: "hello@matifoundation.org",
   displayPhone: "0712 146 179",
   rawPhone: "254712146179", // Sanitized with country code (Kenya) for tel: and wa.me links
-  address: "123 Hope Lane, Springfield"
+  address: "123 Hope Lane, Kilifi, Kenya"
 };
 
 // This context is fed to Gemini
 export const SITE_CONTENT_CONTEXT = {
-  mission: "To provide a safe haven, holistic education, and community integration for orphaned and vulnerable children.",
-  vision: "A world where every child has the foundation to build their own future.",
-  history: "Founded in 2010 by Matilda Kashindo, starting with a small 3-bedroom house and 5 children.",
-  stats: {
-    childrenSupported: 150,
-    graduates: 45,
-    mealsServed: "50,000+",
-    volunteers: 200
-  },
+  mission: "To uplift vulnerable children and communities by providing access to education, basic needs, and opportunities that promote dignity, resilience, and lasting transformation.",
+  vision: "A future where every child has access to education, care, and opportunity—regardless of their background.",
+  history: `Mati Foundation is an independent, humanitarian foundation founded by Matilda Kashindo, dedicated to supporting vulnerable children and underserved communities across Africa. It was born from her hands-on experience and recognition of the need for a focused foundation that prioritizes education, child welfare, and sustainable empowerment.`,
+  founder_background: "Matilda Kashindo is a passionate humanitarian and community advocate. Through years of involvement in grassroots support initiatives, she recognized the need for an independent foundation to respond directly to the real challenges facing children.",
   programs: [
-    "Residential Care: 24/7 care for 50 children.",
-    "Education Scholarship: Funding tuition for 100 community children.",
-    "Community Outreach: Monthly health camps and food drives."
+    "Child Welfare & Care: Supporting orphaned and vulnerable children with essential needs like food, nutrition, clothing, and safe living conditions.",
+    "Education Support: Providing school fees assistance, learning materials, and uniforms to keep children in school.",
+    "Community Empowerment: Working with parents, caregivers, and local leaders to promote family stability and self-reliance.",
+    "Health & Wellbeing: Promoting healthy growth through nutrition awareness and basic health support.",
   ],
+  how_to_help: "Support can be given by donating to provide education and care, sponsoring a child's education, volunteering your time, or partnering with us to amplify our impact.",
   contact: {
     email: CONTACT_INFO.email,
     phone: CONTACT_INFO.displayPhone,
@@ -32,25 +29,43 @@ export const SITE_CONTENT_CONTEXT = {
 
 export const PROGRAMS: Program[] = [
   {
-    id: 'edu',
-    title: 'Education Program',
-    description: 'We believe education is the key to breaking the cycle of poverty. Our program provides tuition, uniforms, books, and after-school tutoring for both residents and vulnerable children in the surrounding community.',
-    // Image: Children in a classroom
-    image: 'https://images.unsplash.com/photo-1427504746696-ea470a74ea02?auto=format&fit=crop&q=80&w=800',
+    id: 'welfare',
+    title: 'Child Welfare & Care',
+    description: 'We support orphaned and vulnerable children by helping meet essential needs, including food and nutrition, clothing, safe living conditions, and emotional support.',
+    image: 'https://i0.wp.com/africanrelief.org/wp-content/uploads/2024/08/BWA-Kabwata-Orphan-Image-Ironisitc.jpeg?fit=2160%2C1440&ssl=1',
     stats: [
-      { label: 'Students Sponsored', value: '120' },
-      { label: 'Graduation Rate', value: '98%' }
+      { label: 'Children Supported', value: '200+' },
+      { label: 'Meals Provided Monthly', value: '1,500+' }
     ]
   },
   {
-    id: 'outreach',
-    title: 'Community Outreach',
-    description: 'The Mati Foundation extends its arms beyond our walls. We host monthly medical camps, nutrition workshops, and vocational training for single mothers in the neighborhood.',
-    // Image: Community gathering/hands together
-    image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800',
+    id: 'edu',
+    title: 'Education Support',
+    description: 'Education is the foundation of long-term change. We provide school fees assistance, learning materials, and uniforms to keep children in school and reduce dropout rates.',
+    image: 'https://camfed.org/wp-content/uploads/2021/07/Hero_-_CAMA_Zambia_outdoor_lessons.jpg',
     stats: [
-      { label: 'Families Helped', value: '450' },
-      { label: 'Medical Camps', value: '12/yr' }
+      { label: 'Scholarships', value: '75+' },
+      { label: 'Schools Partnered', value: '12' }
+    ]
+  },
+  {
+    id: 'community',
+    title: 'Community Empowerment',
+    description: 'Working with parents, caregivers, and local leaders, we promote family stability, community-led development, and self-reliance through local support initiatives.',
+    image: 'https://static.wixstatic.com/media/c3ec3c_d97978e55e294e449545fe551cb85635~mv2.png/v1/fill/w_640%2Ch_446%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/c3ec3c_d97978e55e294e449545fe551cb85635~mv2.png',
+    stats: [
+      { label: 'Families Engaged', value: '120+' },
+      { label: 'Workshops Held', value: '25' }
+    ]
+  },
+  {
+    id: 'health',
+    title: 'Health & Wellbeing',
+    description: 'We promote healthy growth through nutrition awareness, basic health support, and child wellbeing education for families and caregivers.',
+    image: 'https://images.unsplash.com/photo-1540499749214-f6f3e8371804?auto=format&fit=crop&q=80&w=800',
+    stats: [
+      { label: 'Health Checks', value: '300+' },
+      { label: 'Hygiene Kits', value: '1000+' }
     ]
   }
 ];
@@ -58,23 +73,21 @@ export const PROGRAMS: Program[] = [
 export const STORIES: Story[] = [
   {
     id: '1',
-    title: 'From Survival to Success: David’s Journey',
-    excerpt: 'David came to Mati Foundation at age 6. Today, he is graduating with a degree in Civil Engineering.',
+    title: 'From Textbooks to Dreams: Maria\'s Story',
+    excerpt: 'Thanks to our education support program, 14-year-old Maria now has the books and uniform she needs to attend secondary school and pursue her dream of becoming a nurse.',
     author: 'Matilda Kashindo',
-    date: 'Oct 12, 2023',
-    // Image: Graduation
-    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600',
-    content: "David's story represents the heart of our mission..."
+    date: 'Oct 15, 2023',
+    image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600',
+    content: "Maria's journey is a testament to what community support can achieve..."
   },
   {
     id: '2',
-    title: 'A New Library for the Community',
-    excerpt: 'Thanks to our generous donors, we opened a publicly accessible library this weekend.',
-    author: 'Admin',
-    date: 'Sep 28, 2023',
-    // Image: Books/Library
-    image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=600',
-    content: "Books have the power to transport us..."
+    title: 'A Community Harvest: Feeding Futures',
+    excerpt: 'Our recent community empowerment workshop brought families together to plant a communal garden, ensuring a sustainable source of nutrition for the children.',
+    author: 'Community Update',
+    date: 'Sep 21, 2023',
+    image: 'https://images.unsplash.com/photo-1621473105269-58d04275d22f?auto=format&fit=crop&q=80&w=600',
+    content: "By working together, we are building resilience and food security from the ground up..."
   }
 ];
 
@@ -82,22 +95,7 @@ export const TEAM: TeamMember[] = [
   {
     name: "Matilda Kashindo",
     role: "Founder & Director",
-    bio: "Former educator with 20 years of experience in child development.",
-    // Image: Black woman professional
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300'
-  },
-  {
-    name: "Dr. James Ochieng",
-    role: "Head of Health",
-    bio: "Pediatrician dedicated to community health initiatives.",
-    // Image: Black man doctor/professional
-    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=300'
-  },
-  {
-    name: "Elena Rodriguez",
-    role: "Education Coordinator",
-    bio: "Ensures every child's academic needs are met with personalized plans.",
-    // Image: Woman professional
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=300'
+    bio: "A passionate humanitarian and community advocate whose years of involvement in grassroots support initiatives inspired the creation of Mati Foundation.",
+    image: 'https://www.fordfoundation.org/wp-content/uploads/2025/08/Akina_Mama_wa_Afrika_Hero.jpg?w=1024'
   }
 ];
