@@ -1,5 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// FIX: Import Variants type from framer-motion
+import { motion, Variants } from 'framer-motion';
 
 interface AnimatedTextProps {
   text: string;
@@ -14,7 +15,8 @@ const containerVariants = {
   }),
 };
 
-const wordVariants = {
+// FIX: Explicitly type wordVariants as Variants to prevent type inference issues.
+const wordVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,

@@ -24,6 +24,7 @@ export const chatWithMatiBot = async (userMessage: string): Promise<string> => {
     const response = await client.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: userMessage,
+      // FIX: systemInstruction must be inside the config object.
       config: {
         systemInstruction: `You are a warm, empathetic, and helpful assistant for the "Mati Foundation".
         

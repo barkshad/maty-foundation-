@@ -12,13 +12,15 @@ const icons: { [key: string]: React.ReactElement } = {
     Handshake: <Handshake className="w-8 h-8" style={{ color: 'var(--primary-blue)'}}/>,
 };
 
-const SectionWrapper: React.FC<{ className?: string, children: React.ReactNode }> = ({ children, className = '' }) => (
+// FIX: Added 'style' prop to the component's props to allow passing inline styles.
+const SectionWrapper: React.FC<{ className?: string, children: React.ReactNode, style?: React.CSSProperties }> = ({ children, className = '', style }) => (
   <motion.section
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.2 }}
     transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.2 }}
     className={className}
+    style={style}
   >
     {children}
   </motion.section>

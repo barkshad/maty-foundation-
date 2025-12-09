@@ -158,3 +158,10 @@ export const CONTACT_METHODS = [
     { icon: 'Mail', title: "Email", content: CONTACT_INFO.email, href: `mailto:${CONTACT_INFO.email}`, image: "https://images.unsplash.com/photo-1557853194-27230455d35a?auto=format&fit=crop&q=80&w=800" },
     { icon: 'Phone', title: "Call", content: CONTACT_INFO.displayPhone, href: `tel:${CONTACT_INFO.rawPhone}`, image: "https://images.unsplash.com/photo-1586953208448-3151cf794014?auto=format&fit=crop&q=80&w=800" },
 ];
+
+export const SOCIAL_LINKS = [
+    { name: 'Facebook', icon: 'Facebook', url: '#', desc: 'Join our community for daily updates and stories.', image: 'https://images.unsplash.com/photo-1633675254053-524a35031a29?auto=format&fit=crop&q=80&w=800' },
+    { name: 'Instagram', icon: 'Instagram', url: '#', desc: 'See the moments of joy and impact through our photos.', image: 'https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&q=80&w=800' },
+    { name: 'Twitter / X', icon: 'Twitter', url: '#', desc: 'Follow for news, announcements, and live updates.', image: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&q=80&w=800' },
+    { name: 'LinkedIn', icon: 'Linkedin', url: '#', desc: 'Connect with us for professional partnerships and networking.', image: 'https://images.unsplash.com/photo-1611944212129-29955ae40213?auto=format&fit=crop&q=80&w=800' },
+];

@@ -67,8 +67,8 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
             <motion.button
               onClick={() => navigate(PageRoute.ABOUT)}
               className="bg-white/20 border-2 border-white text-white px-8 py-4 rounded-full text-lg font-bold transition-colors hover:bg-white"
-              style={{ hover: { color: 'var(--text-main)' } }}
-              whileHover={{ scale: 1.05, y: -2 }}
+              // FIX: The 'hover' property is invalid in 'style'. Moved the color change to the 'whileHover' prop to correctly handle hover animations.
+              whileHover={{ scale: 1.05, y: -2, color: 'var(--text-main)' }}
               whileTap={{ scale: 0.95 }}
             >
               Our Founder's Story

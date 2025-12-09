@@ -3,6 +3,11 @@ import * as Lucide from 'lucide-react';
 import { CONTACT_INFO, GET_INVOLVED_OPTIONS, BANK_DETAILS } from '../constants';
 import { motion } from 'framer-motion';
 import AnimatedText from '../components/AnimatedText';
+import { PageRoute } from '../types';
+
+interface GetInvolvedProps {
+  navigate: (page: PageRoute) => void;
+}
 
 const SectionWrapper: React.FC<{ className?: string, children: React.ReactNode }> = ({ children, className = '' }) => (
   <motion.section
@@ -24,7 +29,7 @@ const BankDetailRow: React.FC<{ label: string, value: string }> = ({ label, valu
 );
 
 
-const GetInvolved: React.FC = () => {
+const GetInvolved: React.FC<GetInvolvedProps> = ({ navigate }) => {
   
   const { itemCategories, deliveryInfo, volunteerInfo, sponsorInfo } = GET_INVOLVED_OPTIONS;
 
@@ -84,7 +89,17 @@ const GetInvolved: React.FC = () => {
                             <p className="text-sm" style={{ color: 'var(--text-light)'}}>Share your confirmation with us for documentation.</p>
                         </div>
                     </div>
-                    <p className="text-xs mt-6 italic" style={{ color: 'var(--text-light)'}}>All donations go directly toward supporting children and community programs. For assistance, please <a href={`mailto:${CONTACT_INFO.email}`} className="font-bold hover:underline" style={{color: 'var(--primary-blue)'}}>contact us</a>.</p>
+                    <div className="text-xs mt-6 italic" style={{ color: 'var(--text-light)'}}>
+                      <p>All donations go directly toward supporting children and community programs. For assistance or to connect with us after donating, please visit our socials page.</p>
+                      <motion.button 
+                        onClick={() => navigate(PageRoute.SOCIALS)}
+                        className="btn-primary mt-4 text-sm"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        Contact & Socials
+                      </motion.button>
+                    </div>
                 </div>
             </div>
           </div>

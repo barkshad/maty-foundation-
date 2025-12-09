@@ -37,4 +37,5 @@ export enum PageRoute {
   STORIES = '/stories',
   GALLERY = '/gallery',
   CONTACT = '/contact',
+  SOCIALS = '/socials',
 }
