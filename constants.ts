@@ -10,9 +10,11 @@ export const CONTACT_INFO = {
 export const BANK_DETAILS = {
   bankName: "Diamond Trust Bank",
   accountName: "Matilda John Kashindo",
-  accountNumber: "[To be provided]",
-  branch: "Kilifi Branch",
-  swiftCode: "[To be provided]",
+  accountNumber: "0200471001",
+  branch: "Kilifi",
+  branchCode: "044",
+  bankCode: "63",
+  swiftCode: "DTKE KENA",
   country: "Kenya"
 };
 

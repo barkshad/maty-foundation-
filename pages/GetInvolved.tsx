@@ -83,6 +83,8 @@ const GetInvolved: React.FC<GetInvolvedProps> = ({ navigate }) => {
                         <BankDetailRow label="Account Name" value={BANK_DETAILS.accountName} />
                         <BankDetailRow label="Account Number" value={BANK_DETAILS.accountNumber} />
                         <BankDetailRow label="Branch" value={BANK_DETAILS.branch} />
+                        <BankDetailRow label="Branch Code" value={BANK_DETAILS.branchCode} />
+                        <BankDetailRow label="Bank Code" value={BANK_DETAILS.bankCode} />
                         <BankDetailRow label="Swift Code" value={BANK_DETAILS.swiftCode} />
                         <BankDetailRow label="Country" value={BANK_DETAILS.country} />
                     </div>
