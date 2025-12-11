@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { PageRoute } from '../types';
 import { ArrowRight, Heart, BookOpen, Users, Shield } from 'lucide-react';
@@ -5,21 +6,28 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { INSPIRATIONAL_QUOTES } from '../constants';
 import AnimatedText from '../components/AnimatedText';
 import AnimatedCounter from '../components/AnimatedCounter';
+import { useContent } from '../contexts/ContentContext';
 
 interface HomeProps {
   navigate: (page: PageRoute) => void;
 }
 
 const Home: React.FC<HomeProps> = ({ navigate }) => {
+  const { content } = useContent();
   const { scrollYProgress } = useScroll();
   const parallaxY = useTransform(scrollYProgress, [0, 0.3], [0, -100]);
 
-  const impactStats = [
-      { label: 'Children Supported', value: 200, suffix: '+', icon: <Heart className="w-6 h-6" style={{ color: 'var(--primary-blue)' }}/> },
-      { label: 'Scholarships Given', value: 75, suffix: '+', icon: <BookOpen className="w-6 h-6" style={{ color: 'var(--primary-blue)' }}/> },
-      { label: 'Families Engaged', value: 120, suffix: '+', icon: <Users className="w-6 h-6" style={{ color: 'var(--primary-blue)' }}/> },
-      { label: 'Communities Reached', value: 15, suffix: '+', icon: <Shield className="w-6 h-6" style={{ color: 'var(--primary-blue)' }}/> },
-  ];
+  // Map string icons to components for the dynamic stats
+  const getIcon = (iconName: string) => {
+    const props = { className: "w-6 h-6", style: { color: 'var(--primary-blue)' } };
+    switch(iconName) {
+        case 'Heart': return <Heart {...props} />;
+        case 'BookOpen': return <BookOpen {...props} />;
+        case 'Users': return <Users {...props} />;
+        case 'Shield': return <Shield {...props} />;
+        default: return <Heart {...props} />;
+    }
+  };
 
   return (
     <div className="flex flex-col gap-24 md:gap-32 pb-24 bg-background-soft">
@@ -30,8 +38,8 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
           style={{ y: parallaxY }}
         >
           <img
-            src="https://camfed.org/wp-content/uploads/2021/07/Hero_-_CAMA_Zambia_outdoor_lessons.jpg"
-            alt="African children in an outdoor learning session"
+            src={content.hero.image}
+            alt="Hero background"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-accent-blue/60 to-accent-blue/20"></div>
@@ -39,7 +47,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
 
         <div className="relative z-10 max-w-4xl mx-auto p-8">
             <AnimatedText 
-              text="Empowering Children. Strengthening Communities."
+              text={content.hero.headline}
               className="text-4xl md:text-6xl font-serif font-bold mb-6 leading-tight text-white [text-shadow:0_3px_5px_rgba(0,0,0,0.3)]"
             />
           <motion.p
@@ -48,7 +56,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
             transition={{ type: 'spring', stiffness: 120, damping: 20, delay: 0.8 }}
             className="text-lg md:text-xl text-slate-100 mb-8 max-w-3xl mx-auto font-medium [text-shadow:0_2px_4px_rgba(0,0,0,0.4)]"
           >
-            Founded by Matilda Kashindo, Mati Foundation is an independent foundation providing education, care, and connection to Kenya’s orphans and vulnerable children.
+            {content.hero.subheadline}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -89,10 +97,10 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
                 alt="subtle background pattern" 
                 className="absolute inset-0 w-full h-full object-cover opacity-5"
             />
-          {impactStats.map((stat, idx) => (
+          {content.impactStats.map((stat, idx) => (
             <div key={idx} className="text-center relative">
               <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm" style={{ backgroundColor: 'var(--secondary-blue)'}}>
-                {stat.icon}
+                {getIcon(stat.icon)}
               </div>
               <div className="text-3xl font-bold mb-1" style={{ color: 'var(--accent-blue)' }}>
                  <AnimatedCounter to={stat.value} />{stat.suffix}
@@ -169,7 +177,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
           </motion.p>
         </div>
       </section>
-
+      
       {/* CTA Section */}
       <section className="px-4">
          <motion.div

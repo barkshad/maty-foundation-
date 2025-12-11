@@ -1,3 +1,4 @@
+
 export interface Program {
   id: string;
   title: string;
@@ -38,4 +39,31 @@ export enum PageRoute {
   GALLERY = '/gallery',
   CONTACT = '/contact',
   SOCIALS = '/socials',
+  ADMIN = '/admin',
+  ADMIN_DASHBOARD = '/admin/dashboard',
+}
+
+export interface GalleryItem {
+  id: number;
+  cat: 'all' | 'edu' | 'community' | 'welfare';
+  url: string;
+  caption: string;
+}
+
+export interface ContentState {
+  hero: {
+    headline: string;
+    subheadline: string;
+    image: string;
+  };
+  impactStats: { label: string; value: number; suffix: string; icon: string }[];
+  programs: Program[];
+  stories: Story[];
+  gallery: GalleryItem[];
+  contact: {
+    email: string;
+    phone: string;
+    address: string;
+  };
+  socials: { name: string; url: string; icon: string; desc: string; image: string }[];
 }

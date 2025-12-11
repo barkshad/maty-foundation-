@@ -1,22 +1,16 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedText from '../components/AnimatedText';
+import { useContent } from '../contexts/ContentContext';
 
 const Gallery: React.FC = () => {
+  const { content } = useContent();
   const [filter, setFilter] = useState<'all' | 'edu' | 'community' | 'welfare'>('all');
 
-  const images = [
-    { id: 1, cat: 'edu', url: "https://camfed.org/wp-content/uploads/2021/07/Hero_-_CAMA_Zambia_outdoor_lessons.jpg", caption: "Outdoor Classroom" },
-    { id: 2, cat: 'community', url: "https://static.wixstatic.com/media/c3ec3c_d97978e55e294e449545fe551cb85635~mv2.png/v1/fill/w_640%2Ch_446%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/c3ec3c_d97978e55e294e449545fe551cb85635~mv2.png", caption: "Community Gathering" },
-    { id: 3, cat: 'welfare', url: "https://i0.wp.com/africanrelief.org/wp-content/uploads/2024/08/BWA-Kabwata-Orphan-Image-Ironisitc.jpeg?fit=2160%2C1440&ssl=1", caption: "Sharing a Meal" },
-    { id: 4, cat: 'edu', url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600", caption: "Focused Learning" },
-    { id: 5, cat: 'community', url: "https://images.unsplash.com/photo-1621473105269-58d04275d22f?auto=format&fit=crop&q=80&w=600", caption: "Planting Together" },
-    { id: 6, cat: 'welfare', url: "https://images.unsplash.com/photo-1594883498394-11855a805f77?auto=format&fit=crop&q=80&w=600", caption: "New School Shoes" },
-    { id: 7, cat: 'edu', url: "https://images.unsplash.com/photo-1618143099239-c8b519a86a23?auto=format&fit=crop&q=80&w=600", caption: "Joyful Learners" },
-    { id: 8, cat: 'community', url: "https://images.unsplash.com/photo-1517594422361-5e3e8a30be48?auto=format&fit=crop&q=80&w=600", caption: "Building Friendships" },
-  ];
-
-  const filteredImages = filter === 'all' ? images : images.filter(img => img.cat === filter);
+  const filteredImages = filter === 'all' 
+    ? content.gallery 
+    : content.gallery.filter(img => img.cat === filter);
 
   return (
     <div className="min-h-screen pb-24 bg-background-soft">
@@ -89,6 +83,11 @@ const Gallery: React.FC = () => {
               </motion.div>
             ))}
           </AnimatePresence>
+          {filteredImages.length === 0 && (
+             <div className="col-span-full text-center py-10 text-slate-400">
+               No images found in this category.
+             </div>
+          )}
         </motion.div>
       </div>
     </div>
