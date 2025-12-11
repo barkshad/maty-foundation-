@@ -14,6 +14,11 @@
               sans: ['Inter', 'sans-serif'],
               serif: ['Merriweather', 'serif'],
             },
+            colors: {
+              primary: '#1e88e5',
+              secondary: '#e3f2fd',
+              accent: '#0d47a1',
+            }
           }
         }
       }
@@ -50,7 +55,8 @@
       html, body {
         background-color: var(--background-soft) !important;
         color: var(--text-main);
-        color-scheme: light;
+        /* Force light mode behavior to prevent system dark mode from messing with specific colors */
+        color-scheme: light; 
       }
       
       h1, h2, h3, h4, h5, h6 {
@@ -64,7 +70,7 @@
       .btn-primary {
         background-image: linear-gradient(to right, #2979ff 0%, #1e88e5 51%, #2979ff 100%);
         background-size: 200% auto;
-        color: var(--white);
+        color: var(--white) !important; /* Force white text for buttons */
         border-radius: 9999px;
         padding: 0.75rem 1.5rem;
         font-weight: bold;
@@ -140,17 +146,13 @@
         100% { background-position: 100% 100%; }
       }
 
+      /* Fix for dark mode users - ensure the site stays in light mode theme */
       @media (prefers-color-scheme: dark) {
-        html, body, div, section, header, footer, nav, main, article, aside {
-          background-color: var(--background-soft) !important;
-          color: var(--text-main) !important;
+        html, body {
+           background-color: var(--background-soft) !important;
+           color: var(--text-main) !important;
         }
-        h1, h2, h3, h4, h5, h6 {
-           color: var(--accent-blue) !important;
-        }
-        p, span, li, div {
-           color: inherit !important;
-        }
+        /* Do NOT override p, span, div colors globally as it breaks specific text color classes */
       }
     </style>
   </head>
