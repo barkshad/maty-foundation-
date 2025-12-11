@@ -1,4 +1,5 @@
-import { Program, Story, TeamMember } from './types';
+
+import { Program, Story, TeamMember, StudentProfile } from './types';
 
 export const CONTACT_INFO = {
   email: "jomimatilda@gmail.com",
@@ -141,6 +142,69 @@ export const TEAM: TeamMember[] = [
     role: "Founder & Director",
     bio: "A passionate humanitarian and community advocate whose years of involvement in grassroots support initiatives inspired the creation of Mati Foundation.",
     image: 'https://www.fordfoundation.org/wp-content/uploads/2025/08/Akina_Mama_wa_Afrika_Hero.jpg?w=1024'
+  }
+];
+
+export const STUDENT_PROFILES: StudentProfile[] = [
+  {
+    id: 'sp001',
+    firstName: 'David',
+    age: 10,
+    gender: 'Male',
+    image: 'https://images.unsplash.com/photo-1542838686-37da4a9fd1b3?auto=format&fit=crop&q=80&w=800',
+    dream: 'Become a Pilot',
+    bio: 'David is a bright and curious boy who loves reading adventure stories and learning about airplanes. He excels in science and hopes to travel the world one day.',
+    sponsorshipNeeded: ['School Fees: $20/month', 'Books & Supplies: $5/month', 'Uniform: $3/month']
+  },
+  {
+    id: 'sp002',
+    firstName: 'Grace',
+    age: 8,
+    gender: 'Female',
+    image: 'https://images.unsplash.com/photo-1503944583220-79d6f823f8a2?auto=format&fit=crop&q=80&w=800',
+    dream: 'Become a Doctor',
+    bio: 'Grace has a caring heart and loves helping others. She enjoys biology and is always eager to learn how to take care of her friends when they have a small scrape. She dreams of healing people in her community.',
+    sponsorshipNeeded: ['School Fees: $20/month', 'Books & Supplies: $5/month', 'Uniform: $3/month']
+  },
+  {
+    id: 'sp003',
+    firstName: 'Samuel',
+    age: 12,
+    gender: 'Male',
+    image: 'https://images.unsplash.com/photo-1596647932221-a755106f5c0b?auto=format&fit=crop&q=80&w=800',
+    dream: 'Become an Engineer',
+    bio: 'Samuel is a natural problem-solver who enjoys building things with recycled materials. He is fascinated by how things work and spends his free time sketching new inventions.',
+    sponsorshipNeeded: ['Secondary School Fees: $30/month', 'Science Kit: $10/month', 'Uniform: $5/month']
+  },
+  {
+    id: 'sp004',
+    firstName: 'Esther',
+    age: 9,
+    gender: 'Female',
+    image: 'https://images.unsplash.com/photo-1594801389461-266d6d84f8b3?auto=format&fit=crop&q=80&w=800',
+    dream: 'Become a Teacher',
+    bio: 'Esther loves to share her knowledge with younger children. She is patient and kind, and often organizes small study groups to help her friends with their homework.',
+    sponsorshipNeeded: ['School Fees: $20/month', 'Books & Supplies: $5/month', 'Uniform: $3/month']
+  },
+  {
+    id: 'sp005',
+    firstName: 'Joseph',
+    age: 14,
+    gender: 'Male',
+    image: 'https://images.unsplash.com/photo-1599427303039-4f7f63d0bd32?auto=format&fit=crop&q=80&w=800',
+    dream: 'Become a Farmer',
+    bio: 'Joseph has a green thumb and is passionate about agriculture. He helps tend the community garden and is keen to learn about sustainable farming to help feed his community.',
+    sponsorshipNeeded: ['Vocational Training: $25/month', 'Farming Tools: $5/month', 'Project Supplies: $10/month']
+  },
+  {
+    id: 'sp006',
+    firstName: 'Faith',
+    age: 7,
+    gender: 'Female',
+    image: 'https://images.unsplash.com/photo-1610203378680-e0a5a73e512c?auto=format&fit=crop&q=80&w=800',
+    dream: 'Become an Artist',
+    bio: 'Faith sees the world in vibrant colors. She is incredibly creative and loves to draw and paint, telling stories through her art. She brightens up every room she enters.',
+    sponsorshipNeeded: ['School Fees: $20/month', 'Art Supplies: $10/month', 'Uniform: $3/month']
   }
 ];
 

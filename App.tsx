@@ -19,6 +19,7 @@ import Stories from './pages/Stories';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
 import Socials from './pages/Socials';
+import Sponsorship from './pages/Sponsorship';
 
 // Admin Pages
 import AdminLogin from './pages/AdminLogin';
@@ -64,6 +65,7 @@ const AppContent: React.FC = () => {
       case PageRoute.ABOUT: return <About />;
       case PageRoute.PROGRAMS: return <Programs navigate={setCurrentPage} />;
       case PageRoute.GET_INVOLVED: return <GetInvolved navigate={setCurrentPage} />;
+      case PageRoute.SPONSORSHIP: return <Sponsorship navigate={setCurrentPage} />;
       case PageRoute.STORIES: return <Stories />;
       case PageRoute.GALLERY: return <Gallery />;
       case PageRoute.CONTACT: return <Contact />;

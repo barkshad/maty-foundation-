@@ -29,11 +29,23 @@ export interface ChatMessage {
   text: string;
 }
 
+export interface StudentProfile {
+  id: string;
+  firstName: string;
+  age: number;
+  gender: 'Male' | 'Female';
+  image: string;
+  dream: string;
+  bio: string;
+  sponsorshipNeeded: string[];
+}
+
 // Navigation Types
 export enum PageRoute {
   HOME = '/',
   ABOUT = '/about',
   PROGRAMS = '/programs',
+  SPONSORSHIP = '/sponsorship',
   GET_INVOLVED = '/get-involved',
   STORIES = '/stories',
   GALLERY = '/gallery',

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { PageRoute } from '../types';
 import { Menu, X, Heart, Phone, MessageCircle } from 'lucide-react';
@@ -27,6 +28,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
     { name: 'Home', path: PageRoute.HOME },
     { name: 'About', path: PageRoute.ABOUT },
     { name: 'Programs', path: PageRoute.PROGRAMS },
+    { name: 'Sponsor a Child', path: PageRoute.SPONSORSHIP },
     { name: 'Get Involved', path: PageRoute.GET_INVOLVED },
     { name: 'Stories', path: PageRoute.STORIES },
     { name: 'Gallery', path: PageRoute.GALLERY },
@@ -163,6 +165,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
               <ul className="space-y-2 text-sm text-blue-200">
                 <li><button onClick={() => handleNav(PageRoute.ABOUT)} className="hover:underline">Our Story</button></li>
                 <li><button onClick={() => handleNav(PageRoute.PROGRAMS)} className="hover:underline">Programs</button></li>
+                <li><button onClick={() => handleNav(PageRoute.SPONSORSHIP)} className="hover:underline">Sponsor a Child</button></li>
                 <li><button onClick={() => handleNav(PageRoute.SOCIALS)} className="hover:underline">Follow Us</button></li>
                 <li><button onClick={() => handleNav(PageRoute.GET_INVOLVED)} className="hover:underline">Donate Items</button></li>
               </ul>
