@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { PageRoute } from '../types';
-import { Menu, X, Heart, Phone, MessageCircle } from 'lucide-react';
+import { Menu, X, Heart, Phone, MessageCircle, Lock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ChatWidget from './ChatWidget';
 import { CONTACT_INFO } from '../constants';
@@ -201,6 +201,13 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, navigate }) => {
           </div>
           <div className="border-t border-white/20 mt-16 pt-8 text-center text-xs text-blue-200">
             <p>&copy; {new Date().getFullYear()} Mati Foundation. Built with 💙 by Matilda Kashindo.</p>
+             <button 
+                onClick={() => handleNav(PageRoute.ADMIN)} 
+                className="mt-4 opacity-60 hover:opacity-100 hover:underline transition-opacity inline-flex items-center"
+            >
+                <Lock size={12} className="mr-1.5" />
+                Admin Login
+            </button>
           </div>
         </div>
       </footer>
