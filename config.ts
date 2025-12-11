@@ -2,9 +2,9 @@
 // IMPORTANT: You must replace these placeholders with your actual keys.
 
 export const CLOUDINARY_CONFIG = {
-  cloudName: "YOUR_CLOUD_NAME", // e.g., 'dxy88mz'
-  uploadPreset: "YOUR_UNSIGNED_PRESET", // e.g., 'mati_foundation_uploads'
-  apiKey: "YOUR_API_KEY" // Optional for frontend uploads, but good to have
+  cloudName: "dycbotqpw",
+  uploadPreset: "mati_unsigned",
+  apiKey: "" // Optional for frontend uploads, but good to have
 };
 
 export const FIREBASE_CONFIG = {
