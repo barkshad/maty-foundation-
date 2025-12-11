@@ -8,10 +8,11 @@ export const CLOUDINARY_CONFIG = {
 };
 
 export const FIREBASE_CONFIG = {
-  apiKey: "YOUR_FIREBASE_API_KEY",
-  authDomain: "your-project.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef123456"
+  apiKey: "AIzaSyDF3FnrxPYa6Hj_0lIT59FP9CSCIk7aS0w",
+  authDomain: "mati-foundation-2d67e.firebaseapp.com",
+  projectId: "mati-foundation-2d67e",
+  storageBucket: "mati-foundation-2d67e.firebasestorage.app",
+  messagingSenderId: "769000463528",
+  appId: "1:769000463528:web:efbfbb32b885aa7071369d",
+  measurementId: "G-EHP18C5S41"
 };
