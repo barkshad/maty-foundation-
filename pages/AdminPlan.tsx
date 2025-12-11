@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { Database, Server, Layout, Shield, Lock, CreditCard, Users, FileText, Upload, Image as ImageIcon, Cloud, AlertCircle, Check } from 'lucide-react';
+import { Database, Server, Layout, Shield, Lock, CreditCard, Users, FileText, Upload, Image as ImageIcon, Cloud, AlertCircle, Check, Video } from 'lucide-react';
 import { uploadToCloudinary, uploadToFirebase } from '../services/mediaService';
 import { motion } from 'framer-motion';
 
@@ -38,6 +39,8 @@ const AdminPlan: React.FC = () => {
       setUploading(false);
     }
   };
+
+  const isVideo = (url: string) => url.match(/\.(mp4|webm|ogg|mov)$/i) || url.includes('/video/upload/');
 
   return (
     <div className="min-h-screen py-16 px-4 bg-white">
@@ -85,9 +88,9 @@ const AdminPlan: React.FC = () => {
                         </button>
                     </div>
 
-                    <label className="block text-sm font-bold mb-2">2. Choose Image</label>
+                    <label className="block text-sm font-bold mb-2">2. Choose Image or Video</label>
                     <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center bg-white cursor-pointer hover:bg-blue-50 transition-colors relative mb-6">
-                        <input type="file" onChange={handleFileChange} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*"/>
+                        <input type="file" onChange={handleFileChange} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*,video/*"/>
                         {file ? (
                              <div className="text-blue-600 font-medium flex items-center justify-center">
                                 <Check size={20} className="mr-2"/> {file.name}
@@ -95,7 +98,7 @@ const AdminPlan: React.FC = () => {
                         ) : (
                             <div className="text-gray-400">
                                 <Upload size={32} className="mx-auto mb-2"/>
-                                <p>Click to select an image</p>
+                                <p>Click to select an image or video</p>
                             </div>
                         )}
                     </div>
@@ -129,7 +132,13 @@ const AdminPlan: React.FC = () => {
                             <div className="text-green-600 font-bold mb-4 flex items-center justify-center">
                                 <Check size={20} className="mr-2" /> Upload Successful!
                             </div>
-                            <img src={uploadedUrl} alt="Uploaded" className="max-h-64 mx-auto rounded-lg shadow-md mb-4 object-contain"/>
+                            
+                            {isVideo(uploadedUrl) ? (
+                                <video src={uploadedUrl} controls className="max-h-64 mx-auto rounded-lg shadow-md mb-4"/>
+                            ) : (
+                                <img src={uploadedUrl} alt="Uploaded" className="max-h-64 mx-auto rounded-lg shadow-md mb-4 object-contain"/>
+                            )}
+
                             <div className="bg-gray-100 p-3 rounded-lg text-xs break-all text-gray-600">
                                 {uploadedUrl}
                             </div>
@@ -137,7 +146,10 @@ const AdminPlan: React.FC = () => {
                         </motion.div>
                     ) : (
                         <div className="text-gray-300">
-                            <ImageIcon size={64} className="mx-auto mb-4 opacity-50"/>
+                            <div className="flex justify-center gap-2 mb-4 opacity-50">
+                                <ImageIcon size={48} />
+                                <Video size={48} />
+                            </div>
                             <p>Preview will appear here after upload</p>
                         </div>
                     )}

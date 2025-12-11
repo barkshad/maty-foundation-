@@ -29,6 +29,11 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
     }
   };
 
+  const isVideo = (url?: string) => {
+    if (!url) return false;
+    return url.match(/\.(mp4|webm|ogg|mov)$/i) || url.includes('/video/upload/');
+  };
+
   return (
     <div className="flex flex-col gap-24 md:gap-32 pb-24 bg-background-soft">
       {/* Hero Section */}
@@ -37,11 +42,22 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
           className="absolute inset-0 z-0"
           style={{ y: parallaxY }}
         >
-          <img
-            src={content.hero.image}
-            alt="Hero background"
-            className="w-full h-full object-cover"
-          />
+          {isVideo(content.hero.image) ? (
+            <video 
+              src={content.hero.image} 
+              className="w-full h-full object-cover" 
+              autoPlay 
+              muted 
+              loop 
+              playsInline
+            />
+          ) : (
+            <img
+              src={content.hero.image}
+              alt="Hero background"
+              className="w-full h-full object-cover"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-accent-blue/60 to-accent-blue/20"></div>
         </motion.div>
 

@@ -1,3 +1,4 @@
+
 import { CLOUDINARY_CONFIG, FIREBASE_CONFIG } from '../config';
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -7,6 +8,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 export interface CloudinaryResponse {
   secure_url: string;
   public_id: string;
+  resource_type: string;
   error?: { message: string };
 }
 
@@ -20,8 +22,9 @@ export const uploadToCloudinary = async (file: File): Promise<string> => {
   formData.append('upload_preset', CLOUDINARY_CONFIG.uploadPreset);
 
   try {
+    // FIX: Use 'auto' instead of 'image' to support videos and other file types
     const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CONFIG.cloudName}/image/upload`,
+      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CONFIG.cloudName}/auto/upload`,
       {
         method: 'POST',
         body: formData,
@@ -31,13 +34,14 @@ export const uploadToCloudinary = async (file: File): Promise<string> => {
     const data: CloudinaryResponse = await response.json();
 
     if (data.error) {
+      console.error("Cloudinary API Error:", data.error.message);
       throw new Error(data.error.message);
     }
 
     return data.secure_url;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Cloudinary Upload Error:", error);
-    throw error;
+    throw new Error(error.message || "Upload failed");
   }
 };
 
