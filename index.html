@@ -6,28 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mati Foundation</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://upload-widget.cloudinary.com/latest/global/all.js" type="text/javascript"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              serif: ['Merriweather', 'serif'],
-            },
+            fontFamily: { sans: ['"Space Grotesk"', 'sans-serif'], serif: ['"Playfair Display"', 'serif'] },
             colors: {
-              primary: '#1e88e5',
-              secondary: '#e3f2fd',
-              accent: '#0d47a1',
+              brand: { gold: '#e2b34a', dark: '#1a1a1a', primary: '#00c49a', light: '#f7f3ed' }
+            },
+            animation: {
+              'shimmer': 'shimmer 2.5s linear infinite',
+              'float': 'float 6s ease-in-out infinite'
+            },
+            keyframes: {
+              shimmer: { '0%': { transform: 'translateX(-100%) skewX(-15deg)' }, '100%': { transform: 'translateX(200%) skewX(-15deg)' } },
+              float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } }
             }
           }
         }
       }
     </script>
-    <!-- Lucide Icons loaded via unpkg -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Cloudinary Upload Widget -->
-    <script src="https://upload-widget.cloudinary.com/latest/global/all.js" type="text/javascript"></script>
     <script type="importmap">
 {
   "imports": {
@@ -39,127 +39,29 @@
     "framer-motion": "https://aistudiocdn.com/framer-motion@^11.3.18",
     "firebase/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js",
     "firebase/storage": "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js",
+    "firebase/auth": "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js",
+    "firebase/firestore": "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js",
     "firebase/": "https://esm.sh/firebase@^12.6.0/"
   }
 }
 </script>
     <style>
-      :root {
-        --primary-blue: #1e88e5;
-        --secondary-blue: #e3f2fd;
-        --accent-blue: #0d47a1;
-        --white: #ffffff;
-        --background-soft: #f8fafc;
-        --text-main: #102a43;
-        --text-light: #52616b;
-        --border-color: #e2e8f0;
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
       }
-
-      html, body {
-        background-color: var(--background-soft) !important;
-        color: var(--text-main);
-        /* Force light mode behavior to prevent system dark mode from messing with specific colors */
-        color-scheme: light; 
-      }
-      
-      h1, h2, h3, h4, h5, h6 {
-        color: var(--accent-blue);
-      }
-
-      a {
-        color: var(--primary-blue);
-      }
-      
-      .btn-primary {
-        background-image: linear-gradient(to right, #2979ff 0%, #1e88e5 51%, #2979ff 100%);
-        background-size: 200% auto;
-        color: var(--white) !important; /* Force white text for buttons */
-        border-radius: 9999px;
-        padding: 0.75rem 1.5rem;
-        font-weight: bold;
-        transition: all 0.3s ease-out;
-        border: none;
-      }
-      .btn-primary:hover {
-         background-position: right center;
-         transform: translateY(-2px);
-         box-shadow: 0 4px 15px 0 rgba(29, 136, 229, 0.4);
-      }
-      
-      .btn-secondary {
-        background-color: var(--secondary-blue);
-        color: var(--primary-blue);
-        border: 1px solid var(--primary-blue);
-         border-radius: 9999px;
-        padding: 0.75rem 1.5rem;
-        font-weight: bold;
-        transition: all 0.2s;
-      }
-      .btn-secondary:hover {
-        background-color: #bbdefb;
-        transform: translateY(-2px);
-      }
-      
-      .card-shine {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .card-shine:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 25px -5px rgba(29, 136, 229, 0.1), 0 8px 10px -6px rgba(29, 136, 229, 0.1);
-      }
-
-      .footer-bg {
-        position: relative;
-        background-image: url('https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=1470');
-        background-size: cover;
-        background-position: center;
-      }
-      .footer-bg::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(13, 71, 161, 0.9); /* accent-blue at 90% opacity */
-      }
-      .footer-bg > * {
-        position: relative;
-        z-index: 1;
-      }
-      
-      input[type="text"]:focus,
-      input[type="email"]:focus,
-      input[type="number"]:focus,
-      textarea:focus {
-        outline: none;
-        border-color: var(--primary-blue) !important;
-        box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
-        transition: border-color 0.2s, box-shadow 0.2s;
-      }
-
-      .map-placeholder-bg {
-        background-color: var(--secondary-blue);
-        background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M-10 10h20v20h-20zM90 90h20v20h-20zM30 30h20v20h-20zM-10 50h20v20h-20zM90 10h20v20h-20zM-10 90h20v20h-20zM30 70h20v20h-20zM70 30h20v20h-20zM-30 70h20v20h-20zM110 30h20v20h-20z" fill="%231e88e5" fill-opacity="0.1"/%3E%3C/svg%3E');
-        animation: pan-map 20s linear infinite;
-      }
-
-      @keyframes pan-map {
-        0% { background-position: 0% 0%; }
-        100% { background-position: 100% 100%; }
-      }
-
-      /* Fix for dark mode users - ensure the site stays in light mode theme */
-      @media (prefers-color-scheme: dark) {
-        html, body {
-           background-color: var(--background-soft) !important;
-           color: var(--text-main) !important;
-        }
-        /* Do NOT override p, span, div colors globally as it breaks specific text color classes */
+      .glass-dark {
+        background: rgba(10, 10, 10, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
     </style>
   </head>
-  <body class="antialiased">
+  <body class="bg-brand-light text-brand-dark antialiased">
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
   </body>
