@@ -57,6 +57,30 @@ export interface SocialLink {
   image: string;
 }
 
+// Legacy ContentState used in ContentContext
+export interface ContentState {
+  hero: {
+    headline: string;
+    subheadline: string;
+    image: string;
+  };
+  impactStats: {
+    label: string;
+    value: number;
+    suffix: string;
+    icon: string;
+  }[];
+  programs: Program[];
+  stories: Story[];
+  gallery: GalleryItem[];
+  contact: {
+    email: string;
+    phone: string;
+    address: string;
+  };
+  socials: SocialLink[];
+}
+
 // Consolidating existing content into the new CMS State structure
 export interface WebsiteState {
   company: {

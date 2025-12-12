@@ -16,12 +16,16 @@ const AdminLogin: React.FC<{ navigate: (page: PageRoute) => void }> = ({ navigat
     e.preventDefault();
     setIsLoggingIn(true);
     setError('');
+    
     try {
       await login(email, password);
       navigate(PageRoute.ADMIN_DASHBOARD);
     } catch (err: any) {
-      console.error(err);
-      setError('Invalid email or password. Please check your credentials.');
+      if (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
+        setError('User not found. Please create an account in Firebase Console or use correct credentials.');
+      } else {
+        setError('Login failed. Please check email/password.');
+      }
     } finally {
       setIsLoggingIn(false);
     }
