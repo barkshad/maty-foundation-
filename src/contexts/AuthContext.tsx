@@ -1,13 +1,14 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../firebase';
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged, User } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, User } from 'firebase/auth';
 
 interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;
   loading: boolean;
   login: (email: string, pass: string) => Promise<void>;
+  register: (email: string, pass: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -26,20 +27,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = async (email: string, pass: string) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, pass);
-    } catch (error: any) {
-      console.error("Login failed:", error.code, error.message);
-      throw error;
-    }
+    await signInWithEmailAndPassword(auth, email, pass);
   };
+
+  const register = async (email: string, pass: string) => {
+    await createUserWithEmailAndPassword(auth, email, pass);
+  }
 
   const logout = async () => {
     await signOut(auth);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated: !!user, user, loading, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated: !!user, user, loading, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

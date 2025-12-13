@@ -32,25 +32,18 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
     setUploading(true);
 
     try {
-      // 1. Upload to Cloudinary via Service
+      // Direct API Upload
       console.log("Starting upload for:", file.name);
       const url = await uploadToCloudinary(file);
-      
       console.log("Upload successful:", url);
-      
-      // 2. Update Local Preview
       setPreview(url);
-      
-      // 3. Trigger callback to save to Database
       onUpload(url);
 
     } catch (err: any) {
       console.error("Upload failed in component:", err);
-      setError("Upload failed. Please check your internet or Cloudinary config.");
-      alert(`Error: ${err.message || "Failed to upload"}`);
+      setError("Upload failed. Please check your internet or config.");
     } finally {
       setUploading(false);
-      // Reset input so same file can be selected again if needed
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };

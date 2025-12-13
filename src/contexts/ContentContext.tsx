@@ -29,7 +29,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   useEffect(() => {
     const docRef = doc(db, 'website_content', 'main_v1');
     
-    // Real-time listener
+    // Real-time listener: This triggers whenever the database changes on ANY device
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
       if (docSnap.exists()) {
         const data = docSnap.data() as WebsiteState;
@@ -45,7 +45,6 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       setLoading(false);
     }, (error) => {
       console.error("Firestore Error:", error);
-      // Fallback to defaults on error
       setLoading(false);
     });
 
@@ -62,7 +61,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       if (msg) console.log(msg);
     } catch (e) {
       console.error("❌ Failed to save to cloud:", e);
-      alert("Error saving changes to database. Please checks your connection and permissions.");
+      alert("Error saving changes. Check internet connection.");
     }
   };
 
@@ -88,12 +87,12 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const addGalleryItem = (item: Omit<GalleryItem, 'id'>) => {
     const newItem = { ...item, id: Date.now() };
     const next = { ...content, gallery: [newItem, ...content.gallery] };
-    saveToCloud(next);
+    saveToCloud(next, "Gallery Item Added");
   };
 
   const deleteGalleryItem = (id: number) => {
     const next = { ...content, gallery: content.gallery.filter(g => g.id !== id) };
-    saveToCloud(next);
+    saveToCloud(next, "Gallery Item Deleted");
   };
 
   const updateProgram = (updatedProgram: Program) => {
@@ -110,7 +109,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const syncLocalData = () => {
-      saveToCloud(DEFAULT_WEBSITE_STATE, "Reset to Local Defaults");
+      saveToCloud(DEFAULT_WEBSITE_STATE, "Reset to Defaults");
   };
 
   return (
