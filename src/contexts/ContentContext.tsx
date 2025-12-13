@@ -7,9 +7,8 @@ import { doc, setDoc, onSnapshot } from 'firebase/firestore';
 
 interface ContentContextType {
   content: WebsiteState;
-  state: WebsiteState;
+  state: WebsiteState; // Alias for Admin compatibility
   loading: boolean;
-  connectionError: string | null;
   updateHero: (data: Partial<WebsiteState['hero']>) => void;
   updateContact: (data: any) => void;
   addGalleryItem: (item: Omit<GalleryItem, 'id'>) => void;
@@ -25,17 +24,13 @@ const ContentContext = createContext<ContentContextType | undefined>(undefined);
 export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [content, setContent] = useState<WebsiteState>(DEFAULT_WEBSITE_STATE);
   const [loading, setLoading] = useState(true);
-  const [connectionError, setConnectionError] = useState<string | null>(null);
 
   // 1. Sync with Firebase Firestore on Mount
   useEffect(() => {
     const docRef = doc(db, 'website_content', 'main_v1');
     
-    console.log("📡 Connecting to Firestore...");
-
     // Real-time listener
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
-      setConnectionError(null); // Clear errors on successful snapshot
       if (docSnap.exists()) {
         const data = docSnap.data() as WebsiteState;
         // Merge with default state to ensure structure exists if DB is partial
@@ -44,16 +39,12 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       } else {
         console.log("⚠️ No cloud data found. Initializing Database...");
         // If doc doesn't exist, create it with default data
-        setDoc(docRef, DEFAULT_WEBSITE_STATE).catch(err => {
-            console.error("Init failed:", err);
-            setConnectionError("Failed to initialize DB. Check permissions.");
-        });
+        setDoc(docRef, DEFAULT_WEBSITE_STATE).catch(console.error);
         setContent(DEFAULT_WEBSITE_STATE);
       }
       setLoading(false);
     }, (error) => {
-      console.error("Firestore Read Error:", error);
-      setConnectionError(error.message);
+      console.error("Firestore Error:", error);
       // Fallback to defaults on error
       setLoading(false);
     });
@@ -61,35 +52,21 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return () => unsubscribe();
   }, []);
 
-  // 2. Main Save Function with Revert Logic
+  // 2. Main Save Function
   const saveToCloud = async (newData: WebsiteState, msg?: string) => {
-    const previousContent = content; // Keep reference to revert if needed
-    
-    // Optimistic UI update (Update screen immediately)
+    // Optimistic UI update
     setContent(newData);
     
     try {
       await setDoc(doc(db, 'website_content', 'main_v1'), newData, { merge: true });
       if (msg) console.log(msg);
-    } catch (e: any) {
+    } catch (e) {
       console.error("❌ Failed to save to cloud:", e);
-      
-      // REVERT the change because database rejected it
-      setContent(previousContent);
-      
-      // Alert the user so they know it didn't work
-      let errorMsg = "Database Save Failed.";
-      if (e.code === 'permission-denied') {
-        errorMsg = "Permission Denied: Your Firebase Rules are blocking this write. Please check Firestore Rules in the Firebase Console.";
-      } else if (e.code === 'unavailable') {
-        errorMsg = "Network Error: You appear to be offline.";
-      }
-      
-      alert(`Error: ${errorMsg}`);
+      alert("Error saving changes to database. Please checks your connection and permissions.");
     }
   };
 
-  // 3. Helper Functions
+  // 3. Helper Functions (Now using saveToCloud)
 
   const updateHero = (data: Partial<WebsiteState['hero']>) => {
     const next = { ...content, hero: { ...content.hero, ...data } };
@@ -111,12 +88,12 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const addGalleryItem = (item: Omit<GalleryItem, 'id'>) => {
     const newItem = { ...item, id: Date.now() };
     const next = { ...content, gallery: [newItem, ...content.gallery] };
-    saveToCloud(next, "Gallery Item Added");
+    saveToCloud(next);
   };
 
   const deleteGalleryItem = (id: number) => {
     const next = { ...content, gallery: content.gallery.filter(g => g.id !== id) };
-    saveToCloud(next, "Gallery Item Deleted");
+    saveToCloud(next);
   };
 
   const updateProgram = (updatedProgram: Program) => {
@@ -141,7 +118,6 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         content, 
         state: content, // Alias
         loading, 
-        connectionError,
         updateHero, 
         updateContact, 
         addGalleryItem, 
