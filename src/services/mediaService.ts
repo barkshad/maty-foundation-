@@ -1,6 +1,6 @@
 
 import { CLOUDINARY_CONFIG } from '../config';
-import { storage } from '../firebase'; // Import centralized storage instance
+import { storage } from '../firebase'; 
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 // --- Cloudinary Logic ---
@@ -13,53 +13,55 @@ export interface CloudinaryResponse {
 }
 
 export const uploadToCloudinary = async (file: File): Promise<string> => {
-  if (CLOUDINARY_CONFIG.cloudName === "YOUR_CLOUD_NAME" || !CLOUDINARY_CONFIG.uploadPreset) {
-    throw new Error("Please configure your Cloudinary Cloud Name and Preset in config.ts");
+  // Validation
+  if (!CLOUDINARY_CONFIG.cloudName || !CLOUDINARY_CONFIG.uploadPreset) {
+    throw new Error("Missing Cloudinary Configuration. Please check config.ts");
   }
 
   const formData = new FormData();
   formData.append('file', file);
   formData.append('upload_preset', CLOUDINARY_CONFIG.uploadPreset);
+  // Folder organization (optional)
+  formData.append('folder', 'mati_foundation'); 
 
   try {
-    // Use 'auto' resource type to support images and videos
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CONFIG.cloudName}/auto/upload`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    );
+    const cloudName = CLOUDINARY_CONFIG.cloudName;
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      body: formData,
+    });
 
     const data: CloudinaryResponse = await response.json();
 
-    if (data.error) {
-      console.error("Cloudinary API Error:", data.error.message);
-      throw new Error(data.error.message);
+    if (!response.ok) {
+      const errorMsg = data.error?.message || `HTTP Error: ${response.status}`;
+      console.error("Cloudinary API Error Details:", data);
+      throw new Error(errorMsg);
     }
 
     return data.secure_url;
   } catch (error: any) {
     console.error("Cloudinary Upload Error:", error);
+    // Provide a user-friendly error if the preset is likely wrong
+    if (error.message.includes('upload_preset')) {
+      throw new Error("Invalid Upload Preset. Check Cloudinary Settings > Upload > Upload presets.");
+    }
     throw new Error(error.message || "Upload failed");
   }
 };
 
-// --- Firebase Logic ---
+// --- Firebase Logic (Fallback) ---
 
 export const uploadToFirebase = async (file: File, path: string = 'uploads'): Promise<string> => {
   if (!storage) {
-     throw new Error("Firebase Storage not initialized. Check firebase.ts configuration.");
+     throw new Error("Firebase Storage not initialized.");
   }
 
   try {
-    // Create a unique filename
     const storageRef = ref(storage, `${path}/${Date.now()}_${file.name}`);
-    
-    // Upload
     const snapshot = await uploadBytes(storageRef, file);
-    
-    // Get URL
     const downloadURL = await getDownloadURL(snapshot.ref);
     return downloadURL;
   } catch (error) {
