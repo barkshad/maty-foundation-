@@ -53,7 +53,7 @@ export const uploadToCloudinary = async (file: File): Promise<string> => {
   }
 };
 
-// --- Firebase Logic (Fallback) ---
+// --- Firebase Logic ---
 
 export const uploadToFirebase = async (file: File, path: string = 'uploads'): Promise<string> => {
   if (!storage) {
