@@ -3,16 +3,18 @@ import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useData } from '../contexts/ContentContext';
 import { PageRoute } from '../types';
-import AdminLogin from './AdminLogin'; // Reusing existing login UI but creating wrapper logic here
+import AdminLogin from './AdminLogin';
 import AdminLayout from '../components/Admin/AdminLayout';
 import PagesEditor from '../components/Admin/PagesEditor';
+import ProgramsEditor from '../components/Admin/ProgramsEditor';
+import GalleryManager from '../components/Admin/GalleryManager';
 import { Save, Loader, AlertTriangle, CheckCircle } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-// Placeholder components for other tabs to keep file size manageable
+// Placeholder components for other tabs
 const PlaceholderTab = ({ name }: { name: string }) => (
     <div className="p-12 text-center text-slate-400 bg-white rounded-xl border border-dashed border-slate-300">
-        <h3 className="text-xl font-bold mb-2">{name} Manager</h3>
+        <h3 className="text-xl font-bold mb-2 capitalize">{name} Manager</h3>
         <p>This module is under construction in the V2 rollout.</p>
     </div>
 );
@@ -29,7 +31,7 @@ const Admin: React.FC<{ navigate: (page: PageRoute) => void }> = ({ navigate }) 
   }
 
   if (!user) {
-    return <AdminLogin navigate={navigate} />; // This component handles the login logic internally using useAuth now
+    return <AdminLogin navigate={navigate} />;
   }
 
   const handleSave = async () => {
@@ -62,13 +64,27 @@ const Admin: React.FC<{ navigate: (page: PageRoute) => void }> = ({ navigate }) 
                         <div className="text-3xl font-bold text-slate-800">{state.programs.length}</div>
                     </div>
                      <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                        <h3 className="text-slate-500 font-bold text-xs uppercase tracking-wider mb-2">Maintenance Mode</h3>
-                        <div className="text-xl font-bold text-slate-800">{state.maintenanceMode ? 'On' : 'Off'}</div>
+                        <h3 className="text-slate-500 font-bold text-xs uppercase tracking-wider mb-2">Gallery Images</h3>
+                        <div className="text-3xl font-bold text-slate-800">{state.gallery.length}</div>
                     </div>
                 </div>
             );
         case 'pages':
             return <PagesEditor state={state} updateSection={updateSection} />;
+        case 'programs':
+            return (
+              <ProgramsEditor 
+                programs={state.programs} 
+                onUpdate={(newPrograms) => updateSection('programs', newPrograms)} 
+              />
+            );
+        case 'media':
+            return (
+              <GalleryManager 
+                gallery={state.gallery}
+                onUpdate={(newGallery) => updateSection('gallery', newGallery)}
+              />
+            );
         case 'settings':
              return (
                  <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 max-w-xl">
