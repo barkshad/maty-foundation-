@@ -1,7 +1,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Upload, Check, Image as ImageIcon, Loader, Video } from 'lucide-react';
+import { Upload, Check, Image as ImageIcon, Loader } from 'lucide-react';
 import { CLOUDINARY_CONFIG } from '../config';
+import { isVideo, getOptimizedMediaUrl } from '../utils/media';
 
 // Define the Cloudinary global type
 declare global {
@@ -40,7 +41,6 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
               uploadPreset: CLOUDINARY_CONFIG.uploadPreset,
               sources: ['local', 'url', 'camera'],
               resourceType: 'auto', // Auto allows both images and videos
-              // Removed clientAllowedFormats to allow all file types defined in the upload preset
               maxFileSize: 55000000, // 55MB
               multiple: false,
               styles: {
@@ -98,10 +98,8 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
     }
   };
 
-  const isVideo = (url?: string) => {
-    if (!url) return false;
-    return url.match(/\.(mp4|webm|ogg|mov)$/i) || url.includes('/video/upload/');
-  };
+  const optimizedPreview = getOptimizedMediaUrl(preview);
+  const isVideoPreview = isVideo(preview);
 
   return (
     <div className="mb-6">
@@ -110,9 +108,9 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         {/* Preview Area */}
         <div className="relative w-full sm:w-40 h-40 rounded-xl overflow-hidden border-2 border-slate-200 bg-slate-50 flex items-center justify-center flex-shrink-0 shadow-inner group">
           {preview ? (
-            isVideo(preview) ? (
+            isVideoPreview ? (
                <video 
-                 src={preview} 
+                 src={optimizedPreview} 
                  className="w-full h-full object-cover" 
                  muted 
                  loop 
@@ -121,7 +119,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
                />
             ) : (
                <img 
-                 src={preview} 
+                 src={optimizedPreview} 
                  alt="Preview" 
                  className="w-full h-full object-cover" 
                />

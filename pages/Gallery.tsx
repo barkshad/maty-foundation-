@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedText from '../components/AnimatedText';
 import { useContent } from '../contexts/ContentContext';
+import { isVideo, getOptimizedMediaUrl } from '../utils/media';
 
 const Gallery: React.FC = () => {
   const { content } = useContent();
@@ -11,11 +12,6 @@ const Gallery: React.FC = () => {
   const filteredImages = filter === 'all' 
     ? content.gallery 
     : content.gallery.filter(img => img.cat === filter);
-
-  const isVideo = (url?: string) => {
-    if (!url) return false;
-    return url.match(/\.(mp4|webm|ogg|mov)$/i) || url.includes('/video/upload/');
-  };
 
   return (
     <div className="min-h-screen pb-24 bg-background-soft">
@@ -63,42 +59,47 @@ const Gallery: React.FC = () => {
         
         <motion.div layout className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <AnimatePresence>
-            {filteredImages.map((img) => (
-              <motion.div
-                key={img.id}
-                layout
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-                className="group relative aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-white border card-shine"
-                style={{ borderColor: 'var(--border-color)'}}
-              >
-                {isVideo(img.url) ? (
-                  <video 
-                    src={img.url} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                    muted
-                    loop
-                    playsInline
-                    onMouseOver={(e) => e.currentTarget.play()}
-                    onMouseOut={(e) => e.currentTarget.pause()}
-                  />
-                ) : (
-                  <img 
-                    src={img.url} 
-                    loading="lazy"
-                    alt={img.caption}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-4 pointer-events-none">
-                  <span className="text-white font-bold text-sm [text-shadow:0_1px_3px_rgba(0,0,0,0.5)]">
-                    {img.caption}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+            {filteredImages.map((img) => {
+              const optimizedUrl = getOptimizedMediaUrl(img.url);
+              const isItemVideo = isVideo(img.url);
+
+              return (
+                <motion.div
+                  key={img.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+                  className="group relative aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-white border card-shine"
+                  style={{ borderColor: 'var(--border-color)'}}
+                >
+                  {isItemVideo ? (
+                    <video 
+                      src={optimizedUrl} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                      muted
+                      loop
+                      playsInline
+                      onMouseOver={(e) => e.currentTarget.play()}
+                      onMouseOut={(e) => e.currentTarget.pause()}
+                    />
+                  ) : (
+                    <img 
+                      src={optimizedUrl} 
+                      loading="lazy"
+                      alt={img.caption}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-4 pointer-events-none">
+                    <span className="text-white font-bold text-sm [text-shadow:0_1px_3px_rgba(0,0,0,0.5)]">
+                      {img.caption}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
           </AnimatePresence>
           {filteredImages.length === 0 && (
              <div className="col-span-full text-center py-10 text-slate-400">

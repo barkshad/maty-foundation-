@@ -1,12 +1,13 @@
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { PageRoute } from '../types';
-import { ArrowRight, Heart, BookOpen, Users, Shield } from 'lucide-react';
+import { Heart, BookOpen, Users, Shield, ArrowRight } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { INSPIRATIONAL_QUOTES } from '../constants';
 import AnimatedText from '../components/AnimatedText';
 import AnimatedCounter from '../components/AnimatedCounter';
 import { useContent } from '../contexts/ContentContext';
+import { isVideo, getOptimizedMediaUrl } from '../utils/media';
 
 interface HomeProps {
   navigate: (page: PageRoute) => void;
@@ -16,6 +17,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
   const { content } = useContent();
   const { scrollYProgress } = useScroll();
   const parallaxY = useTransform(scrollYProgress, [0, 0.3], [0, -100]);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Map string icons to components for the dynamic stats
   const getIcon = (iconName: string) => {
@@ -29,10 +31,19 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
     }
   };
 
-  const isVideo = (url?: string) => {
-    if (!url) return false;
-    return url.match(/\.(mp4|webm|ogg|mov)$/i) || url.includes('/video/upload/');
-  };
+  const heroMediaUrl = getOptimizedMediaUrl(content.hero.image);
+  const isHeroVideo = isVideo(content.hero.image);
+
+  useEffect(() => {
+    // Enforce autoplay for browsers that are strict about muted property
+    if (isHeroVideo && videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(err => {
+        console.warn("Hero video autoplay prevented:", err);
+      });
+    }
+  }, [heroMediaUrl, isHeroVideo]);
 
   return (
     <div className="flex flex-col gap-24 md:gap-32 pb-24 bg-background-soft">
@@ -42,18 +53,21 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
           className="absolute inset-0 z-0"
           style={{ y: parallaxY }}
         >
-          {isVideo(content.hero.image) ? (
+          {isHeroVideo ? (
             <video 
-              src={content.hero.image} 
+              ref={videoRef}
+              key={heroMediaUrl} // Force re-render on URL change
+              src={heroMediaUrl} 
               className="w-full h-full object-cover" 
               autoPlay 
               muted 
               loop 
               playsInline
+              preload="auto"
             />
           ) : (
             <img
-              src={content.hero.image}
+              src={heroMediaUrl}
               alt="Hero background"
               className="w-full h-full object-cover"
             />
