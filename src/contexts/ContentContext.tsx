@@ -9,6 +9,7 @@ interface ContentContextType {
   content: WebsiteState;
   state: WebsiteState; // Alias for Admin compatibility
   loading: boolean;
+  connectionError: string | null;
   updateHero: (data: Partial<WebsiteState['hero']>) => void;
   updateContact: (data: any) => void;
   addGalleryItem: (item: Omit<GalleryItem, 'id'>) => void;
@@ -24,6 +25,7 @@ const ContentContext = createContext<ContentContextType | undefined>(undefined);
 export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [content, setContent] = useState<WebsiteState>(DEFAULT_WEBSITE_STATE);
   const [loading, setLoading] = useState(true);
+  const [connectionError, setConnectionError] = useState<string | null>(null);
 
   // 1. Sync with Firebase Firestore on Mount
   useEffect(() => {
@@ -31,6 +33,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     
     // Real-time listener: This triggers whenever the database changes on ANY device
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
+      setConnectionError(null);
       if (docSnap.exists()) {
         const data = docSnap.data() as WebsiteState;
         // Merge with default state to ensure structure exists if DB is partial
@@ -39,12 +42,16 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       } else {
         console.log("⚠️ No cloud data found. Initializing Database...");
         // If doc doesn't exist, create it with default data
-        setDoc(docRef, DEFAULT_WEBSITE_STATE).catch(console.error);
+        setDoc(docRef, DEFAULT_WEBSITE_STATE).catch(err => {
+            console.error("Init Error:", err);
+            setConnectionError("Failed to initialize database.");
+        });
         setContent(DEFAULT_WEBSITE_STATE);
       }
       setLoading(false);
     }, (error) => {
       console.error("Firestore Error:", error);
+      setConnectionError(error.message);
       setLoading(false);
     });
 
@@ -59,9 +66,11 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     try {
       await setDoc(doc(db, 'website_content', 'main_v1'), newData, { merge: true });
       if (msg) console.log(msg);
-    } catch (e) {
+      setConnectionError(null);
+    } catch (e: any) {
       console.error("❌ Failed to save to cloud:", e);
-      alert("Error saving changes. Check internet connection.");
+      setConnectionError("Save failed: " + e.message);
+      alert("Error saving changes: " + e.message);
     }
   };
 
@@ -117,6 +126,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         content, 
         state: content, // Alias
         loading, 
+        connectionError,
         updateHero, 
         updateContact, 
         addGalleryItem, 

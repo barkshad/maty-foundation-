@@ -32,18 +32,18 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
     setUploading(true);
 
     try {
-      // Direct API Upload
-      console.log("Starting upload for:", file.name);
+      console.log("Starting direct upload for:", file.name);
       const url = await uploadToCloudinary(file);
       console.log("Upload successful:", url);
       setPreview(url);
       onUpload(url);
-
     } catch (err: any) {
       console.error("Upload failed in component:", err);
-      setError("Upload failed. Please check your internet or config.");
+      setError("Upload failed. Please check your internet.");
+      alert("Upload failed: " + (err.message || "Unknown error"));
     } finally {
       setUploading(false);
+      // Reset input to allow re-uploading the same file if needed
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };
@@ -57,7 +57,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
 
   return (
     <div className="mb-6">
-      <label className="block text-sm font-bold mb-2 text-slate-700">{label}</label>
+      {label && <label className="block text-sm font-bold mb-2 text-slate-700">{label}</label>}
       <div className="flex flex-col sm:flex-row items-start gap-4">
         {/* Hidden Input */}
         <input 
@@ -131,9 +131,9 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
                         {uploading ? <Loader className="w-6 h-6 animate-spin"/> : <Upload className="w-6 h-6" />}
                     </div>
                     <span className="font-bold text-sm text-blue-700">
-                        {uploading ? "Uploading to Cloud..." : "Click to Upload Media"}
+                        {uploading ? "Uploading..." : "Click to Upload Photo/Video"}
                     </span>
-                    <span className="text-xs text-blue-400 mt-1">Images & Videos up to 55MB</span>
+                    <span className="text-xs text-blue-400 mt-1">Direct Cloudinary Upload</span>
                 </>
             )}
           </button>
