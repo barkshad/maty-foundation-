@@ -4,11 +4,11 @@ import { useContent } from '../../contexts/ContentContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { PageRoute } from '../../types';
 import ImageUploader from '../../components/ImageUploader';
-import { LogOut, Home, Image as ImageIcon, Phone, Save, Trash2, Globe } from 'lucide-react';
+import { LogOut, Home, Image as ImageIcon, Phone, Save, Trash2, Globe, Wifi, WifiOff, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AdminDashboard: React.FC<{ navigate: (page: PageRoute) => void }> = ({ navigate }) => {
-  const { content, updateHero, updateContact, addGalleryItem, deleteGalleryItem } = useContent();
+  const { content, updateHero, updateContact, addGalleryItem, deleteGalleryItem, connectionError } = useContent();
   const { logout } = useAuth();
   const [activeTab, setActiveTab] = useState<'home' | 'gallery' | 'contact'>('home');
   const [saved, setSaved] = useState(false);
@@ -94,7 +94,17 @@ const AdminDashboard: React.FC<{ navigate: (page: PageRoute) => void }> = ({ nav
         <header className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-2xl font-bold text-slate-800 capitalize">{activeTab} Editor</h1>
-            <p className="text-slate-500 text-sm">Make changes to the live website</p>
+            <div className="flex items-center mt-1">
+                {connectionError ? (
+                    <div className="flex items-center text-red-500 text-xs font-bold">
+                        <WifiOff size={14} className="mr-1" /> Offline: {connectionError}
+                    </div>
+                ) : (
+                    <div className="flex items-center text-green-600 text-xs font-bold">
+                        <Wifi size={14} className="mr-1" /> Database Connected
+                    </div>
+                )}
+            </div>
           </div>
           <AnimatePresence>
             {saved && (
@@ -109,6 +119,17 @@ const AdminDashboard: React.FC<{ navigate: (page: PageRoute) => void }> = ({ nav
             )}
           </AnimatePresence>
         </header>
+        
+        {connectionError && (
+             <div className="bg-red-50 border border-red-200 p-4 rounded-xl mb-6 flex items-start text-red-700">
+                <AlertCircle className="flex-shrink-0 mr-3 mt-1" />
+                <div>
+                    <h4 className="font-bold">Database Connection Error</h4>
+                    <p className="text-sm">Your changes will NOT be saved to the tablet/public site. {connectionError}</p>
+                    <p className="text-xs mt-2 font-mono bg-red-100 p-2 rounded">Check Firestore Rules: allow read, write: if true; (for test mode)</p>
+                </div>
+             </div>
+        )}
 
         {/* HOME EDITOR */}
         {activeTab === 'home' && (
@@ -168,7 +189,6 @@ const AdminDashboard: React.FC<{ navigate: (page: PageRoute) => void }> = ({ nav
                           caption: 'New Upload'
                         };
                         addGalleryItem(newItem);
-                        showSaveIndicator();
                      }} 
                    />
                  </div>
