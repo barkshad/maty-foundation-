@@ -25,45 +25,49 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [content, setContent] = useState<WebsiteState>(DEFAULT_WEBSITE_STATE);
   const [loading, setLoading] = useState(true);
 
-  // Load from Firebase on mount
+  // 1. Sync with Firebase Firestore on Mount
   useEffect(() => {
     const docRef = doc(db, 'website_content', 'main_v1');
     
+    // Real-time listener
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
       if (docSnap.exists()) {
-        // Cast to WebsiteState to ensure type safety
-        setContent(docSnap.data() as WebsiteState);
+        const data = docSnap.data() as WebsiteState;
+        // Merge with default state to ensure structure exists if DB is partial
+        setContent({ ...DEFAULT_WEBSITE_STATE, ...data });
         console.log("🔥 Synced with Cloud Database");
       } else {
-        console.log("⚠️ No cloud data found, using defaults. Saving initial state...");
+        console.log("⚠️ No cloud data found. Initializing Database...");
+        // If doc doesn't exist, create it with default data
         setDoc(docRef, DEFAULT_WEBSITE_STATE).catch(console.error);
         setContent(DEFAULT_WEBSITE_STATE);
       }
       setLoading(false);
     }, (error) => {
       console.error("Firestore Error:", error);
+      // Fallback to defaults on error, but don't save to avoid overwriting DB with defaults if it's just a permission error
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
+  // 2. Main Save Function
   const saveToCloud = async (newData: WebsiteState, msg?: string) => {
-    // Optimistic update
+    // Optimistic UI update
     setContent(newData);
     
-    if (!auth.currentUser) {
-      console.warn("User not logged in. Attempting to save...");
-    }
-
     try {
       await setDoc(doc(db, 'website_content', 'main_v1'), newData, { merge: true });
       if (msg) console.log(msg);
     } catch (e) {
       console.error("❌ Failed to save to cloud:", e);
-      alert("Error saving changes. Are you logged in?");
+      // Revert optimistic update? For now we just alert.
+      alert("Error saving changes. Please check your internet connection.");
     }
   };
+
+  // 3. Helper Functions (Now using saveToCloud)
 
   const updateHero = (data: Partial<WebsiteState['hero']>) => {
     const next = { ...content, hero: { ...content.hero, ...data } };
@@ -72,7 +76,6 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const updateContact = (data: any) => {
      // Map legacy contact updates to company object
-     // Assuming data contains { email, phone, address }
      const next = { 
         ...content, 
         company: { 
