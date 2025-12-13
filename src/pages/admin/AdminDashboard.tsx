@@ -16,12 +16,12 @@ const AdminDashboard: React.FC<{ navigate: (page: PageRoute) => void }> = ({ nav
   // Local state for forms
   const [heroForm, setHeroForm] = useState(content.hero);
   // Using content.company mapped to contact in the context
-  const [contactForm, setContactForm] = useState(content.contact);
+  const [contactForm, setContactForm] = useState(content.company);
 
   // Sync local state when content loads from cloud
   useEffect(() => {
     setHeroForm(content.hero);
-    setContactForm(content.contact);
+    setContactForm(content.company);
   }, [content]);
 
   const handleLogout = async () => {
