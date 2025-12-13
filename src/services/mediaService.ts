@@ -21,11 +21,12 @@ export const uploadToCloudinary = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append('file', file);
   formData.append('upload_preset', CLOUDINARY_CONFIG.uploadPreset);
-  // Folder organization (optional)
+  // Folder organization
   formData.append('folder', 'mati_foundation'); 
 
   try {
     const cloudName = CLOUDINARY_CONFIG.cloudName;
+    // Use 'auto' to support images and videos
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
 
     const response = await fetch(url, {
